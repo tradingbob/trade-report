@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WSB 每日紀要 · 2026.05.20 · Sell The News</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=JetBrains+Mono:wght@300;400;500;600&family=Noto+Serif+TC:wght@300;400;500;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #14110e;
+    --bg-deep: #0b0908;
+    --bg-card: #1c1813;
+    --bg-card-2: #231d16;
+    --ink: #ede4d3;
+    --ink-soft: #b9ad98;
+    --ink-faded: #6d6354;
+    --rule: #302820;
+    --rule-soft: #211b16;
+    --gold: #c99d61;
+    --gold-bright: #e8ba78;
+    --bull: #8aae80;
+    --bull-bright: #aed09e;
+    --bear: #c96d56;
+    --bear-bright: #e18d74;
+    --neutral: #c6a260;
+    --serif: "Noto Serif TC", "Fraunces", Georgia, serif;
+    --sans: "Noto Sans TC", "PingFang TC", "Helvetica Neue", Arial, sans-serif;
+    --mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse at 18% -10%, rgba(201,157,97,0.08), transparent 46%),
+      radial-gradient(ellipse at 90% 10%, rgba(138,174,128,0.04), transparent 40%),
+      linear-gradient(180deg, #17130f 0%, var(--bg) 48%, #100d0b 100%);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a { color: inherit; }
+  .tape {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    overflow: hidden;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--rule);
+    background: var(--bg-deep);
+    padding: 11px 0;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.02em;
+  }
+  .tape-track { display: inline-block; padding-left: 100%; animation: scroll 115s linear infinite; }
+  .tape-item { display: inline-block; margin-right: 34px; color: var(--ink-soft); }
+  .tape-item .sym { color: var(--gold-bright); font-weight: 600; }
+  .tape-item .ct { margin-left: 9px; }
+  .tape-item .up { color: var(--bull-bright); margin-left: 9px; }
+  .tape-item .dn { color: var(--bear-bright); margin-left: 9px; }
+  .dot { color: var(--ink-faded); margin: 0 8px; }
+  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+
+  .masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 28px;
+    padding: 22px 56px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .brand { display: flex; align-items: baseline; gap: 16px; min-width: 0; }
+  .brand-mark {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: 23px;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .brand-mark .accent { color: var(--gold); font-style: italic; font-weight: 500; }
+  .brand-sub {
+    border-left: 1px solid var(--rule);
+    padding-left: 16px;
+    color: var(--ink-faded);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+  .nav { display: flex; align-items: center; gap: 28px; color: var(--ink-soft); font-size: 13px; }
+  .nav a { text-decoration: none; padding: 4px 0; }
+  .nav .active { color: var(--gold); border-bottom: 1px solid var(--gold); }
+  .lang {
+    border: 1px solid var(--rule);
+    padding: 6px 11px;
+    color: var(--ink-faded);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+  }
+  .lang .on { color: var(--ink); }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.78fr);
+    gap: 70px;
+    align-items: end;
+    padding: 86px 56px 64px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .kicker {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    color: var(--gold);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+  .kicker::after { content: ""; width: 80px; height: 1px; background: var(--gold); opacity: 0.55; }
+  h1 {
+    max-width: 900px;
+    margin-bottom: 32px;
+    font-family: var(--serif);
+    font-size: clamp(50px, 6.2vw, 94px);
+    line-height: 0.96;
+    letter-spacing: -0.02em;
+  }
+  h1 .italic { color: var(--gold-bright); font-style: italic; font-weight: 300; }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px 30px;
+    padding-top: 26px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono);
+  }
+  .m-item { display: flex; flex-direction: column; gap: 3px; }
+  .m-lbl {
+    color: var(--ink-faded);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .m-val { color: var(--ink); font-size: 13px; }
+
+  .gauge-card {
+    position: relative;
+    border: 1px solid var(--rule);
+    background: var(--bg-card);
+    padding: 32px 30px 28px;
+  }
+  .gauge-card::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 28px;
+    width: 42px;
+    height: 2px;
+    background: var(--gold);
+  }
+  .gauge-label {
+    margin-bottom: 6px;
+    color: var(--ink-faded);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+  .gauge-mood { margin-bottom: 16px; color: var(--bull-bright); font-family: var(--serif); font-style: italic; }
+  .gauge-svg { display: block; width: 100%; max-width: 320px; margin: 0 auto 4px; }
+  .gauge-readout {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+  }
+  .pair { display: flex; flex-direction: column; gap: 2px; }
+  .pair .l { color: var(--ink-faded); font-family: var(--mono); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .pair .v { font-family: var(--serif); font-size: 25px; line-height: 1; }
+  .pair.fear .v { color: var(--bear-bright); }
+  .pair.greed .v { color: var(--bull-bright); }
+  .pair.dom { text-align: right; }
+  .pair.dom .v { max-width: 150px; color: var(--ink); font-family: var(--sans); font-size: 13px; font-style: italic; line-height: 1.3; }
+
+  .section { padding: 78px 56px; border-bottom: 1px solid var(--rule); }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    margin-bottom: 44px;
+    padding-bottom: 18px;
+    border-bottom: 2px solid var(--rule);
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .section-title .num {
+    margin-right: 16px;
+    color: var(--gold);
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 400;
+    vertical-align: top;
+  }
+  .section-meta { color: var(--ink-faded); font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
+  .overview-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.85fr); gap: 54px; }
+  .events-list { display: flex; flex-direction: column; gap: 26px; }
+  .event {
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr);
+    gap: 24px;
+    padding-bottom: 26px;
+    border-bottom: 1px dotted var(--rule);
+  }
+  .event:last-child { border-bottom: 0; }
+  .event-ticker {
+    color: var(--gold-bright);
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .event-ticker .sub {
+    display: block;
+    margin-top: 7px;
+    color: var(--ink-faded);
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+  }
+  .event-headline {
+    margin-bottom: 9px;
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.42;
+  }
+  .event-detail { color: var(--ink-soft); font-size: 13.5px; }
+  .numtxt, .num { color: var(--ink); font-family: var(--mono); }
+  .tag {
+    display: inline-block;
+    margin-right: 8px;
+    padding: 2px 7px;
+    border: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+  .tag.bull { color: var(--bull-bright); border-color: rgba(138,174,128,0.45); }
+  .tag.bear { color: var(--bear-bright); border-color: rgba(201,109,86,0.45); }
+  .tag.flat { color: var(--neutral); border-color: rgba(198,162,96,0.45); }
+  .vibe-card {
+    align-self: start;
+    border: 1px solid var(--rule);
+    background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-card-2) 100%);
+    padding: 30px;
+  }
+  .vibe-label { margin-bottom: 14px; color: var(--ink-faded); font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; }
+  .vibe-quote {
+    margin-bottom: 22px;
+    font-family: var(--serif);
+    font-size: 24px;
+    line-height: 1.35;
+  }
+  .accent { color: var(--gold-bright); }
+  .vibe-body { color: var(--ink-soft); font-size: 14px; }
+  .meme-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .meme {
+    border: 1px solid var(--rule);
+    background: rgba(255,255,255,0.025);
+    padding: 5px 9px;
+    color: var(--ink-soft);
+    font-family: var(--mono);
+    font-size: 11px;
+  }
+  .themes-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .theme {
+    border-top: 1px solid var(--rule);
+    background: rgba(255,255,255,0.012);
+    padding: 24px 0 6px;
+  }
+  .theme.span2 { grid-column: 1 / -1; }
+  .theme-num { margin-bottom: 10px; color: var(--gold); font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; }
+  .theme-title { margin-bottom: 4px; font-family: var(--serif); font-size: 24px; line-height: 1.3; }
+  .theme-subtitle { margin-bottom: 14px; color: var(--ink-faded); font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; }
+  .theme-body { color: var(--ink-soft); font-size: 14px; }
+  .hl { color: var(--gold-bright); }
+  .theme-tickers {
+    margin-top: 16px;
+    color: var(--ink-faded);
+    font-family: var(--mono);
+    font-size: 11px;
+  }
+  .theme-tickers .t { color: var(--gold); }
+  .culture {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 42px;
+  }
+  .culture-block {
+    border-left: 1px solid var(--rule);
+    padding-left: 22px;
+  }
+  .drop {
+    margin-bottom: 12px;
+    color: var(--gold-bright);
+    font-family: var(--serif);
+    font-size: 23px;
+    line-height: 1.25;
+  }
+  .culture p { color: var(--ink-soft); font-size: 14px; }
+  .quote { color: var(--ink); font-family: var(--serif); font-style: italic; }
+  .sectors-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  .sectors-table th {
+    padding: 12px 12px 14px 0;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-faded);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-align: left;
+    text-transform: uppercase;
+  }
+  .sectors-table td { padding: 16px 12px 16px 0; border-bottom: 1px dotted var(--rule); color: var(--ink-soft); vertical-align: top; }
+  .sector { color: var(--ink); font-family: var(--serif); font-size: 17px; }
+  .heat { font-family: var(--mono); white-space: nowrap; }
+  .h-hi { color: var(--bear-bright); }
+  .h-mid { color: var(--gold-bright); }
+  .h-low { color: var(--ink-faded); }
+  .pill {
+    display: inline-block;
+    border: 1px solid var(--rule);
+    padding: 2px 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+  }
+  .sp-bull { color: var(--bull-bright); border-color: rgba(138,174,128,0.36); }
+  .sp-bear { color: var(--bear-bright); border-color: rgba(201,109,86,0.36); }
+  .sp-mix, .sp-neut { color: var(--neutral); border-color: rgba(198,162,96,0.36); }
+  .ticker-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .tcard {
+    min-height: 190px;
+    border: 1px solid var(--rule);
+    background: rgba(255,255,255,0.016);
+    padding: 18px;
+  }
+  .tcard.featured { grid-column: span 2; background: linear-gradient(135deg, rgba(201,157,97,0.08), rgba(255,255,255,0.015)); }
+  .tcard-rank { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 16px; color: var(--ink-faded); font-family: var(--mono); font-size: 10px; letter-spacing: 0.13em; }
+  .mentions { color: var(--gold); }
+  .tcard-sym { margin-bottom: 12px; font-family: var(--serif); font-size: 27px; font-weight: 900; line-height: 1.1; }
+  .tcard-sym .pill { margin-left: 8px; vertical-align: middle; font-family: var(--mono); font-weight: 400; }
+  .tcard-body { color: var(--ink-soft); font-size: 13.5px; }
+  .risk-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 0.82fr); gap: 48px; }
+  .risk-list { display: grid; gap: 18px; }
+  .risk-item { border-top: 1px solid var(--rule); padding-top: 16px; }
+  .risk-title { margin-bottom: 7px; color: var(--ink); font-family: var(--serif); font-size: 19px; }
+  .risk-copy { color: var(--ink-soft); font-size: 13.5px; }
+  .calendar { border: 1px solid var(--rule); background: var(--bg-card); padding: 24px; }
+  .calendar h3 { margin-bottom: 18px; font-family: var(--serif); font-size: 25px; }
+  .cal-row { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-top: 1px dotted var(--rule); }
+  .cal-date { color: var(--gold); font-family: var(--mono); font-size: 11px; }
+  .cal-event { color: var(--ink-soft); font-size: 13.5px; }
+  .quotes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+  blockquote {
+    border-left: 2px solid var(--gold);
+    background: rgba(255,255,255,0.014);
+    padding: 18px 20px;
+  }
+  blockquote p:first-child { margin-bottom: 10px; color: var(--ink); font-family: var(--serif); font-size: 18px; line-height: 1.45; }
+  blockquote p:last-child { color: var(--ink-faded); font-size: 13px; }
+  footer {
+    padding: 30px 56px 48px;
+    color: var(--ink-faded);
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+  }
+  @media (max-width: 1000px) {
+    .hero, .overview-grid, .risk-grid { grid-template-columns: 1fr; }
+    .ticker-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tcard.featured { grid-column: span 1; }
+  }
+  @media (max-width: 760px) {
+    .masthead, .section, .hero, footer { padding-left: 24px; padding-right: 24px; }
+    .masthead { align-items: flex-start; flex-direction: column; }
+    .brand { align-items: flex-start; flex-direction: column; gap: 8px; }
+    .brand-sub { border-left: 0; padding-left: 0; }
+    .nav { flex-wrap: wrap; gap: 16px; }
+    h1 { font-size: clamp(42px, 13vw, 62px); }
+    .section-title { font-size: 30px; }
+    .section-head { align-items: flex-start; flex-direction: column; }
+    .event { grid-template-columns: 1fr; gap: 12px; }
+    .themes-grid, .culture, .ticker-grid, .quotes { grid-template-columns: 1fr; }
+    .theme.span2 { grid-column: auto; }
+    .sectors-table { display: block; overflow-x: auto; white-space: nowrap; }
+  }
+</style>
+</head>
+<body>
+<div class="tape">
+  <div class="tape-track">
+    <span class="tape-item"><span class="sym">NVDA</span><span class="ct">400+ 提及</span><span class="dn">FLAT · 史詩 beat 後</span></span><span class="dot">·</span>
+    <span class="tape-item"><span class="sym">SPCX</span><span class="ct">90+ 提及</span><span class="dn">估值爭議 $1.75T</span></span><span class="dot">·</span>
+    <span class="tape-item"><span class="sym">RKLB</span><span class="ct">70+ 提及</span><span class="dn">$3B ATM 雙殺</span></span><span class="dot">·</span>
+    <span class="tape-item"><span class="sym">INTU</span><span class="ct">55+ 提及</span><span class="dn">-11% AH · 裁員 17%</span></span><span class="dot">·</span>
+    <span class="tape-item"><span class="sym">MU</span><span class="ct">45+ 提及</span><span class="up">強烈看多 $750C</span></span><span class="dot">·</span>
+    <span class="tape-item"><span class="sym">AMD</span><span class="ct">35+ 提及</span><span class="dn">PE 爭議</span></span><span class="dot">·</span>
+    <span class="tape-item"><span class="sym">SPY</span><span class="ct">30+ 提及</span><span class="dn">-0.67% · 7,353.61</span></span><span class="dot">·</span>
+    <span class="tape-item"><span class="sym">RDDT</span><span class="ct">25+ 提及</span><span class="dn">server crash meme</span></span><span class="dot">·</span>
+    <span class="tape-item"><span class="sym">BRENT</span><span class="ct">原油</span><span class="up">$107.77</span></span><span class="dot">·</span>
+    <span class="tape-item"><span class="sym">WTI</span><span class="ct">原油</span><span class="up">$102.18</span></span><span class="dot">·</span>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="brand">
+    <div class="brand-mark">Sell <span class="accent">the</span> News</div>
+    <div class="brand-sub">Retail Sentiment · Daily Brief</div>
+  </div>
+  <nav class="nav" aria-label="Report sections">
+    <a href="#overview" class="active">WSB</a>
+    <a href="#themes">Themes</a>
+    <a href="#tickers">Tickers</a>
+    <a href="#risks">Risks</a>
+  </nav>
+  <div class="lang">中 <span class="on">·</span> EN</div>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="kicker">WallStreetBets 每日紀要 · Analysis #2</div>
+    <h1>當 NVDA 的<br><span class="italic">史詩 beat</span><br>變成 flat 收盤</h1>
+    <div class="hero-meta">
+      <div class="m-item"><div class="m-lbl">日期</div><div class="m-val">2026.05.20 · Wednesday</div></div>
+      <div class="m-item"><div class="m-lbl">更新</div><div class="m-val">19:08 · 2nd Analysis</div></div>
+      <div class="m-item"><div class="m-lbl">覆蓋評論</div><div class="m-val">1,500 comments</div></div>
+      <div class="m-item"><div class="m-lbl">主導情緒</div><div class="m-val" style="color:var(--gold-bright);">無力感、困惑、IV crush 後遺症</div></div>
+    </div>
+  </div>
+  <aside class="gauge-card" aria-label="Fear and Greed estimate">
+    <div class="gauge-label">Fear · Greed Estimate</div>
+    <div class="gauge-mood">"theta gang wins, fuk your calls and puts"</div>
+    <svg class="gauge-svg" viewBox="0 0 280 165" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fear 35 Greed 65">
+      <defs>
+        <linearGradient id="gaugegrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#c96d56"/>
+          <stop offset="50%" stop-color="#c6a260"/>
+          <stop offset="100%" stop-color="#8aae80"/>
+        </linearGradient>
+      </defs>
+      <path d="M 25 140 A 115 115 0 0 1 255 140" fill="none" stroke="#2d261f" stroke-width="22" stroke-linecap="butt"/>
+      <path d="M 25 140 A 115 115 0 0 1 255 140" fill="none" stroke="url(#gaugegrad)" stroke-width="22" stroke-linecap="butt"/>
+      <line x1="140" y1="140" x2="171" y2="48" stroke="#ede4d3" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="140" cy="140" r="8" fill="#ede4d3"/>
+      <text x="24" y="160" fill="#6d6354" font-family="JetBrains Mono" font-size="10">FEAR</text>
+      <text x="225" y="160" fill="#6d6354" font-family="JetBrains Mono" font-size="10">GREED</text>
+      <text x="129" y="112" fill="#e8ba78" font-family="Fraunces" font-size="30" font-weight="700">65</text>
+    </svg>
+    <div class="gauge-readout">
+      <div class="pair fear"><div class="l">Fear</div><div class="v">35</div></div>
+      <div class="pair greed"><div class="l">Greed</div><div class="v">65</div></div>
+      <div class="pair dom"><div class="l">Dominant</div><div class="v">powerlessness</div></div>
+    </div>
+  </aside>
+</section>
+
+<section class="section" id="overview">
+  <div class="section-head">
+    <div class="section-title"><span class="num">01</span>整體市場概況與情緒</div>
+    <div class="section-meta">Event bombardment · both sides roasted</div>
+  </div>
+  <div class="overview-grid">
+    <div class="events-list">
+      <article class="event">
+        <div class="event-ticker">NVDA<span class="sub">Q1 FY27</span></div>
+        <div>
+          <div class="event-headline"><span class="tag flat">FLAT</span>雙 beat 史詩財報，盤後卻幾乎 flat 收場</div>
+          <div class="event-detail">Revenue <span class="numtxt">$81.6B</span>、EPS <span class="numtxt">$1.87</span>、Q2 guidance <span class="numtxt">$91B</span> vs consensus <span class="numtxt">$86.8B</span>。Data Center <span class="numtxt">$75.2B</span> 佔 92%，新增 <span class="numtxt">$80B</span> buyback，dividend 由 $0.01 加到 $0.25。</div>
+        </div>
+      </article>
+      <article class="event">
+        <div class="event-ticker">INTU<span class="sub">Q3 beat</span></div>
+        <div>
+          <div class="event-headline"><span class="tag bear">-11%</span>業績 beat 但宣布裁員 17%，AI 轉型被市場反向解讀</div>
+          <div class="event-detail">EPS <span class="numtxt">$12.80</span> vs expected <span class="numtxt">$12.57</span>，約 3,000+ 人裁員；QuickBooks 用戶公開轉 Claude，成為 SaaS 被 AI 反咬的樣板。</div>
+        </div>
+      </article>
+      <article class="event">
+        <div class="event-ticker">SPCX<span class="sub">S-1</span></div>
+        <div>
+          <div class="event-headline"><span class="tag bear">估值爭議</span>SpaceX S-1 目標估值 $1.75T-$2T，被叫作史上最大 exit liquidity</div>
+          <div class="event-detail">目標募資 <span class="numtxt">$75B</span>，Q1 revenue <span class="numtxt">$4.69B</span>，但 Q1 operating loss <span class="numtxt">$1.94B</span>。社群分裂成 IPO FOMO 派與 short-the-open 派。</div>
+        </div>
+      </article>
+      <article class="event">
+        <div class="event-ticker">RKLB<span class="sub">ATM</span></div>
+        <div>
+          <div class="event-headline"><span class="tag bear">雙殺</span>$3B ATM offering 與 SpaceX S-1 同晚出現，航天股集體受壓</div>
+          <div class="event-detail">RKLB、LUNR、ASTS 被 SpaceX IPO liquidity vacuum 與自身融資消息夾擊，管理層被集中炮轟。</div>
+        </div>
+      </article>
+      <article class="event">
+        <div class="event-ticker">MACRO<span class="sub">Oil / SPX</span></div>
+        <div>
+          <div class="event-headline"><span class="tag bear">-0.67%</span>S&P 500 收 7,353.61；Iran frozen conflict 與油價高企仍在背景燃燒</div>
+          <div class="event-detail">Brent <span class="numtxt">$107.77</span>、WTI <span class="numtxt">$102.18</span>。NBIS 上調 H100/H200/B200/B300 compute rental rates，最高升幅 72%。</div>
+        </div>
+      </article>
+    </div>
+    <aside class="vibe-card">
+      <div class="vibe-label">Atmosphere</div>
+      <div class="vibe-quote">表面係 neutral-to-chaotic，核心其實係<span class="accent">「多空一齊被慢烤」</span>。</div>
+      <div class="vibe-body">WSB 將 NVDA 反應講到似災難，但實際 AH 價格只在 ±1.5% 內震盪，QQQ futures 亦只是溫和回落。災難敘事明顯走在數字之前，屬於 earnings 後 IV crush trauma 的集體自嚇模式。</div>
+      <div class="meme-row">
+        <span class="meme">green by open</span>
+        <span class="meme">flat as fk</span>
+        <span class="meme">theta gang wins</span>
+        <span class="meme">fuk your calls and puts</span>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="section" id="themes">
+  <div class="section-head">
+    <div class="section-title"><span class="num">02</span>核心主題與話題</div>
+    <div class="section-meta">Five dominant narratives</div>
+  </div>
+  <div class="themes-grid">
+    <article class="theme span2">
+      <div class="theme-num">01</div>
+      <div class="theme-title">NVDA「Beat-and-Flat」模板正式定型</div>
+      <div class="theme-subtitle">由 beat-and-dump 演化成 beat-and-nothing</div>
+      <div class="theme-body">這是近 6/7 季最強的一份財報，疊加 <span class="num">80B</span> buyback 與 25x dividend，仍然推不動股價。社群開始用「NVDA boomer stock」「P/E 34 橫行 9 個月」「buyback + dividend 等於管理層無地方再投資」這類終局語言。</div>
+      <div class="theme-tickers"><span class="t">NVDA</span><span class="dot">·</span>400+ mentions<span class="dot">·</span>Sentiment: neutral / split</div>
+    </article>
+    <article class="theme">
+      <div class="theme-num">02</div>
+      <div class="theme-title">600K NVDA 2DTE Call YOLO 成為教育片</div>
+      <div class="theme-subtitle">theta + IV crush 的公開處刑</div>
+      <div class="theme-body">昨日的 totem 延續到今天，全場圍觀 weekly OTM calls 由希望變成時間價值蒸發。這件事成為「不要在 NVDA ER 買 weekly OTM」的活教材。</div>
+    </article>
+    <article class="theme">
+      <div class="theme-num">03</div>
+      <div class="theme-title">SpaceX S-1 引爆估值爭議</div>
+      <div class="theme-subtitle">航天股被 IPO 黑洞吸走注意力</div>
+      <div class="theme-body"><span class="num">$1.75T</span> 估值對 <span class="num">$18.67B</span> 年收入，PS 約 <span class="num">94x</span>。一派覺得 retail 開盤會追到 $1500-$2000，另一派直接等 short the open。</div>
+    </article>
+    <article class="theme">
+      <div class="theme-num">04</div>
+      <div class="theme-title">SaaS 從受害者敘事出現反轉苗頭</div>
+      <div class="theme-subtitle">WDAY / SNOW / CRM 會是驗證點</div>
+      <div class="theme-body">INTU 大跌令 SaaSpocalypse 變得更真，但 NVDA call 裡「software business / agentic AI」被點名後，社群開始討論 rotation back to SaaS，MSFT、SNOW、CRM、NOW、WDAY 被列入候選。</div>
+    </article>
+    <article class="theme">
+      <div class="theme-num">05</div>
+      <div class="theme-title">Iran stalemate 與油價疲勞</div>
+      <div class="theme-subtitle">市場不再興奮，但 gap risk 仍在</div>
+      <div class="theme-body">Trump 拒絕 Iran counter-proposal，Hormuz 仍 blocked，油價仍高。不過 WSB 已開始疲勞，「war is over for 3 months now」變成口頭禪，焦點落在 Memorial Day 長週末 gap risk。</div>
+    </article>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div class="section-title"><span class="num">03</span>社群情緒與文化觀察</div>
+    <div class="section-meta">Four cultural shifts</div>
+  </div>
+  <div class="culture">
+    <article class="culture-block">
+      <div class="drop">Theta Gang 封神</div>
+      <p>今日 WSB 不再純粹笑賣方，反而集體承認「selling volatility」係今季答案。<span class="quote">"Selling NVDA calls = infinite money glitch"</span>、<span class="quote">"learn spreads, stop being naked"</span> 這些較成熟的交易語言罕見上位。</p>
+    </article>
+    <article class="culture-block">
+      <div class="drop">First Move Is Fake 迷信</div>
+      <p>盤後任何方向都被當成 trap。bull 喊 open at 230、Friday 245；bear 喊 open 200、跌穿 180。這種集體不信任，是多次 NVDA ER 後形成的條件反射。</p>
+    </article>
+    <article class="culture-block">
+      <div class="drop">Reddit 自己成為最大 meme</div>
+      <p>NVDA earnings 關鍵時刻，r/wallstreetbets daily thread lag / freeze 約 40 分鐘，<span class="quote">"puts on RDDT"</span> 被洗版。散戶分析 AI compute 的同時，自己平台連 comment flow 都撐不住，諷刺感很強。</p>
+    </article>
+    <article class="culture-block">
+      <div class="drop">AI 食物鏈被擺上檯面</div>
+      <p>INTU 被 AI 反咬、Anthropic 每月付 SpaceX 大額費用、NBIS compute price 升 50-72%，令社群開始畫出 MU/SNDK → NVDA → CRWV/NBIS → Anthropic/OpenAI → SaaS victims 的鏈條。</p>
+    </article>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div class="section-title"><span class="num">04</span>板塊熱點</div>
+    <div class="section-meta">Sector heat map</div>
+  </div>
+  <table class="sectors-table">
+    <thead><tr><th>Sector / Theme</th><th>Heat</th><th>Sentiment</th><th>Representative Tickers</th></tr></thead>
+    <tbody>
+      <tr><td class="sector">半導體 / AI Chips</td><td class="heat h-hi">●●● 高</td><td><span class="pill sp-mix">中性 · 分化加劇</span></td><td>NVDA · AMD · MU · AVGO · ARM · INTC · ALAB</td></tr>
+      <tr><td class="sector">Software SaaS</td><td class="heat h-hi">●●● 高</td><td><span class="pill sp-bear">偏空 → 中性反轉</span></td><td>INTU · MSFT · CRM · SNOW · NOW · WDAY</td></tr>
+      <tr><td class="sector">航天 / Space</td><td class="heat h-hi">●●● 高</td><td><span class="pill sp-bear">混亂 · IPO 黑洞</span></td><td>SPCX · RKLB · ASTS · LUNR · DXYZ</td></tr>
+      <tr><td class="sector">AI Infra / Power</td><td class="heat h-mid">●●○ 中</td><td><span class="pill sp-bull">偏多</span></td><td>CRWV · NBIS · APLD · CLSK · IREN</td></tr>
+      <tr><td class="sector">Memory / HBM</td><td class="heat h-mid">●●○ 中</td><td><span class="pill sp-bull">強烈看多</span></td><td>MU · SNDK</td></tr>
+      <tr><td class="sector">能源 / Oil</td><td class="heat h-mid">●●○ 中</td><td><span class="pill sp-bull">偏多</span></td><td>USO · XLE</td></tr>
+      <tr><td class="sector">社交媒體</td><td class="heat h-mid">●●○ 中</td><td><span class="pill sp-bear">偏空</span></td><td>RDDT · META</td></tr>
+      <tr><td class="sector">Crypto / BTC proxies</td><td class="heat h-low">●○○ 低</td><td><span class="pill sp-bear">偏空</span></td><td>MSTR · COIN</td></tr>
+      <tr><td class="sector">Retail Consumer</td><td class="heat h-low">●○○ 低</td><td><span class="pill sp-neut">中性</span></td><td>WMT · ROSS · AAP · LULU</td></tr>
+      <tr><td class="sector">Gaming</td><td class="heat h-low">●○○ 低</td><td><span class="pill sp-bear">偏空</span></td><td>TTWO · GTA6 delay shadow</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="section" id="tickers">
+  <div class="section-head">
+    <div class="section-title"><span class="num">05</span>個股情緒分析</div>
+    <div class="section-meta">Top names by mentions</div>
+  </div>
+  <div class="ticker-grid">
+    <article class="tcard featured"><div class="tcard-rank"><span>#01</span><span class="mentions">400+ mentions</span></div><div class="tcard-sym">NVDA <span class="pill sp-mix">中性 · 分裂</span></div><div class="tcard-body">Epic beat 但 flat，theta gang 第 6/7 次勝利。bull 看 EOW $235-$245，bear 看 $200-$180。管理層因 buyback/dividend 被解讀為成長放慢。</div></article>
+    <article class="tcard"><div class="tcard-rank"><span>#02</span><span class="mentions">90+</span></div><div class="tcard-sym">SPCX</div><div class="tcard-body">$1.75T valuation vs $18.67B revenue，被稱為 biggest exit liquidity；社群對 IPO 開盤分歧極大。</div></article>
+    <article class="tcard"><div class="tcard-rank"><span>#03</span><span class="mentions">70+</span></div><div class="tcard-sym">RKLB</div><div class="tcard-body">$3B ATM offering + SpaceX IPO 同晚雙殺，短線情緒強烈偏空。</div></article>
+    <article class="tcard"><div class="tcard-rank"><span>#04</span><span class="mentions">55+</span></div><div class="tcard-sym">INTU</div><div class="tcard-body">Double beat but -11%；17% layoffs 令 AI transition 被視為負面訊號。</div></article>
+    <article class="tcard"><div class="tcard-rank"><span>#05</span><span class="mentions">45+</span></div><div class="tcard-sym">MU</div><div class="tcard-body">強烈看多，$750C / $800 EOW-EOM bets 密集；memory cycle 被看成未完。</div></article>
+    <article class="tcard"><div class="tcard-rank"><span>#06</span><span class="mentions">35+</span></div><div class="tcard-sym">AMD</div><div class="tcard-body">日內升 8%，但 PE 與 NVDA 對比被質疑；puts are easy money 論調存在。</div></article>
+    <article class="tcard"><div class="tcard-rank"><span>#07</span><span class="mentions">25+</span></div><div class="tcard-sym">RDDT</div><div class="tcard-body">Server crash + poor UX，「puts on RDDT」變成口號。</div></article>
+    <article class="tcard"><div class="tcard-rank"><span>#08</span><span class="mentions">20+</span></div><div class="tcard-sym">MSFT</div><div class="tcard-body">被視作下一個 GOOGL comeback candidate；SaaS rotation 觀察名單。</div></article>
+  </div>
+</section>
+
+<section class="section" id="risks">
+  <div class="section-head">
+    <div class="section-title"><span class="num">06</span>風險訊號與日程</div>
+    <div class="section-meta">Risk stack + calendar</div>
+  </div>
+  <div class="risk-grid">
+    <div class="risk-list">
+      <article class="risk-item"><div class="risk-title">AI capex sustainability</div><div class="risk-copy">社群多次計算 2030 年 $3-4T capex 與 money supply / customer budgets 的物理限制，Uber 一季用完全年 AI budget 的說法被反覆引用。</div></article>
+      <article class="risk-item"><div class="risk-title">NVDA buyback + dividend 被讀成 maturity signal</div><div class="risk-copy">巨額 buyback 與 25x dividend 被部分 top comments 解讀為「管理層承認無地方再投資」，並被拿來對比 CSCO / INTC 歷史。</div></article>
+      <article class="risk-item"><div class="risk-title">Circular financing 疑慮升溫</div><div class="risk-copy">Anthropic → SpaceX → NVDA → Anthropic 的閉環敘事被拆解，AI circle paying each other 的質疑正在升級。</div></article>
+      <article class="risk-item"><div class="risk-title">Memorial Day gap risk</div><div class="risk-copy">Iran / Hormuz 仍是長週末最大灰犀牛，油價高企但市場注意力下降，反而令 gap event 更容易被低估。</div></article>
+    </div>
+    <aside class="calendar">
+      <h3>Event Calendar</h3>
+      <div class="cal-row"><div class="cal-date">5/21</div><div class="cal-event">WMT, WDAY, ROSS, AAP earnings；NVDA first full cash day。WSB interest: extremely high。</div></div>
+      <div class="cal-row"><div class="cal-date">5/22</div><div class="cal-event">OpenAI S-1 rumored filing date；NVDA weekly options expiry；Samsung HBM union review。</div></div>
+      <div class="cal-row"><div class="cal-date">5/23-5/26</div><div class="cal-event">Memorial Day long weekend；Iran gap risk。</div></div>
+      <div class="cal-row"><div class="cal-date">5/27-5/29</div><div class="cal-event">SNOW, CRM, NOW earnings cluster；SaaS reversal 的決定性驗證。</div></div>
+      <div class="cal-row"><div class="cal-date">6/11-6/12</div><div class="cal-event">SpaceX IPO pricing / Nasdaq listing target date。</div></div>
+      <div class="cal-row"><div class="cal-date">6/26</div><div class="cal-event">NVDA new dividend $0.25 payout date。</div></div>
+    </aside>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div class="section-title"><span class="num">07</span>經典 WSB Quotes</div>
+    <div class="section-meta">Memes with signal</div>
+  </div>
+  <div class="quotes">
+    <blockquote><p>"Theta gang always wins. NVDA bers thot... NVDA bols thot... Theta gang cuking them both."</p><p>總結 NVDA options sellers 的勝利，亦代表社群由純方向賭博向 volatility-selling 崇拜移動。</p></blockquote>
+    <blockquote><p>"NVDA 200 is NOT a meme."</p><p>第一批非玩笑式「NVDA 可能變成熟股、橫行 9 個月」敘事，對短線追方向是警號。</p></blockquote>
+    <blockquote><p>"AI capex is gonna eat shit if you haven't been paying attention."</p><p>AI customer budget burn-out 由抽象擔憂變成具體案例，配合 INTU layoffs 與 NBIS price hikes，形成三重壓力。</p></blockquote>
+    <blockquote><p>"SPACEX IPO killing off all space stocks."</p><p>準確捕捉 SpaceX listing 可能吸走整個航天板塊流動性的交易機制。</p></blockquote>
+  </div>
+</section>
+
+<footer>
+  Source reviewed in local Chrome: https://sellthenews.org/wsb/daily · Model shown on source: claude-opus-4-7 · Analysis #2 / 2 · Generated local redesign: 2026-05-20
+</footer>
+</body>
+</html>
