@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IUAENA · X Signal Report · 2026.05.23</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900;9..144,900&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EFE7D6;
+    --paper-2: #E6DCC6;
+    --paper-3: #DDD2B9;
+    --ink: #1A1612;
+    --ink-2: #3D342A;
+    --ink-3: #786A55;
+    --rule: #B8A887;
+    --rule-soft: #CFC1A0;
+
+    --bull: #0E5230;
+    --bull-soft: #D9DFCC;
+    --bear: #8B1A0E;
+    --bear-soft: #E8CDC7;
+    --watch: #8B5A1F;
+    --watch-soft: #ECD7B5;
+
+    --serif-display: 'Fraunces', 'Noto Serif TC', serif;
+    --serif-tc: 'Noto Serif TC', 'Fraunces', serif;
+    --sans: 'Geist', 'Noto Serif TC', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Paper texture using SVG noise */
+  body {
+    background-image:
+      radial-gradient(ellipse at top left, rgba(184, 168, 135, 0.18), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(120, 106, 85, 0.08), transparent 50%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.06 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 48px 56px 80px;
+  }
+
+  /* ============ MASTHEAD ============ */
+  .masthead {
+    border-top: 6px double var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 18px 0 14px;
+    margin-bottom: 4px;
+  }
+
+  .masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin-bottom: 8px;
+  }
+
+  .masthead-top .left { display: flex; gap: 18px; }
+
+  .masthead-kicker {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-top: 6px;
+  }
+
+  .masthead-title {
+    font-family: var(--serif-display);
+    font-weight: 900;
+    font-size: 78px;
+    line-height: 0.92;
+    letter-spacing: 0;
+    font-variation-settings: "opsz" 144, "SOFT" 0;
+    color: var(--ink);
+    margin: 4px 0 6px;
+    overflow-wrap: anywhere;
+  }
+
+  .masthead-title .tc {
+    font-family: var(--serif-tc);
+    font-weight: 900;
+    letter-spacing: 0;
+  }
+
+  .masthead-sub {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    padding-top: 6px;
+    border-top: 1px solid var(--rule-soft);
+  }
+
+  .source-tag {
+    font-family: var(--mono);
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ============ STAT BAR ============ */
+  .stat-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: 36px;
+  }
+
+  .stat {
+    padding: 18px 16px 16px;
+    border-right: 1px solid var(--rule-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .stat:last-child { border-right: none; }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .stat-num {
+    font-family: var(--serif-display);
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 1;
+    font-variation-settings: "opsz" 96;
+    color: var(--ink);
+  }
+  .stat-num.bull { color: var(--bull); }
+  .stat-num.bear { color: var(--bear); }
+  .stat-num.risk { color: var(--bear); }
+  .stat-num.watch { color: var(--watch); }
+  .stat-num.conviction {
+    font-size: 36px;
+    line-height: 1.02;
+    overflow-wrap: anywhere;
+  }
+
+  .stat-breakdown {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    font-family: var(--mono);
+    font-size: 8.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .risk-mix-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 5px 1px;
+    border: 1px solid var(--rule-soft);
+    background: rgba(255, 250, 240, 0.28);
+  }
+
+  .risk-mix-chip.high { color: var(--bear); background: var(--bear-soft); border-color: rgba(139, 26, 14, 0.16); }
+  .risk-mix-chip.medium { color: var(--watch); background: var(--watch-soft); border-color: rgba(139, 90, 31, 0.18); }
+  .risk-mix-chip.low { color: var(--ink-3); background: var(--paper-3); }
+
+  .partial-note {
+    margin: -18px 0 28px;
+    padding: 10px 14px;
+    font-family: var(--serif-tc);
+    font-size: 13px;
+    color: var(--watch);
+    background: var(--watch-soft);
+    border-left: 4px solid var(--watch);
+  }
+
+  /* ============ EXECUTIVE SUMMARY ============ */
+  .executive-summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(250px, 0.48fr);
+    gap: 22px;
+    padding: 20px 0 22px;
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .summary-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 7px;
+  }
+
+  .summary-body {
+    font-family: var(--serif-tc);
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink-2);
+  }
+
+  .summary-facts {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    align-content: start;
+    border-left: 1px solid var(--rule);
+    padding-left: 20px;
+  }
+
+  .summary-fact {
+    display: grid;
+    grid-template-columns: 86px minmax(0, 1fr);
+    gap: 10px;
+    align-items: baseline;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .summary-fact:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .summary-fact-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .summary-fact-value {
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.45;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+  }
+
+  /* ============ SIGNAL STRIP ============ */
+  .signal-strip {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(240px, 0.85fr);
+    gap: 22px;
+    padding: 20px 0 24px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 36px;
+  }
+
+  .signal-lead {
+    min-width: 0;
+  }
+
+  .signal-label,
+  .quality-label,
+  .evidence-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 6px;
+  }
+
+  .signal-headline {
+    font-family: var(--serif-tc);
+    font-weight: 900;
+    font-size: 25px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 7px;
+    overflow-wrap: anywhere;
+  }
+
+  .signal-deck {
+    font-family: var(--serif-tc);
+    font-size: 14.5px;
+    line-height: 1.58;
+    color: var(--ink-2);
+  }
+
+  .quality-panel {
+    border-left: 1px solid var(--rule);
+    padding-left: 20px;
+  }
+
+  .quality-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 14px;
+  }
+
+  .quality-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .quality-num {
+    font-family: var(--serif-display);
+    font-size: 24px;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .quality-text {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  /* ============ SECTION HEADERS ============ */
+  .section {
+    margin-bottom: 48px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 24px;
+  }
+
+  .section-num {
+    font-family: var(--serif-display);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 36px;
+    color: var(--ink-3);
+    font-variation-settings: "opsz" 96, "SOFT" 100;
+  }
+
+  .section-title {
+    font-family: var(--serif-tc);
+    font-weight: 900;
+    font-size: 28px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .section-sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-left: auto;
+  }
+
+  /* ============ SECTOR ROWS ============ */
+  .sector {
+    display: grid;
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: 10px 18px;
+    align-items: start;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .sector:last-child { border-bottom: none; }
+
+  .sector > .signal-pill {
+    justify-self: start;
+    margin-top: 2px;
+  }
+
+  .signal-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 4px 8px 3px;
+    border-radius: 1px;
+    white-space: nowrap;
+  }
+
+  .signal-pill.bull { background: var(--bull-soft); color: var(--bull); }
+  .signal-pill.bear { background: var(--bear-soft); color: var(--bear); }
+  .signal-pill.watch { background: var(--watch-soft); color: var(--watch); }
+
+  .signal-pill .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+  .signal-pill.bull .dot { background: var(--bull); }
+  .signal-pill.bear .dot { background: var(--bear); }
+  .signal-pill.watch .dot { background: var(--watch); }
+
+  .severity-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 4px 8px 3px;
+    border-radius: 1px;
+    white-space: nowrap;
+  }
+
+  .severity-pill .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+
+  .severity-high { background: var(--bear-soft); color: var(--bear); }
+  .severity-medium { background: var(--watch-soft); color: var(--watch); }
+  .severity-low { background: var(--paper-3); color: var(--ink-3); }
+  .severity-high .dot { background: var(--bear); }
+  .severity-medium .dot { background: var(--watch); }
+  .severity-low .dot { background: var(--ink-3); }
+
+  .sector-body {
+    min-width: 0;
+  }
+
+  .sector-body .sector-name {
+    font-family: var(--serif-tc);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--ink);
+    margin-bottom: 6px;
+    letter-spacing: -0.005em;
+  }
+
+  .sector-body .sector-thesis {
+    font-family: var(--serif-tc);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+
+  .sector-ref {
+    grid-column: 2;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 0;
+    margin-top: 4px;
+  }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .tag-row.inline {
+    display: inline-flex;
+  }
+
+  .typed-tag {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 5px;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.04em;
+    color: var(--ink-2);
+    background: var(--paper-2);
+    padding: 3px 7px 2px;
+    border: 1px solid var(--rule-soft);
+    border-radius: 1px;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .tag-kind {
+    color: var(--ink-3);
+    font-size: 8px;
+    letter-spacing: 0.12em;
+  }
+
+  .tag-ticker { background: var(--paper-3); border-color: var(--rule); color: var(--ink); font-weight: 700; }
+  .tag-event { background: rgba(14, 82, 48, 0.06); border-color: var(--rule-soft); }
+  .tag-reason { background: var(--paper-2); }
+
+  /* ============ RISK LEDGER ============ */
+  .risk-ledger {
+    border-top: 1px solid var(--ink);
+  }
+
+  .risk-row {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr) minmax(160px, auto);
+    gap: 16px;
+    align-items: start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .risk-title {
+    font-family: var(--serif-tc);
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+
+  .risk-thesis {
+    font-family: var(--serif-tc);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+
+  .risk-tags {
+    justify-content: flex-end;
+  }
+
+  .ref-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .ticker-chip {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink);
+    background: var(--paper-3);
+    padding: 3px 8px 2px;
+    border: 1px solid var(--rule);
+    letter-spacing: 0.02em;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.35;
+  }
+
+  /* ============ STOCK CARDS ============ */
+  .stocks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--ink);
+    border-left: 1px solid var(--ink);
+  }
+
+  .stocks.solo {
+    grid-template-columns: 1fr;
+  }
+
+  .stocks.compact .stock.featured {
+    grid-column: 1 / -1;
+  }
+
+  .stock {
+    border-right: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 22px 24px;
+    background: rgba(255, 250, 240, 0.35);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .stock.featured {
+    background: rgba(14, 82, 48, 0.06);
+  }
+
+  .stock-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .ticker {
+    font-family: var(--serif-display);
+    font-weight: 700;
+    font-size: 38px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-variation-settings: "opsz" 144;
+  }
+
+  .market-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    border: 1px solid var(--rule);
+    padding: 2px 6px 1px;
+  }
+
+  .stock-signal {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .strength {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 500;
+  }
+
+  .stock-thesis {
+    font-family: var(--serif-tc);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    flex: 1;
+  }
+
+  .stock-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 4px;
+  }
+
+  .stock-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding-top: 2px;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    background: var(--paper-2);
+    padding: 3px 7px 2px;
+    border-radius: 1px;
+  }
+
+  .tag.evidence {
+    background: transparent;
+    border: 1px solid var(--rule-soft);
+    color: var(--ink-3);
+  }
+
+  /* ============ WATCHLIST EXPORT ============ */
+  .watchlist-export {
+    margin: 40px 0 0;
+  }
+
+  .watchlist-copy {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    padding: 14px 16px;
+    background: var(--paper-2);
+    border-left: 4px solid var(--ink);
+    margin-bottom: 16px;
+  }
+
+  .watchlist-copy-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .watchlist-copy-text {
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+  }
+
+  .watchlist-table {
+    border-top: 1px solid var(--ink);
+  }
+
+  .watchlist-row,
+  .watchlist-empty {
+    display: grid;
+    grid-template-columns: 110px 170px minmax(0, 1fr);
+    gap: 14px;
+    align-items: baseline;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .watchlist-empty {
+    grid-template-columns: 1fr;
+    font-family: var(--serif-tc);
+    font-size: 14px;
+    color: var(--ink-3);
+  }
+
+  .watchlist-ticker {
+    font-family: var(--serif-display);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .watchlist-refs,
+  .watchlist-reason {
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 1.45;
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+  }
+
+  .watchlist-reason {
+    color: var(--ink-2);
+    text-transform: none;
+    letter-spacing: 0.02em;
+  }
+
+  /* ============ FOOTER ============ */
+  .footer {
+    margin-top: 48px;
+    padding-top: 18px;
+    border-top: 6px double var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .disclaimer {
+    font-family: var(--serif-tc);
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ink-3);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  /* ============ DROP CAP / ORNAMENT ============ */
+  .ornament {
+    text-align: center;
+    font-family: var(--serif-display);
+    font-size: 18px;
+    color: var(--ink-3);
+    letter-spacing: 1em;
+    margin: 4px 0 -8px;
+  }
+
+  /* ============ MOBILE ============ */
+  @media (max-width: 720px) {
+    .page { padding: 28px 22px 60px; }
+    .masthead-title { font-size: 46px; }
+    .stat-bar { grid-template-columns: repeat(2, 1fr); }
+    .executive-summary { grid-template-columns: 1fr; }
+    .summary-facts { border-left: none; padding-left: 0; border-top: 1px solid var(--rule-soft); padding-top: 14px; }
+    .signal-strip { grid-template-columns: 1fr; }
+    .quality-panel { border-left: none; padding-left: 0; border-top: 1px solid var(--rule-soft); padding-top: 16px; }
+    .stat { border-bottom: 1px solid var(--rule-soft); }
+    .stocks { grid-template-columns: 1fr; }
+    .stocks.compact .stock.featured { grid-column: auto; }
+    .sector { grid-template-columns: 1fr; gap: 10px; }
+    .sector-ref { grid-column: 1; flex-direction: row; align-items: center; margin-top: 0; }
+    .risk-row { grid-template-columns: 1fr; gap: 8px; }
+    .watchlist-copy,
+    .watchlist-row { grid-template-columns: 1fr; gap: 7px; }
+    .stat-num { font-size: 32px; }
+    .ticker { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ============ MASTHEAD ============ -->
+  <header class="masthead">
+    <div class="masthead-top">
+      <div class="left">
+        <span>Vol. I</span>
+        <span>No. 143</span>
+      </div>
+      <div>X / Twitter Signal Edition</div>
+    </div>
+
+    <div class="masthead-kicker">Account Signal Report</div>
+    <h1 class="masthead-title"><span class="tc">IUAENA</span></h1>
+
+    <div class="ornament">· · ·</div>
+
+    <div class="masthead-sub">
+      <div>Saturday — 23 May 2026</div>
+      <div class="source-tag">Source — @IUAEDINA</div>
+      <div>Today · 2 posts</div>
+    </div>
+  </header>
+
+  <!-- ============ STAT BAR ============ -->
+  <div class="stat-bar">
+    <div class="stat">
+      <span class="stat-label">Bullish</span>
+      <span class="stat-num bull">03</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Watch</span>
+      <span class="stat-num watch">03</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Risk</span>
+      <span class="stat-num risk">04</span>
+      <div class="stat-breakdown">
+        <span class="risk-mix-chip high">高 02</span>
+        <span class="risk-mix-chip medium">中 02</span>
+        <span class="risk-mix-chip low">低 00</span>
+      </div>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Top Conviction</span>
+      <span class="stat-num conviction">XE</span>
+    </div>
+  </div>
+  
+
+  <!-- ============ EXECUTIVE SUMMARY ============ -->
+  <section class="executive-summary">
+    <div>
+      <div class="summary-label">Today's Summary · 今日總括 · IUAENA</div>
+      <div class="summary-body">已合併重覆 quote / article 內容；圖片訊號已納入 SMR 與 XE 判斷，未使用外部資料。</div>
+    </div>
+    <div class="summary-facts">
+      <div class="summary-fact">
+        <span class="summary-fact-label">Lead</span>
+        <span class="summary-fact-value">XE · 看好</span>
+      </div>
+      <div class="summary-fact">
+        <span class="summary-fact-label">Risk Mix</span>
+        <span class="summary-fact-value">高 02 / 中 02 / 低 00</span>
+      </div>
+      <div class="summary-fact">
+        <span class="summary-fact-label">Watchlist</span>
+        <span class="summary-fact-value">3 names · XE, SMR, OKLO</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="signal-strip">
+    <div class="signal-lead">
+      <div class="signal-label">Lead Signal</div>
+      <div class="signal-headline">XE · 看好</div>
+      <div class="signal-deck">中長線核心偏好，因 TRISO-X 燃料、400米安全半徑、工業蒸汽及 recurring fuel revenue 組合最完整。技術圖歷史短，策略偏極小倉慢慢累積。</div>
+    </div>
+    <div class="quality-panel">
+      <div class="quality-label">Data Quality</div>
+      <div class="quality-grid">
+        <div class="quality-item">
+          <span class="quality-num">2</span>
+          <span class="quality-text">Tweets</span>
+        </div>
+        <div class="quality-item">
+          <span class="quality-num">3</span>
+          <span class="quality-text">Images Read</span>
+        </div>
+        <div class="quality-item">
+          <span class="quality-num">3</span>
+          <span class="quality-text">Themes</span>
+        </div>
+        <div class="quality-item">
+          <span class="quality-num">3</span>
+          <span class="quality-text">Names</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 1: SECTORS ============ -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">I.</span>
+      <h2 class="section-title">板塊發展趨勢</h2>
+      <span class="section-sub">Sector Trends</span>
+    </div>
+
+    <div class="sector">
+      <span class="signal-pill bull"><span class="dot"></span>看好</span>
+      <div class="sector-body">
+        <div class="sector-name">AI Nuclear Power</div>
+        <div class="sector-thesis">AI data center 電力需求升至 200-500MW 甚至 1GW+，穩定 baseload power 成為樽頸。SMR / advanced nuclear 被定位為零碳、全天候供電方案，利好 XE、SMR、OKLO 相關賽道。</div>
+      </div>
+
+      <div class="sector-ref">
+        <span class="ref-label">關聯</span>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>XE</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SMR</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>OKLO</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>AI baseload</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>tweet2058299784</span></div>
+      </div>
+    </div>
+
+    <div class="sector">
+      <span class="signal-pill bull"><span class="dot"></span>催化</span>
+      <div class="sector-body">
+        <div class="sector-name">X-energy HTGR</div>
+        <div class="sector-thesis">XE 以 TRISO-X、HTGR、565°C 工業蒸汽及 reactor + fuel 耗材模式建立較深護城河。Amazon 5億美元注資及 5GW 部署承諾，令其成為今次最強綜合優勢主線。</div>
+      </div>
+
+      <div class="sector-ref">
+        <span class="ref-label">關聯</span>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>XE</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>Amazon 5GW</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>TRISO-X</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>tweet2058318045</span></div>
+      </div>
+    </div>
+
+    <div class="sector">
+      <span class="signal-pill watch"><span class="dot"></span>觀察</span>
+      <div class="sector-body">
+        <div class="sector-name">SMR 技術突破</div>
+        <div class="sector-thesis">SMR 圖表顯示 MACD bullish divergence、RSI speeding up，現價約 11.40，12-12.2 附近是 EMA 50 / POC 及突破確認位。未突破前仍以 watch / setup 處理。</div>
+      </div>
+
+      <div class="sector-ref">
+        <span class="ref-label">關聯</span>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SMR</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>圖1/3</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>bullish divergence</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>tweet2058318045</span></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ SECTION 2: RISKS ============ -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">II.</span>
+      <h2 class="section-title">風險筆記</h2>
+      <span class="section-sub">Bearish / Risk Ledger</span>
+    </div>
+    <div class="risk-ledger">
+
+      <div class="risk-row">
+        <span class="severity-pill severity-high"><span class="dot"></span>高風險</span>
+        <div>
+          <div class="risk-title">OKLO 財務模型</div>
+          <div class="risk-thesis">Kerrisdale 壓測指 OKLO 若用 $35k/kg HALEU，FOAK LCOE 可升至 $230/MWh、IRR 轉負，令投資結果高度二元化。</div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>OKLO</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>HALEU cost</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>negative IRR</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-high"><span class="dot"></span>高風險</span>
+        <div>
+          <div class="risk-title">HALEU 供應鏈</div>
+          <div class="risk-thesis">XE 與 OKLO 均依賴 HALEU，而全球商業供應鏈被描述為近乎由俄羅斯主導、美國供應不足，屬執行及地緣政治風險。</div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>XE</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>OKLO</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>HALEU</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>geopolitical</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-medium"><span class="dot"></span>中風險</span>
+        <div>
+          <div class="risk-title">XE 估值與圖表</div>
+          <div class="risk-thesis">XE 剛上市，圖表參考不足且現價可能偏高，短線只適合用 25.00 / 27.30 / 29.67 / 36.55 作倉位及風險回報參考。</div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>XE</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>圖2</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>新上市</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>valuation</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-medium"><span class="dot"></span>中風險</span>
+        <div>
+          <div class="risk-title">SMR 部署限制</div>
+          <div class="risk-thesis">SMR 監管最穩，但地下水池冷卻、水源需求、O&amp;M 成本及意向協議轉硬合約速度，仍會限制重估速度。</div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SMR</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>water use</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>O&amp;M</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>contract lag</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 2: STOCKS ============ -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">III.</span>
+      <h2 class="section-title">個股分析</h2>
+      <span class="section-sub">Single-Name Coverage</span>
+    </div>
+
+    <div class="stocks compact">
+
+      <article class="stock featured">
+        <div class="stock-head">
+          <div class="ticker">XE</div>
+          <span class="market-tag">NASDAQ</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">高</span>
+        </div>
+        <p class="stock-thesis">中長線核心偏好，因 TRISO-X 燃料、400米安全半徑、工業蒸汽及 recurring fuel revenue 組合最完整。技術圖歷史短，策略偏極小倉慢慢累積。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>XE</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>TRISO-X</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>HTGR</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>圖2</span></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">SMR</div>
+          <span class="market-tag">NYSE</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill watch"><span class="dot"></span>觀察</span>
+          <span class="strength">中</span>
+        </div>
+        <p class="stock-thesis">NuScale 擁有最高監管確定性及最低燃料供應風險，適合作較防守的 advanced nuclear 標的。交易上等約 12.2，即 EMA 50 / POC 附近確認後作 swing / position trade。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SMR</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>NRC SDA</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>12.2 buy</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>圖1/3</span></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">OKLO</div>
+          <span class="market-tag">未提供</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill bear"><span class="dot"></span>風險</span>
+          <span class="strength">高波動</span>
+        </div>
+        <p class="stock-thesis">Oklo 有 20年免換料、BOO / PPA、Meta 預付款及核廢料回收潛力，但仍未有 NRC 最終設計批准，且財務模型高度依賴 HALEU 成本及回收技術落地。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>OKLO</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>HALEU</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>BOO</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>Meta PPA</span></div>
+      </article>
+    </div>
+  </section>
+
+
+  <!-- ============ WATCHLIST EXPORT ============ -->
+  <section class="section watchlist-export">
+    <div class="section-header">
+      <span class="section-num">IV.</span>
+      <h2 class="section-title">Watchlist Export</h2>
+      <span class="section-sub">Clean Ticker List</span>
+    </div>
+    <div class="watchlist-copy">
+      <span class="watchlist-copy-label">Copy List</span>
+      <span class="watchlist-copy-text">XE, SMR, OKLO</span>
+    </div>
+    <div class="watchlist-table">
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">XE</span>
+        <span class="watchlist-refs">Lead + Section I + Section II + Section III</span>
+        <span class="watchlist-reason">AI baseload · tweet2058299784 · Amazon 5GW</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">SMR</span>
+        <span class="watchlist-refs">Section I + Section II + Section III</span>
+        <span class="watchlist-reason">AI baseload · tweet2058299784 · 圖1/3</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">OKLO</span>
+        <span class="watchlist-refs">Section I + Section II + Section III</span>
+        <span class="watchlist-reason">AI baseload · tweet2058299784 · HALEU cost</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div>© 2026 Daily Signal Digest</div>
+    <div class="disclaimer">非投資建議 · Not Investment Advice</div>
+    <div>End of Issue No. 143</div>
+  </footer>
+
+</div>
+</body>
+</html>
