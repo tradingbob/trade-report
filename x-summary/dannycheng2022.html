@@ -518,6 +518,50 @@
   .tag-event { background: rgba(14, 82, 48, 0.06); border-color: var(--rule-soft); }
   .tag-reason { background: var(--paper-2); }
 
+  .source-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+  }
+
+  .source-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-right: 2px;
+  }
+
+  .source-chip,
+  .source-more {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 9px;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    background: rgba(255, 250, 240, 0.32);
+    border: 1px solid var(--rule-soft);
+    padding: 3px 7px 2px;
+    text-decoration: none;
+    border-radius: 1px;
+  }
+
+  .source-chip:hover {
+    background: var(--paper-3);
+    color: var(--ink);
+  }
+
+  .source-more {
+    color: var(--ink-3);
+    background: transparent;
+  }
+
   /* ============ RISK LEDGER ============ */
   .risk-ledger {
     border-top: 1px solid var(--ink);
@@ -841,7 +885,7 @@
     <div class="masthead-sub">
       <div>Sunday — 24 May 2026</div>
       <div class="source-tag">Source — @dannycheng2022</div>
-      <div>Today · 16 posts</div>
+      <div>Last 7 Days · 431 posts</div>
     </div>
   </header>
 
@@ -849,24 +893,24 @@
   <div class="stat-bar">
     <div class="stat">
       <span class="stat-label">Bullish</span>
-      <span class="stat-num bull">02</span>
+      <span class="stat-num bull">11</span>
     </div>
     <div class="stat">
       <span class="stat-label">Watch</span>
-      <span class="stat-num watch">04</span>
+      <span class="stat-num watch">06</span>
     </div>
     <div class="stat">
       <span class="stat-label">Risk</span>
-      <span class="stat-num risk">02</span>
+      <span class="stat-num risk">06</span>
       <div class="stat-breakdown">
-        <span class="risk-mix-chip high">高 00</span>
-        <span class="risk-mix-chip medium">中 02</span>
+        <span class="risk-mix-chip high">高 03</span>
+        <span class="risk-mix-chip medium">中 03</span>
         <span class="risk-mix-chip low">低 00</span>
       </div>
     </div>
     <div class="stat">
       <span class="stat-label">Top Conviction</span>
-      <span class="stat-num conviction">CIFR</span>
+      <span class="stat-num conviction">AMD</span>
     </div>
   </div>
   
@@ -875,20 +919,20 @@
   <section class="executive-summary">
     <div>
       <div class="summary-label">Today's Summary · 今日總括 · Danny cheng</div>
-      <div class="summary-body">今日主線偏多：CIFR 係最清晰續強 setup，SPX 維持反共識向上，IBM 屬反轉觀察。AMD、NVDA、PLTR 只提供核心持倉線索，未有新買賣位；風險重點係 CIFR 下方波動缺口同技術分析不可脫離價格。</div>
+      <div class="summary-body">主線非常清楚：大市仍偏多，資金集中追 AI 基建、半導體、memory、photonics 及核心股 AMD/NVDA/PLTR。可攻但不可亂追，重點用 volatility hole、momentum bar、紅燭及 weekly trend 做確認；風險集中在長債、黃金、弱勢小票、槓桿工具及過度集中同一 AI trade。</div>
     </div>
     <div class="summary-facts">
       <div class="summary-fact">
         <span class="summary-fact-label">Lead</span>
-        <span class="summary-fact-value">CIFR · 看好</span>
+        <span class="summary-fact-value">NVDA · 看好</span>
       </div>
       <div class="summary-fact">
         <span class="summary-fact-label">Risk Mix</span>
-        <span class="summary-fact-value">高 00 / 中 02 / 低 00</span>
+        <span class="summary-fact-value">高 03 / 中 03 / 低 00</span>
       </div>
       <div class="summary-fact">
         <span class="summary-fact-label">Watchlist</span>
-        <span class="summary-fact-value">6 names · CIFR, SPX, IBM, AMD, NVDA, PLTR</span>
+        <span class="summary-fact-value">35 names · AMD, HIVE, RIOT, CORZ, MARA, IREN, SPX, SPY, SOXL, SMH, NVDA, PLTR, USAR, UUUU, MP, EWY, CIEN, PL, NOK, IGV, CONL, TSLL, IONQ, RGTI, QUBT, QBTS, SLNH, GLD, TLT, IBM, CIFR, TSLA, BB, ALAB, PATH</span>
       </div>
     </div>
   </section>
@@ -896,26 +940,26 @@
   <section class="signal-strip">
     <div class="signal-lead">
       <div class="signal-label">Lead Signal</div>
-      <div class="signal-headline">CIFR · 看好</div>
-      <div class="signal-deck">週線出現全新 bullish red ribbon 準備展開，whale accumulation 約 99.05%。關鍵位是 20.55，只要持續收在其上，向上動能仍完整。</div>
+      <div class="signal-headline">NVDA · 看好</div>
+      <div class="signal-deck">NVDA 是核心倉之一，外部分析亦指其相對 SMH beta 已由高轉低，業績後有上望 300 美元的情境。作者偏向把 NVDA 視為 AI 主線核心而非短炒。</div>
     </div>
     <div class="quality-panel">
       <div class="quality-label">Data Quality</div>
       <div class="quality-grid">
         <div class="quality-item">
-          <span class="quality-num">16</span>
+          <span class="quality-num">431</span>
           <span class="quality-text">Tweets</span>
         </div>
         <div class="quality-item">
-          <span class="quality-num">6</span>
+          <span class="quality-num">12</span>
           <span class="quality-text">Images Read</span>
         </div>
         <div class="quality-item">
-          <span class="quality-num">1</span>
+          <span class="quality-num">7</span>
           <span class="quality-text">Themes</span>
         </div>
         <div class="quality-item">
-          <span class="quality-num">5</span>
+          <span class="quality-num">16</span>
           <span class="quality-text">Names</span>
         </div>
       </div>
@@ -931,15 +975,100 @@
     </div>
 
     <div class="sector">
-      <span class="signal-pill bull"><span class="dot"></span>看好</span>
+      <span class="signal-pill watch"><span class="dot"></span>觀察</span>
       <div class="sector-body">
-        <div class="sector-name">美股大市</div>
-        <div class="sector-thesis">SPX 圖中 2026-05-22 收 7473.470，仍沿上升軌道近高位；跌至 5800 的看淡共識暫未獲價格確認。交易上不宜只因市場普遍看淡而逆勢做淡。</div>
+        <div class="sector-name">數據中心</div>
+        <div class="sector-thesis">HIVE、RIOT、CORZ、MARA 只屬 viewing only；IREN/CIFR 仍有長線持倉及 AI compute 故事，但基本面現金流與執行風險需要分開處理。</div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/Lootster/status/2058541023627010122" target="_blank" rel="noopener noreferrer">POST · 2026-05-24 13:30 UTC</a><a class="source-chip" href="https://x.com/dannycheng2022/status/2058038058591936863" target="_blank" rel="noopener noreferrer">POST · 2026-05-23 04:11 UTC</a></div>
       </div>
 
       <div class="sector-ref">
         <span class="ref-label">關聯</span>
-        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SPX</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>2026-05-22</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>反共識</span></div>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>HIVE</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>RIOT</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>CORZ</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>MARA</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>IREN</span></div>
+      </div>
+    </div>
+
+    <div class="sector">
+      <span class="signal-pill bull"><span class="dot"></span>看好</span>
+      <div class="sector-body">
+        <div class="sector-name">大市趨勢</div>
+        <div class="sector-thesis">SPX 圖表由見底、趨勢反轉到突破買入訊號延續，作者反覆否定 5800 點崩盤劇本。大市方向仍偏支持持有強勢股。</div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/dannycheng2022/status/2058410083705663504" target="_blank" rel="noopener noreferrer">POST · 2026-05-24 04:49 UTC</a><a class="source-chip" href="https://x.com/dannycheng2022/status/2058040269468311929" target="_blank" rel="noopener noreferrer">POST · 2026-05-23 04:20 UTC</a></div>
+      </div>
+
+      <div class="sector-ref">
+        <span class="ref-label">關聯</span>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SPX</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SPY</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>突破買入</span></div>
+      </div>
+    </div>
+
+    <div class="sector">
+      <span class="signal-pill bull"><span class="dot"></span>看好</span>
+      <div class="sector-body">
+        <div class="sector-name">半導體槓桿</div>
+        <div class="sector-thesis">SOXL 一個月升逾 2 倍，圖片實為 SMH 週線並多次標示 BUY / breakout buy，反映半導體主趨勢仍強。不過槓桿工具只適合承受高波動。</div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/dannycheng2022/status/2058029897965297830" target="_blank" rel="noopener noreferrer">POST · 2026-05-23 03:38 UTC</a></div>
+      </div>
+
+      <div class="sector-ref">
+        <span class="ref-label">關聯</span>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SOXL</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SMH</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>半導體強勢</span></div>
+      </div>
+    </div>
+
+    <div class="sector">
+      <span class="signal-pill bull"><span class="dot"></span>看好</span>
+      <div class="sector-body">
+        <div class="sector-name">AI 基建</div>
+        <div class="sector-thesis">主線集中於 Semiconductors、memory、photonics 及 AI infrastructure，並強調核心倉應優先放在真正受惠 AI 資本開支的龍頭，而非 meme 或小型投機股。</div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/dannycheng2022/status/2057670451498008703" target="_blank" rel="noopener noreferrer">POST · 2026-05-22 03:50 UTC</a><a class="source-chip" href="https://x.com/dannycheng2022/status/2057100899572518976" target="_blank" rel="noopener noreferrer">POST · 2026-05-20 14:47 UTC</a><a class="source-chip" href="https://x.com/dannycheng2022/status/2056296847078220075" target="_blank" rel="noopener noreferrer">POST · 2026-05-18 08:52 UTC</a></div>
+      </div>
+
+      <div class="sector-ref">
+        <span class="ref-label">關聯</span>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>NVDA</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>AMD</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>PLTR</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>AI 週期</span></div>
+      </div>
+    </div>
+
+    <div class="sector">
+      <span class="signal-pill watch"><span class="dot"></span>觀察</span>
+      <div class="sector-body">
+        <div class="sector-name">稀土</div>
+        <div class="sector-thesis">USAR、UUUU、MP 被列為 daily charts for viewing only，未有明確買入訊號。只可視為主題觀察，等待後續圖表確認。</div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/dannycheng2022/status/2056980063023927411" target="_blank" rel="noopener noreferrer">POST · 2026-05-20 06:07 UTC</a></div>
+      </div>
+
+      <div class="sector-ref">
+        <span class="ref-label">關聯</span>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>USAR</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>UUUU</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>MP</span></div>
+      </div>
+    </div>
+
+    <div class="sector">
+      <span class="signal-pill bull"><span class="dot"></span>看好</span>
+      <div class="sector-body">
+        <div class="sector-name">光子/突破股</div>
+        <div class="sector-thesis">EWY、CIEN、PL、NOK 多次示範 volatility hole 上沿突破後續升，適合作為牛市跟趨勢框架。現階段重點是跟蹤突破後能否守住紅色上升帶。</div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/dannycheng2022/status/2056214055615180961" target="_blank" rel="noopener noreferrer">POST · 2026-05-18 03:23 UTC</a><a class="source-chip" href="https://x.com/dannycheng2022/status/2056210624431243364" target="_blank" rel="noopener noreferrer">POST · 2026-05-18 03:09 UTC</a></div>
+      </div>
+
+      <div class="sector-ref">
+        <span class="ref-label">關聯</span>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>EWY</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>CIEN</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>PL</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>NOK</span></div>
+      </div>
+    </div>
+
+    <div class="sector">
+      <span class="signal-pill watch"><span class="dot"></span>觀察</span>
+      <div class="sector-body">
+        <div class="sector-name">軟件反轉</div>
+        <div class="sector-thesis">IGV 週線出現三底及買盤介入，76-80 美元區的 volatility holes 成功捕捉低位。若能持續企穩 90 美元上方，中期轉入多頭紅帶機會提高。</div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/dannycheng2022/status/2056209434305810728" target="_blank" rel="noopener noreferrer">POST · 2026-05-18 02:55 UTC</a></div>
+      </div>
+
+      <div class="sector-ref">
+        <span class="ref-label">關聯</span>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>IGV</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>三底</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>90 美元確認</span></div>
       </div>
     </div>
   </section>
@@ -957,18 +1086,56 @@
       <div class="risk-row">
         <span class="severity-pill severity-medium"><span class="dot"></span>中風險</span>
         <div>
-          <div class="risk-title">CIFR 下方波動缺口</div>
-          <div class="risk-thesis">CIFR 圖中仍標示 Volatility Hole，下方缺口雖然未必短期回補，但若失守 20.55，續強假設會轉弱。</div>
+          <div class="risk-title">IREN 現金流風險</div>
+          <div class="risk-thesis">IREN 雖有 AI cloud 及 renewable compute 故事，但自由現金流仍為負、資本開支高且有攤薄，未算高確定 compounder。</div>
+          <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/Lootster/status/2058541023627010122" target="_blank" rel="noopener noreferrer">POST · 2026-05-24 13:30 UTC</a></div>
         </div>
-        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>CIFR</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>下方缺口</span></div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>IREN</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>負自由現金流</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>攤薄</span></div>
       </div>
       <div class="risk-row">
         <span class="severity-pill severity-medium"><span class="dot"></span>中風險</span>
         <div>
-          <div class="risk-title">技術分析固化風險</div>
-          <div class="risk-thesis">技術分析應用作管理風險，若變成固定信念並忽略價格行動，容易錯過 2023 以來升浪或錯判大市方向。</div>
+          <div class="risk-title">槓桿與集中度</div>
+          <div class="risk-thesis">CONL、TSLL 等槓桿 ETF 被明確列為交易工具而非核心長持；同時高集中 AI trade 相關性高，回撤時要用現金及倉位控制。</div>
+          <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/sedonaroxx/status/2057692937811882090" target="_blank" rel="noopener noreferrer">POST · 2026-05-22 05:20 UTC</a><a class="source-chip" href="https://x.com/dannycheng2022/status/2056296847078220075" target="_blank" rel="noopener noreferrer">POST · 2026-05-18 08:52 UTC</a></div>
         </div>
-        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SPX</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>價格行動</span></div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>CONL</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>TSLL</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>槓桿衰減</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>高相關</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-medium"><span class="dot"></span>中風險</span>
+        <div>
+          <div class="risk-title">量子股動能降</div>
+          <div class="risk-thesis">IONQ、RGTI、QUBT、QBTS 多數出現動能流失及 whale accumulation 下降，短線不宜把整個量子板塊一概追高。</div>
+          <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/vicin888/status/2057418680485417298" target="_blank" rel="noopener noreferrer">POST · 2026-05-21 11:10 UTC</a><a class="source-chip" href="https://x.com/dannycheng2022/status/2056612542940926163" target="_blank" rel="noopener noreferrer">POST · 2026-05-19 05:46 UTC</a></div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>IONQ</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>RGTI</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>QUBT</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>QBTS</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-high"><span class="dot"></span>高風險</span>
+        <div>
+          <div class="risk-title">SLNH 轉弱</div>
+          <div class="risk-thesis">SLNH 出現 bearish yellow candle，若收低於 1.68 美元會觸發更深調整；重上 1.90 美元前不宜當強勢延續。</div>
+          <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/dannycheng2022/status/2057365982545686843" target="_blank" rel="noopener noreferrer">POST · 2026-05-21 07:40 UTC</a><a class="source-chip" href="https://x.com/dannycheng2022/status/2057044713958670697" target="_blank" rel="noopener noreferrer">POST · 2026-05-20 10:24 UTC</a><a class="source-chip" href="https://x.com/dannycheng2022/status/2056614508001681865" target="_blank" rel="noopener noreferrer">POST · 2026-05-19 05:54 UTC</a></div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SLNH</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>黃燭</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>1.68 失守</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-high"><span class="dot"></span>高風險</span>
+        <div>
+          <div class="risk-title">GLD 看淡訊號</div>
+          <div class="risk-thesis">GLD 月線自 2023 年 10 月以來首次同時出現新黃燭及 bearish green bar，追買黃金風險上升。</div>
+          <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/BitBrew1/status/2057057269792096619" target="_blank" rel="noopener noreferrer">POST · 2026-05-20 11:14 UTC</a><a class="source-chip" href="https://x.com/dannycheng2022/status/2057053557573185839" target="_blank" rel="noopener noreferrer">POST · 2026-05-20 10:59 UTC</a></div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>GLD</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>月線黃燭</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>bearish bar</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-high"><span class="dot"></span>高風險</span>
+        <div>
+          <div class="risk-title">TLT 下行壓力</div>
+          <div class="risk-thesis">TLT 在日線、週線及月線均形成跌勢，並配合 whale momentum 下降，對長債及利率敏感倉位不利。</div>
+          <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/dannycheng2022/status/2056302276990620012" target="_blank" rel="noopener noreferrer">POST · 2026-05-18 09:14 UTC</a></div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>TLT</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>多周期下跌</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>動能轉弱</span></div>
       </div>
     </div>
   </section>
@@ -985,28 +1152,58 @@
 
       <article class="stock featured">
         <div class="stock-head">
-          <div class="ticker">CIFR</div>
-          <span class="market-tag">NASDAQ</span>
+          <div class="ticker">NVDA</div>
+          <span class="market-tag">US</span>
         </div>
         <div class="stock-signal">
           <span class="signal-pill bull"><span class="dot"></span>看好</span>
           <span class="strength">高</span>
         </div>
-        <p class="stock-thesis">週線出現全新 bullish red ribbon 準備展開，whale accumulation 約 99.05%。關鍵位是 20.55，只要持續收在其上，向上動能仍完整。</p>
-        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>CIFR</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>週線圖</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>20.55</span></div>
+        <p class="stock-thesis">NVDA 是核心倉之一，外部分析亦指其相對 SMH beta 已由高轉低，業績後有上望 300 美元的情境。作者偏向把 NVDA 視為 AI 主線核心而非短炒。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>NVDA</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SMH</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>業績前後</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/dannycheng2022/status/2058452537121062958" target="_blank" rel="noopener noreferrer">POST · 2026-05-24 07:38 UTC</a><a class="source-chip" href="https://x.com/Dr_Crossroads/status/2056795882889113897" target="_blank" rel="noopener noreferrer">POST · 2026-05-19 17:55 UTC</a><a class="source-chip" href="https://x.com/Dr_Crossroads/status/2056503995510710446" target="_blank" rel="noopener noreferrer">POST · 2026-05-18 22:35 UTC</a></div>
       </article>
 
       <article class="stock">
         <div class="stock-head">
           <div class="ticker">IBM</div>
-          <span class="market-tag">NYSE</span>
+          <span class="market-tag">US</span>
         </div>
         <div class="stock-signal">
           <span class="signal-pill watch"><span class="dot"></span>觀察</span>
           <span class="strength">中</span>
         </div>
-        <p class="stock-thesis">日線見 Short-term Hold a Position 及 Mid-Term Buy，週線由低位大幅反彈至 253.840。訊號偏多但仍屬反轉確認期，要等後續收盤確認中期築底是否完成。</p>
-        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>IBM</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>volatility hole</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>中期買入</span></div>
+        <p class="stock-thesis">IBM 被標示日線及週線圖，問題在於最新 volatility hole 能否結束中期築底並確認趨勢反轉。未有明確突破條件，先列觀察。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>IBM</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>中期築底</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>趨勢反轉</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/dannycheng2022/status/2058405315968958665" target="_blank" rel="noopener noreferrer">POST · 2026-05-24 04:30 UTC</a></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">CIFR</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">高</span>
+        </div>
+        <p class="stock-thesis">CIFR 週線準備展開新的 bullish red ribbon，whale accumulation 達 99.05%。只要持續收在 20.55 美元之上，上行動能仍完整。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>CIFR</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>新紅帶</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>99.05% 累積</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/dannycheng2022/status/2058399065910739021" target="_blank" rel="noopener noreferrer">POST · 2026-05-24 04:05 UTC</a><a class="source-chip" href="https://x.com/dannycheng2022/status/2057365070636896573" target="_blank" rel="noopener noreferrer">POST · 2026-05-21 07:37 UTC</a><a class="source-chip" href="https://x.com/dannycheng2022/status/2056936097985577371" target="_blank" rel="noopener noreferrer">POST · 2026-05-20 03:12 UTC</a></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">TSLA</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">高</span>
+        </div>
+        <p class="stock-thesis">TSLA 週線最新圈出 BUY，作者指 350-400 美元區間累積完成，買賣訊號以週線 volatility hole 反轉為核心。短線支撐可參考 418、408-410 及 402 附近。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>TSLA</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>累積完成</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>週線 BUY</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/dannycheng2022/status/2058386176462278758" target="_blank" rel="noopener noreferrer">POST · 2026-05-24 03:14 UTC</a><a class="source-chip" href="https://x.com/dannycheng2022/status/2058017107754054011" target="_blank" rel="noopener noreferrer">POST · 2026-05-23 02:48 UTC</a><a class="source-chip" href="https://x.com/dannycheng2022/status/2056560220240048227" target="_blank" rel="noopener noreferrer">POST · 2026-05-19 02:19 UTC</a></div>
       </article>
 
       <article class="stock">
@@ -1015,24 +1212,12 @@
           <span class="market-tag">US</span>
         </div>
         <div class="stock-signal">
-          <span class="signal-pill watch"><span class="dot"></span>觀察</span>
-          <span class="strength">中</span>
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">高</span>
         </div>
-        <p class="stock-thesis">被列為核心持倉之一，持有約 1 年；未有圖表或買賣位，暫只可視為持倉線索。</p>
-        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>AMD</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>核心持倉</span></div>
-      </article>
-
-      <article class="stock">
-        <div class="stock-head">
-          <div class="ticker">NVDA</div>
-          <span class="market-tag">US</span>
-        </div>
-        <div class="stock-signal">
-          <span class="signal-pill watch"><span class="dot"></span>觀察</span>
-          <span class="strength">中</span>
-        </div>
-        <p class="stock-thesis">被列為核心持倉之一，持有約 3 年；未有新增技術位，暫不構成新入場訊號。</p>
-        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>NVDA</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>核心持倉</span></div>
+        <p class="stock-thesis">AMD 是作者三大核心倉之一，與 NVDA、PLTR 合共佔多個組合超過 91%。持倉圖顯示 AMD 浮盈 +139.54%，仍以長線持有及回調加倉為主。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>AMD</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>核心倉</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>長線複利</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/dannycheng2022/status/2058377604491817297" target="_blank" rel="noopener noreferrer">POST · 2026-05-24 02:40 UTC</a><a class="source-chip" href="https://x.com/dannycheng2022/status/2058108665853268293" target="_blank" rel="noopener noreferrer">POST · 2026-05-23 08:51 UTC</a><a class="source-chip" href="https://x.com/dannycheng2022/status/2057751174489731220" target="_blank" rel="noopener noreferrer">POST · 2026-05-22 09:11 UTC</a></div>
       </article>
 
       <article class="stock">
@@ -1041,11 +1226,68 @@
           <span class="market-tag">US</span>
         </div>
         <div class="stock-signal">
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">高</span>
+        </div>
+        <p class="stock-thesis">PLTR 與 NVDA、AMD 同列三大核心倉，定位是長線 AI 主線持有。今次 X posts 未提供新圖表入場位，訊號主要來自核心倉披露。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>PLTR</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>三大核心</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>AI 主線</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/dannycheng2022/status/2058377604491817297" target="_blank" rel="noopener noreferrer">POST · 2026-05-24 02:40 UTC</a><a class="source-chip" href="https://x.com/cantonmeow/status/2058358360827994138" target="_blank" rel="noopener noreferrer">POST · 2026-05-24 01:24 UTC</a><a class="source-chip" href="https://x.com/dannycheng2022/status/2057689272816414732" target="_blank" rel="noopener noreferrer">POST · 2026-05-22 05:05 UTC</a></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">QUBT</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
           <span class="signal-pill watch"><span class="dot"></span>觀察</span>
           <span class="strength">中</span>
         </div>
-        <p class="stock-thesis">被列為核心持倉之一，持有約 3 年；未有新增圖表訊號，適合只作持倉取向參考。</p>
-        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>PLTR</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>核心持倉</span></div>
+        <p class="stock-thesis">QUBT 的上下界很清晰：收在 13.50 美元 volatility hole 上界之上或觸發急升，跌穿 10.60 美元下界則可能急跌。這是雙向觸發盤，不宜預判。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>QUBT</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>13.50 觸發</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>10.60 失效</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/dannycheng2022/status/2058037620907917410" target="_blank" rel="noopener noreferrer">POST · 2026-05-23 04:09 UTC</a></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">BB</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">中高</span>
+        </div>
+        <p class="stock-thesis">BB 的 bullish signals 被指反覆兌現，社群耐性開始回報。另一條 X post 把 BB 比作早期 PLTR：產品強但前景仍有不確定，適合高風險長線觀察。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>BB</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>訊號兌現</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>早期 PLTR 類比</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/sanityninsanity/status/2057893254147027380" target="_blank" rel="noopener noreferrer">POST · 2026-05-22 18:36 UTC</a><a class="source-chip" href="https://x.com/sheslee/status/2057875811055907242" target="_blank" rel="noopener noreferrer">POST · 2026-05-22 17:26 UTC</a><a class="source-chip" href="https://x.com/dannycheng2022/status/2057839004821909574" target="_blank" rel="noopener noreferrer">POST · 2026-05-22 15:00 UTC</a></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">ALAB</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">高</span>
+        </div>
+        <p class="stock-thesis">ALAB 升勢維持，whale accumulation 由 98.22% 升至 98.7%。訊號組合包括趨勢反轉紅燭、突破 momentum bars 及 volatility hole 上界。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>ALAB</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>98.7% 累積</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>升勢延續</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/dannycheng2022/status/2057732474969673799" target="_blank" rel="noopener noreferrer">POST · 2026-05-22 07:57 UTC</a><a class="source-chip" href="https://x.com/dannycheng2022/status/2057049459708875050" target="_blank" rel="noopener noreferrer">POST · 2026-05-20 10:43 UTC</a></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">PATH</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill watch"><span class="dot"></span>觀察</span>
+          <span class="strength">中</span>
+        </div>
+        <p class="stock-thesis">PATH 仍在整理箱內，後續動能要逐級收穿 10.74、10.86、11.73 美元。whale accumulation 只有 10-16% 區間，暫時需要耐性。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>PATH</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>整理箱</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>11.73 確認</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/dannycheng2022/status/2057719278971822320" target="_blank" rel="noopener noreferrer">POST · 2026-05-22 07:04 UTC</a></div>
       </article>
     </div>
   </section>
@@ -1060,44 +1302,218 @@
     </div>
     <div class="watchlist-copy">
       <span class="watchlist-copy-label">Copy List</span>
-      <span class="watchlist-copy-text">CIFR, SPX, IBM, AMD, NVDA, PLTR</span>
+      <span class="watchlist-copy-text">AMD, HIVE, RIOT, CORZ, MARA, IREN, SPX, SPY, SOXL, SMH, NVDA, PLTR, USAR, UUUU, MP, EWY, CIEN, PL, NOK, IGV, CONL, TSLL, IONQ, RGTI, QUBT, QBTS, SLNH, GLD, TLT, IBM, CIFR, TSLA, BB, ALAB, PATH</span>
     </div>
     <div class="watchlist-table">
 
       <div class="watchlist-row">
-        <span class="watchlist-ticker">CIFR</span>
-        <span class="watchlist-refs">Lead + Section II + Section III</span>
-        <span class="watchlist-reason">下方缺口 · 週線圖 · 20.55</span>
+        <span class="watchlist-ticker">AMD</span>
+        <span class="watchlist-refs">Lead + Section I + Section III</span>
+        <span class="watchlist-reason">AI 週期 · 核心倉 · 長線複利</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">HIVE</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">—</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">RIOT</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">—</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">CORZ</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">—</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">MARA</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">—</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">IREN</span>
+        <span class="watchlist-refs">Section I + Section II</span>
+        <span class="watchlist-reason">負自由現金流 · 攤薄</span>
       </div>
 
       <div class="watchlist-row">
         <span class="watchlist-ticker">SPX</span>
-        <span class="watchlist-refs">Section I + Section II</span>
-        <span class="watchlist-reason">2026-05-22 · 反共識 · 價格行動</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">突破買入</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">SPY</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">突破買入</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">SOXL</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">半導體強勢</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">SMH</span>
+        <span class="watchlist-refs">Section I + Section III</span>
+        <span class="watchlist-reason">半導體強勢 · 業績前後</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">NVDA</span>
+        <span class="watchlist-refs">Section I + Section III</span>
+        <span class="watchlist-reason">AI 週期 · 業績前後</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">PLTR</span>
+        <span class="watchlist-refs">Section I + Section III</span>
+        <span class="watchlist-reason">AI 週期 · 三大核心 · AI 主線</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">USAR</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">—</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">UUUU</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">—</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">MP</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">—</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">EWY</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">—</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">CIEN</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">—</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">PL</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">—</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">NOK</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">—</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">IGV</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">三底 · 90 美元確認</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">CONL</span>
+        <span class="watchlist-refs">Section II</span>
+        <span class="watchlist-reason">槓桿衰減 · 高相關</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">TSLL</span>
+        <span class="watchlist-refs">Section II</span>
+        <span class="watchlist-reason">槓桿衰減 · 高相關</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">IONQ</span>
+        <span class="watchlist-refs">Section II</span>
+        <span class="watchlist-reason">—</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">RGTI</span>
+        <span class="watchlist-refs">Section II</span>
+        <span class="watchlist-reason">—</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">QUBT</span>
+        <span class="watchlist-refs">Section II + Section III</span>
+        <span class="watchlist-reason">13.50 觸發 · 10.60 失效</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">QBTS</span>
+        <span class="watchlist-refs">Section II</span>
+        <span class="watchlist-reason">—</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">SLNH</span>
+        <span class="watchlist-refs">Section II</span>
+        <span class="watchlist-reason">黃燭 · 1.68 失守</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">GLD</span>
+        <span class="watchlist-refs">Section II</span>
+        <span class="watchlist-reason">月線黃燭 · bearish bar</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">TLT</span>
+        <span class="watchlist-refs">Section II</span>
+        <span class="watchlist-reason">多周期下跌 · 動能轉弱</span>
       </div>
 
       <div class="watchlist-row">
         <span class="watchlist-ticker">IBM</span>
         <span class="watchlist-refs">Section III</span>
-        <span class="watchlist-reason">volatility hole · 中期買入</span>
+        <span class="watchlist-reason">中期築底 · 趨勢反轉</span>
       </div>
 
       <div class="watchlist-row">
-        <span class="watchlist-ticker">AMD</span>
+        <span class="watchlist-ticker">CIFR</span>
         <span class="watchlist-refs">Section III</span>
-        <span class="watchlist-reason">核心持倉</span>
+        <span class="watchlist-reason">新紅帶 · 99.05% 累積</span>
       </div>
 
       <div class="watchlist-row">
-        <span class="watchlist-ticker">NVDA</span>
+        <span class="watchlist-ticker">TSLA</span>
         <span class="watchlist-refs">Section III</span>
-        <span class="watchlist-reason">核心持倉</span>
+        <span class="watchlist-reason">累積完成 · 週線 BUY</span>
       </div>
 
       <div class="watchlist-row">
-        <span class="watchlist-ticker">PLTR</span>
+        <span class="watchlist-ticker">BB</span>
         <span class="watchlist-refs">Section III</span>
-        <span class="watchlist-reason">核心持倉</span>
+        <span class="watchlist-reason">訊號兌現 · 早期 PLTR 類比</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">ALAB</span>
+        <span class="watchlist-refs">Section III</span>
+        <span class="watchlist-reason">98.7% 累積 · 升勢延續</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">PATH</span>
+        <span class="watchlist-refs">Section III</span>
+        <span class="watchlist-reason">整理箱 · 11.73 確認</span>
       </div>
     </div>
   </section>
