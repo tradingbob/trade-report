@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Johns Charts · X Signal Report · 2026.05.24</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900;9..144,900&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EFE7D6;
+    --paper-2: #E6DCC6;
+    --paper-3: #DDD2B9;
+    --ink: #1A1612;
+    --ink-2: #3D342A;
+    --ink-3: #786A55;
+    --rule: #B8A887;
+    --rule-soft: #CFC1A0;
+
+    --bull: #0E5230;
+    --bull-soft: #D9DFCC;
+    --bear: #8B1A0E;
+    --bear-soft: #E8CDC7;
+    --watch: #8B5A1F;
+    --watch-soft: #ECD7B5;
+
+    --serif-display: 'Fraunces', 'Noto Serif TC', serif;
+    --serif-tc: 'Noto Serif TC', 'Fraunces', serif;
+    --sans: 'Geist', 'Noto Serif TC', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Paper texture using SVG noise */
+  body {
+    background-image:
+      radial-gradient(ellipse at top left, rgba(184, 168, 135, 0.18), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(120, 106, 85, 0.08), transparent 50%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.06 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 48px 56px 80px;
+  }
+
+  /* ============ MASTHEAD ============ */
+  .masthead {
+    border-top: 6px double var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 18px 0 14px;
+    margin-bottom: 4px;
+  }
+
+  .masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin-bottom: 8px;
+  }
+
+  .masthead-top .left { display: flex; gap: 18px; }
+
+  .masthead-kicker {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-top: 6px;
+  }
+
+  .masthead-title {
+    font-family: var(--serif-display);
+    font-weight: 900;
+    font-size: 78px;
+    line-height: 0.92;
+    letter-spacing: 0;
+    font-variation-settings: "opsz" 144, "SOFT" 0;
+    color: var(--ink);
+    margin: 4px 0 6px;
+    overflow-wrap: anywhere;
+  }
+
+  .masthead-title .tc {
+    font-family: var(--serif-tc);
+    font-weight: 900;
+    letter-spacing: 0;
+  }
+
+  .masthead-sub {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    padding-top: 6px;
+    border-top: 1px solid var(--rule-soft);
+  }
+
+  .source-tag {
+    font-family: var(--mono);
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ============ STAT BAR ============ */
+  .stat-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: 36px;
+  }
+
+  .stat {
+    padding: 18px 16px 16px;
+    border-right: 1px solid var(--rule-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .stat:last-child { border-right: none; }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .stat-num {
+    font-family: var(--serif-display);
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 1;
+    font-variation-settings: "opsz" 96;
+    color: var(--ink);
+  }
+  .stat-num.bull { color: var(--bull); }
+  .stat-num.bear { color: var(--bear); }
+  .stat-num.risk { color: var(--bear); }
+  .stat-num.watch { color: var(--watch); }
+  .stat-num.conviction {
+    font-size: 36px;
+    line-height: 1.02;
+    overflow-wrap: anywhere;
+  }
+
+  .stat-breakdown {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    font-family: var(--mono);
+    font-size: 8.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .risk-mix-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 5px 1px;
+    border: 1px solid var(--rule-soft);
+    background: rgba(255, 250, 240, 0.28);
+  }
+
+  .risk-mix-chip.high { color: var(--bear); background: var(--bear-soft); border-color: rgba(139, 26, 14, 0.16); }
+  .risk-mix-chip.medium { color: var(--watch); background: var(--watch-soft); border-color: rgba(139, 90, 31, 0.18); }
+  .risk-mix-chip.low { color: var(--ink-3); background: var(--paper-3); }
+
+  .partial-note {
+    margin: -18px 0 28px;
+    padding: 10px 14px;
+    font-family: var(--serif-tc);
+    font-size: 13px;
+    color: var(--watch);
+    background: var(--watch-soft);
+    border-left: 4px solid var(--watch);
+  }
+
+  /* ============ EXECUTIVE SUMMARY ============ */
+  .executive-summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(250px, 0.48fr);
+    gap: 22px;
+    padding: 20px 0 22px;
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .summary-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 7px;
+  }
+
+  .summary-body {
+    font-family: var(--serif-tc);
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink-2);
+  }
+
+  .summary-facts {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    align-content: start;
+    border-left: 1px solid var(--rule);
+    padding-left: 20px;
+  }
+
+  .summary-fact {
+    display: grid;
+    grid-template-columns: 86px minmax(0, 1fr);
+    gap: 10px;
+    align-items: baseline;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .summary-fact:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .summary-fact-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .summary-fact-value {
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.45;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+  }
+
+  /* ============ SIGNAL STRIP ============ */
+  .signal-strip {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(240px, 0.85fr);
+    gap: 22px;
+    padding: 20px 0 24px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 36px;
+  }
+
+  .signal-lead {
+    min-width: 0;
+  }
+
+  .signal-label,
+  .quality-label,
+  .evidence-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 6px;
+  }
+
+  .signal-headline {
+    font-family: var(--serif-tc);
+    font-weight: 900;
+    font-size: 25px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 7px;
+    overflow-wrap: anywhere;
+  }
+
+  .signal-deck {
+    font-family: var(--serif-tc);
+    font-size: 14.5px;
+    line-height: 1.58;
+    color: var(--ink-2);
+  }
+
+  .quality-panel {
+    border-left: 1px solid var(--rule);
+    padding-left: 20px;
+  }
+
+  .quality-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 14px;
+  }
+
+  .quality-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .quality-num {
+    font-family: var(--serif-display);
+    font-size: 24px;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .quality-text {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  /* ============ SECTION HEADERS ============ */
+  .section {
+    margin-bottom: 48px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 24px;
+  }
+
+  .section-num {
+    font-family: var(--serif-display);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 36px;
+    color: var(--ink-3);
+    font-variation-settings: "opsz" 96, "SOFT" 100;
+  }
+
+  .section-title {
+    font-family: var(--serif-tc);
+    font-weight: 900;
+    font-size: 28px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .section-sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-left: auto;
+  }
+
+  /* ============ SECTOR ROWS ============ */
+  .sector {
+    display: grid;
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: 10px 18px;
+    align-items: start;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .sector:last-child { border-bottom: none; }
+
+  .sector > .signal-pill {
+    justify-self: start;
+    margin-top: 2px;
+  }
+
+  .signal-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 4px 8px 3px;
+    border-radius: 1px;
+    white-space: nowrap;
+  }
+
+  .signal-pill.bull { background: var(--bull-soft); color: var(--bull); }
+  .signal-pill.bear { background: var(--bear-soft); color: var(--bear); }
+  .signal-pill.watch { background: var(--watch-soft); color: var(--watch); }
+
+  .signal-pill .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+  .signal-pill.bull .dot { background: var(--bull); }
+  .signal-pill.bear .dot { background: var(--bear); }
+  .signal-pill.watch .dot { background: var(--watch); }
+
+  .severity-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 4px 8px 3px;
+    border-radius: 1px;
+    white-space: nowrap;
+  }
+
+  .severity-pill .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+
+  .severity-high { background: var(--bear-soft); color: var(--bear); }
+  .severity-medium { background: var(--watch-soft); color: var(--watch); }
+  .severity-low { background: var(--paper-3); color: var(--ink-3); }
+  .severity-high .dot { background: var(--bear); }
+  .severity-medium .dot { background: var(--watch); }
+  .severity-low .dot { background: var(--ink-3); }
+
+  .sector-body {
+    min-width: 0;
+  }
+
+  .sector-body .sector-name {
+    font-family: var(--serif-tc);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--ink);
+    margin-bottom: 6px;
+    letter-spacing: -0.005em;
+  }
+
+  .sector-body .sector-thesis {
+    font-family: var(--serif-tc);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+
+  .sector-ref {
+    grid-column: 2;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 0;
+    margin-top: 4px;
+  }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .tag-row.inline {
+    display: inline-flex;
+  }
+
+  .typed-tag {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 5px;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.04em;
+    color: var(--ink-2);
+    background: var(--paper-2);
+    padding: 3px 7px 2px;
+    border: 1px solid var(--rule-soft);
+    border-radius: 1px;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .tag-kind {
+    color: var(--ink-3);
+    font-size: 8px;
+    letter-spacing: 0.12em;
+  }
+
+  .tag-ticker { background: var(--paper-3); border-color: var(--rule); color: var(--ink); font-weight: 700; }
+  .tag-event { background: rgba(14, 82, 48, 0.06); border-color: var(--rule-soft); }
+  .tag-reason { background: var(--paper-2); }
+
+  /* ============ RISK LEDGER ============ */
+  .risk-ledger {
+    border-top: 1px solid var(--ink);
+  }
+
+  .risk-row {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr) minmax(160px, auto);
+    gap: 16px;
+    align-items: start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .risk-title {
+    font-family: var(--serif-tc);
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+
+  .risk-thesis {
+    font-family: var(--serif-tc);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+
+  .risk-tags {
+    justify-content: flex-end;
+  }
+
+  .ref-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .ticker-chip {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink);
+    background: var(--paper-3);
+    padding: 3px 8px 2px;
+    border: 1px solid var(--rule);
+    letter-spacing: 0.02em;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.35;
+  }
+
+  /* ============ STOCK CARDS ============ */
+  .stocks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--ink);
+    border-left: 1px solid var(--ink);
+  }
+
+  .stocks.solo {
+    grid-template-columns: 1fr;
+  }
+
+  .stocks.compact .stock.featured {
+    grid-column: 1 / -1;
+  }
+
+  .stock {
+    border-right: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 22px 24px;
+    background: rgba(255, 250, 240, 0.35);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .stock.featured {
+    background: rgba(14, 82, 48, 0.06);
+  }
+
+  .stock-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .ticker {
+    font-family: var(--serif-display);
+    font-weight: 700;
+    font-size: 38px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-variation-settings: "opsz" 144;
+  }
+
+  .market-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    border: 1px solid var(--rule);
+    padding: 2px 6px 1px;
+  }
+
+  .stock-signal {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .strength {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 500;
+  }
+
+  .stock-thesis {
+    font-family: var(--serif-tc);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    flex: 1;
+  }
+
+  .stock-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 4px;
+  }
+
+  .stock-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding-top: 2px;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    background: var(--paper-2);
+    padding: 3px 7px 2px;
+    border-radius: 1px;
+  }
+
+  .tag.evidence {
+    background: transparent;
+    border: 1px solid var(--rule-soft);
+    color: var(--ink-3);
+  }
+
+  /* ============ WATCHLIST EXPORT ============ */
+  .watchlist-export {
+    margin: 40px 0 0;
+  }
+
+  .watchlist-copy {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    padding: 14px 16px;
+    background: var(--paper-2);
+    border-left: 4px solid var(--ink);
+    margin-bottom: 16px;
+  }
+
+  .watchlist-copy-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .watchlist-copy-text {
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+  }
+
+  .watchlist-table {
+    border-top: 1px solid var(--ink);
+  }
+
+  .watchlist-row,
+  .watchlist-empty {
+    display: grid;
+    grid-template-columns: 110px 170px minmax(0, 1fr);
+    gap: 14px;
+    align-items: baseline;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .watchlist-empty {
+    grid-template-columns: 1fr;
+    font-family: var(--serif-tc);
+    font-size: 14px;
+    color: var(--ink-3);
+  }
+
+  .watchlist-ticker {
+    font-family: var(--serif-display);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .watchlist-refs,
+  .watchlist-reason {
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 1.45;
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+  }
+
+  .watchlist-reason {
+    color: var(--ink-2);
+    text-transform: none;
+    letter-spacing: 0.02em;
+  }
+
+  /* ============ FOOTER ============ */
+  .footer {
+    margin-top: 48px;
+    padding-top: 18px;
+    border-top: 6px double var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .disclaimer {
+    font-family: var(--serif-tc);
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ink-3);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  /* ============ DROP CAP / ORNAMENT ============ */
+  .ornament {
+    text-align: center;
+    font-family: var(--serif-display);
+    font-size: 18px;
+    color: var(--ink-3);
+    letter-spacing: 1em;
+    margin: 4px 0 -8px;
+  }
+
+  /* ============ MOBILE ============ */
+  @media (max-width: 720px) {
+    .page { padding: 28px 22px 60px; }
+    .masthead-title { font-size: 46px; }
+    .stat-bar { grid-template-columns: repeat(2, 1fr); }
+    .executive-summary { grid-template-columns: 1fr; }
+    .summary-facts { border-left: none; padding-left: 0; border-top: 1px solid var(--rule-soft); padding-top: 14px; }
+    .signal-strip { grid-template-columns: 1fr; }
+    .quality-panel { border-left: none; padding-left: 0; border-top: 1px solid var(--rule-soft); padding-top: 16px; }
+    .stat { border-bottom: 1px solid var(--rule-soft); }
+    .stocks { grid-template-columns: 1fr; }
+    .stocks.compact .stock.featured { grid-column: auto; }
+    .sector { grid-template-columns: 1fr; gap: 10px; }
+    .sector-ref { grid-column: 1; flex-direction: row; align-items: center; margin-top: 0; }
+    .risk-row { grid-template-columns: 1fr; gap: 8px; }
+    .watchlist-copy,
+    .watchlist-row { grid-template-columns: 1fr; gap: 7px; }
+    .stat-num { font-size: 32px; }
+    .ticker { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ============ MASTHEAD ============ -->
+  <header class="masthead">
+    <div class="masthead-top">
+      <div class="left">
+        <span>Vol. I</span>
+        <span>No. 144</span>
+      </div>
+      <div>X / Twitter Signal Edition</div>
+    </div>
+
+    <div class="masthead-kicker">Account Signal Report</div>
+    <h1 class="masthead-title"><span class="tc">Johns Charts</span></h1>
+
+    <div class="ornament">· · ·</div>
+
+    <div class="masthead-sub">
+      <div>Sunday — 24 May 2026</div>
+      <div class="source-tag">Source — @johnscharts</div>
+      <div>Last 7 Days · 172 posts</div>
+    </div>
+  </header>
+
+  <!-- ============ STAT BAR ============ -->
+  <div class="stat-bar">
+    <div class="stat">
+      <span class="stat-label">Bullish</span>
+      <span class="stat-num bull">08</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Watch</span>
+      <span class="stat-num watch">08</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Risk</span>
+      <span class="stat-num risk">08</span>
+      <div class="stat-breakdown">
+        <span class="risk-mix-chip high">高 02</span>
+        <span class="risk-mix-chip medium">中 04</span>
+        <span class="risk-mix-chip low">低 02</span>
+      </div>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Top Conviction</span>
+      <span class="stat-num conviction">RGTI</span>
+    </div>
+  </div>
+  
+
+  <!-- ============ EXECUTIVE SUMMARY ============ -->
+  <section class="executive-summary">
+    <div>
+      <div class="summary-label">Today's Summary · 今日總括 · Johns Charts</div>
+      <div class="summary-body">主線集中在 RGTI、ARM、ZS、SNOW、NOW 的動能延續，以及能源、Semiconductors、量子科技的資金流。風險同樣清晰：大市強勢收窄、宏觀壓力升溫，多隻強勢股已延伸，交易重點是等可控 setup、分段鎖利及降低追高。</div>
+    </div>
+    <div class="summary-facts">
+      <div class="summary-fact">
+        <span class="summary-fact-label">Lead</span>
+        <span class="summary-fact-value">RGTI · 看好</span>
+      </div>
+      <div class="summary-fact">
+        <span class="summary-fact-label">Risk Mix</span>
+        <span class="summary-fact-value">高 02 / 中 04 / 低 02</span>
+      </div>
+      <div class="summary-fact">
+        <span class="summary-fact-label">Watchlist</span>
+        <span class="summary-fact-value">22 names · RGTI, IONQ, QS, XLE, XOM, RIG, SMH, ARM, SNDK, IYZ, ASTS, CRCL, NVDA, NBIS, OPEN, AMD, SPY, ZS, SNOW, NOW, TSLA, GOOG</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="signal-strip">
+    <div class="signal-lead">
+      <div class="signal-label">Lead Signal</div>
+      <div class="signal-headline">RGTI · 看好</div>
+      <div class="signal-deck">由早會提到 July 17 20 後，回報更新至 166%，其後 May 22 22 flow 更推至 607%。週線/月線更高低點及 Sales 199% 支持主線，但急升後較適合等日線整理或回調。</div>
+    </div>
+    <div class="quality-panel">
+      <div class="quality-label">Data Quality</div>
+      <div class="quality-grid">
+        <div class="quality-item">
+          <span class="quality-num">172</span>
+          <span class="quality-text">Tweets</span>
+        </div>
+        <div class="quality-item">
+          <span class="quality-num">12</span>
+          <span class="quality-text">Images Read</span>
+        </div>
+        <div class="quality-item">
+          <span class="quality-num">6</span>
+          <span class="quality-text">Themes</span>
+        </div>
+        <div class="quality-item">
+          <span class="quality-num">12</span>
+          <span class="quality-text">Names</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 1: SECTORS ============ -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">I.</span>
+      <h2 class="section-title">板塊發展趨勢</h2>
+      <span class="section-sub">Sector Trends</span>
+    </div>
+
+    <div class="sector">
+      <span class="signal-pill bull"><span class="dot"></span>看好</span>
+      <div class="sector-body">
+        <div class="sector-name">量子科技</div>
+        <div class="sector-thesis">RGTI、IONQ、QS 都有資金流及圖表跟進，RGTI 由 53% 快速推升至 607%，週線/月線更高低點配合 Sales 199%。IONQ 尊重 200MA 後有 follow through，QS 亦有短線推升。</div>
+      </div>
+
+      <div class="sector-ref">
+        <span class="ref-label">關聯</span>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>RGTI</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>IONQ</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>QS</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>資金流</span></div>
+      </div>
+    </div>
+
+    <div class="sector">
+      <span class="signal-pill bull"><span class="dot"></span>看好</span>
+      <div class="sector-body">
+        <div class="sector-name">能源</div>
+        <div class="sector-thesis">XLE 被標示為盤前最強板塊，原油期貨在健康水平形成 inside day，XOM、RIG、VIST、VAL 亦有強勢線索。板塊主線是資金輪動入能源及油氣股。</div>
+      </div>
+
+      <div class="sector-ref">
+        <span class="ref-label">關聯</span>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>XLE</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>XOM</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>RIG</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>原油強勢</span></div>
+      </div>
+    </div>
+
+    <div class="sector">
+      <span class="signal-pill bull"><span class="dot"></span>看好</span>
+      <div class="sector-body">
+        <div class="sector-name">Semiconductors</div>
+        <div class="sector-thesis">SMH 尊重 21EMA，ARM 週線 bull pennant 突破並配合 RS 新高，是本週最清晰強勢結構之一。SNDK 亦有 daily breakout，但已明顯延伸。</div>
+      </div>
+
+      <div class="sector-ref">
+        <span class="ref-label">關聯</span>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SMH</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>ARM</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SNDK</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>RS 強</span></div>
+      </div>
+    </div>
+
+    <div class="sector">
+      <span class="signal-pill watch"><span class="dot"></span>觀察</span>
+      <div class="sector-body">
+        <div class="sector-name">電訊 / 太空</div>
+        <div class="sector-thesis">IYZ 維持上升趨勢，圖中 CR 99%，並指 ASTS 帶領電訊板塊。屬強勢板塊確認，但個股入場仍要等 setup。</div>
+      </div>
+
+      <div class="sector-ref">
+        <span class="ref-label">關聯</span>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>IYZ</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>ASTS</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>板塊強勢</span></div>
+      </div>
+    </div>
+
+    <div class="sector">
+      <span class="signal-pill watch"><span class="dot"></span>觀察</span>
+      <div class="sector-body">
+        <div class="sector-name">Stablecoin 支付</div>
+        <div class="sector-thesis">CRCL 被視為進取 IPO 規則下的杯柄低位試倉，週線 10MA 支持及擴大成交量被確認。波幅高，偏向小注及嚴守風控。</div>
+      </div>
+
+      <div class="sector-ref">
+        <span class="ref-label">關聯</span>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>CRCL</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>IPO setup</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>10MA 支持</span></div>
+      </div>
+    </div>
+
+    <div class="sector">
+      <span class="signal-pill bear"><span class="dot"></span>風險</span>
+      <div class="sector-body">
+        <div class="sector-name">大市環境</div>
+        <div class="sector-thesis">盤前期指多次轉紅，加上高油價、美元上升及債息急升，長倉不宜過度進取。掃描及 AI screens 顯示近期最少強勢，長倉環境要更精挑細選。</div>
+      </div>
+
+      <div class="sector-ref">
+        <span class="ref-label">關聯</span>
+        <div class="tag-row inline"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>期指轉弱</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>美元上升</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>債息急升</span></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ SECTION 2: RISKS ============ -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">II.</span>
+      <h2 class="section-title">風險筆記</h2>
+      <span class="section-sub">Bearish / Risk Ledger</span>
+    </div>
+    <div class="risk-ledger">
+
+      <div class="risk-row">
+        <span class="severity-pill severity-high"><span class="dot"></span>高風險</span>
+        <div>
+          <div class="risk-title">宏觀三重壓力</div>
+          <div class="risk-thesis">高油價、美元上升及債息急升同時出現，令追長倉風險上升，除非 NVDA 業績帶回 risk-on。</div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>NVDA</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>高油價</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>債息急升</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-high"><span class="dot"></span>高風險</span>
+        <div>
+          <div class="risk-title">長倉環境轉窄</div>
+          <div class="risk-thesis">掃描及 AI screens 顯示近期最少強勢，長倉只適合精挑細選，避免廣泛加 exposure。</div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>強勢減少</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>精挑細選</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-medium"><span class="dot"></span>中風險</span>
+        <div>
+          <div class="risk-title">延伸股追高</div>
+          <div class="risk-thesis">NBIS、SNDK、ARM、GOOG 等多隻強勢股已出現日線或週線延伸，入場要等整理、回踩或突破確認。</div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>NBIS</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SNDK</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>ARM</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-medium"><span class="dot"></span>中風險</span>
+        <div>
+          <div class="risk-title">期權倉位管理</div>
+          <div class="risk-thesis">近期期權獲利快，但短期到期期權風險高，策略重點是升途中分段減倉而非食盡整段。</div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>分段減倉</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>短期到期</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-medium"><span class="dot"></span>中風險</span>
+        <div>
+          <div class="risk-title">OPEN 反彈質素</div>
+          <div class="risk-thesis">OPEN 只屬超跌支持區反彈觀察，圖表仍無強勢，反彈不等於健康趨勢。</div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>OPEN</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>無強勢</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>超跌</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-medium"><span class="dot"></span>中風險</span>
+        <div>
+          <div class="risk-title">AMD 潛在虧損</div>
+          <div class="risk-thesis">高風險回報 ideas 中，AMD 由先前 27% 快速盈利更新為 potential loss，顯示同一策略內仍要嚴守止損。</div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>AMD</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>potential loss</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-low"><span class="dot"></span>低風險</span>
+        <div>
+          <div class="risk-title">新手基準</div>
+          <div class="risk-thesis">SPY 一年回報 +28.76%，新手策略應先以跑贏 SPY 作基準，避免為交易而交易。</div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SPY</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>績效基準</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-low"><span class="dot"></span>低風險</span>
+        <div>
+          <div class="risk-title">Drones 資金輪動</div>
+          <div class="risk-thesis">Drones 現時不熱，資金轉向 Space 相關名字，相關舊主題短線需要降低預期。</div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>資金輪動</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>Drones 轉冷</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>Space 轉強</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 2: STOCKS ============ -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">III.</span>
+      <h2 class="section-title">個股分析</h2>
+      <span class="section-sub">Single-Name Coverage</span>
+    </div>
+
+    <div class="stocks ">
+
+      <article class="stock featured">
+        <div class="stock-head">
+          <div class="ticker">RGTI</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">強</span>
+        </div>
+        <p class="stock-thesis">由早會提到 July 17 20 後，回報更新至 166%，其後 May 22 22 flow 更推至 607%。週線/月線更高低點及 Sales 199% 支持主線，但急升後較適合等日線整理或回調。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>RGTI</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>607% flow</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>更高低點</span></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">ARM</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">強</span>
+        </div>
+        <p class="stock-thesis">MarketSurge 圖顯示 Composite 99、RS 92，之後週線圖突破 bull pennant，單週升幅約 22.9% 並見 RS 線創高。屬趨勢延續名單，但短線已升，入場要等可控位置。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>ARM</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>週線突破</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>RS 新高</span></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">ZS</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">強</span>
+        </div>
+        <p class="stock-thesis">多次更新 May 22 160 idea，由 151%、229% 推至 313%，並提到 2.3 RV 及 intraday base 後再推升。屬高動能延續，但已是成熟段。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>ZS</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>313%</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>2.3 RV</span></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">SNOW</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">強</span>
+        </div>
+        <p class="stock-thesis">Friday X live stream flow 先後由 34%、73% 更新到 May 22 165 上升 124%，並多次盤前高於前日高位。資金流與確認訊號一致。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SNOW</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>124%</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>盤前破高</span></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">NOW</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">強</span>
+        </div>
+        <p class="stock-thesis">May 22 105 idea 由 27%、43% 推至 109%，並出現 AH HOD 及盤前高於前日高位。相對早段強勢明確，但之後未見新 setup 補充。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>NOW</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>109%</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>AH HOD</span></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">CRCL</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill watch"><span class="dot"></span>觀察</span>
+          <span class="strength">中</span>
+        </div>
+        <p class="stock-thesis">杯柄 handle 低位試倉，圖中顯示 21 Day ATR 9.20%、距 pivot -14%，屬高波幅進取 setup。其後 HOD、持倉及週線 10MA 支持被確認。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>CRCL</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>HOD</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>杯柄低位</span></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">IONQ</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill watch"><span class="dot"></span>觀察</span>
+          <span class="strength">中強</span>
+        </div>
+        <p class="stock-thesis">尊重 200MA 後轉強，日線圖顯示單日升 8.32%，Sales 755% 及 RS 改善。其後有 follow through，但短線急彈後要留意追高風險。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>IONQ</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>200MA 支持</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>Sales 755%</span></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">TSLA</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill watch"><span class="dot"></span>觀察</span>
+          <span class="strength">中</span>
+        </div>
+        <p class="stock-thesis">3.1M order 被標示為 New Money，週線/月線圖顯示更高低點。結構有改善，但仍需突破區間確認。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>TSLA</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>3.1M order</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>更高低點</span></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">GOOG</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill watch"><span class="dot"></span>觀察</span>
+          <span class="strength">中</span>
+        </div>
+        <p class="stock-thesis">日線圖回調至短期均線附近，右上有短下降整理線，被標示為 actionable setup。若突破整理線並守住均線，才確認恢復上升。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>GOOG</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>回調 setup</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>均線附近</span></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">OPEN</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill watch"><span class="dot"></span>觀察</span>
+          <span class="strength">弱</span>
+        </div>
+        <p class="stock-thesis">日線第三次測試約 4.15-4.35 支持區，屬短線超跌反彈觀察。圖表現時無強勢，跌穿支持會削弱 setup。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>OPEN</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>支持區</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>超跌反彈</span></div>
+      </article>
+    </div>
+  </section>
+
+
+  <!-- ============ WATCHLIST EXPORT ============ -->
+  <section class="section watchlist-export">
+    <div class="section-header">
+      <span class="section-num">IV.</span>
+      <h2 class="section-title">Watchlist Export</h2>
+      <span class="section-sub">Clean Ticker List</span>
+    </div>
+    <div class="watchlist-copy">
+      <span class="watchlist-copy-label">Copy List</span>
+      <span class="watchlist-copy-text">RGTI, IONQ, QS, XLE, XOM, RIG, SMH, ARM, SNDK, IYZ, ASTS, CRCL, NVDA, NBIS, OPEN, AMD, SPY, ZS, SNOW, NOW, TSLA, GOOG</span>
+    </div>
+    <div class="watchlist-table">
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">RGTI</span>
+        <span class="watchlist-refs">Lead + Section I + Section III</span>
+        <span class="watchlist-reason">資金流 · 607% flow · 更高低點</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">IONQ</span>
+        <span class="watchlist-refs">Section I + Section III</span>
+        <span class="watchlist-reason">資金流 · 200MA 支持 · Sales 755%</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">QS</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">資金流</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">XLE</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">原油強勢</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">XOM</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">原油強勢</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">RIG</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">原油強勢</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">SMH</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">RS 強</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">ARM</span>
+        <span class="watchlist-refs">Section I + Section II + Section III</span>
+        <span class="watchlist-reason">RS 強 · 週線突破 · RS 新高</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">SNDK</span>
+        <span class="watchlist-refs">Section I + Section II</span>
+        <span class="watchlist-reason">RS 強</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">IYZ</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">板塊強勢</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">ASTS</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">板塊強勢</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">CRCL</span>
+        <span class="watchlist-refs">Section I + Section III</span>
+        <span class="watchlist-reason">IPO setup · 10MA 支持 · HOD</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">NVDA</span>
+        <span class="watchlist-refs">Section II</span>
+        <span class="watchlist-reason">高油價 · 債息急升</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">NBIS</span>
+        <span class="watchlist-refs">Section II</span>
+        <span class="watchlist-reason">—</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">OPEN</span>
+        <span class="watchlist-refs">Section II + Section III</span>
+        <span class="watchlist-reason">無強勢 · 超跌 · 支持區</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">AMD</span>
+        <span class="watchlist-refs">Section II</span>
+        <span class="watchlist-reason">potential loss</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">SPY</span>
+        <span class="watchlist-refs">Section II</span>
+        <span class="watchlist-reason">績效基準</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">ZS</span>
+        <span class="watchlist-refs">Section III</span>
+        <span class="watchlist-reason">313% · 2.3 RV</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">SNOW</span>
+        <span class="watchlist-refs">Section III</span>
+        <span class="watchlist-reason">124% · 盤前破高</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">NOW</span>
+        <span class="watchlist-refs">Section III</span>
+        <span class="watchlist-reason">109% · AH HOD</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">TSLA</span>
+        <span class="watchlist-refs">Section III</span>
+        <span class="watchlist-reason">3.1M order · 更高低點</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">GOOG</span>
+        <span class="watchlist-refs">Section III</span>
+        <span class="watchlist-reason">回調 setup · 均線附近</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div>© 2026 Daily Signal Digest</div>
+    <div class="disclaimer">非投資建議 · Not Investment Advice</div>
+    <div>End of Issue No. 144</div>
+  </footer>
+
+</div>
+</body>
+</html>
