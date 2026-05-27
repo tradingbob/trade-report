@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wall St Engine · X Signal Report · 2026.05.27</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900;9..144,900&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EFE7D6;
+    --paper-2: #E6DCC6;
+    --paper-3: #DDD2B9;
+    --ink: #1A1612;
+    --ink-2: #3D342A;
+    --ink-3: #786A55;
+    --rule: #B8A887;
+    --rule-soft: #CFC1A0;
+
+    --bull: #0E5230;
+    --bull-soft: #D9DFCC;
+    --bear: #8B1A0E;
+    --bear-soft: #E8CDC7;
+    --watch: #8B5A1F;
+    --watch-soft: #ECD7B5;
+
+    --serif-display: 'Fraunces', 'Noto Serif TC', serif;
+    --serif-tc: 'Noto Serif TC', 'Fraunces', serif;
+    --sans: 'Geist', 'Noto Serif TC', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Paper texture using SVG noise */
+  body {
+    background-image:
+      radial-gradient(ellipse at top left, rgba(184, 168, 135, 0.18), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(120, 106, 85, 0.08), transparent 50%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.06 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 48px 56px 80px;
+  }
+
+  /* ============ MASTHEAD ============ */
+  .masthead {
+    border-top: 6px double var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 18px 0 14px;
+    margin-bottom: 4px;
+  }
+
+  .masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin-bottom: 8px;
+  }
+
+  .masthead-top .left { display: flex; gap: 18px; }
+
+  .masthead-kicker {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-top: 6px;
+  }
+
+  .masthead-title {
+    font-family: var(--serif-display);
+    font-weight: 900;
+    font-size: 78px;
+    line-height: 0.92;
+    letter-spacing: 0;
+    font-variation-settings: "opsz" 144, "SOFT" 0;
+    color: var(--ink);
+    margin: 4px 0 6px;
+    overflow-wrap: anywhere;
+  }
+
+  .masthead-title .tc {
+    font-family: var(--serif-tc);
+    font-weight: 900;
+    letter-spacing: 0;
+  }
+
+  .masthead-sub {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    padding-top: 6px;
+    border-top: 1px solid var(--rule-soft);
+  }
+
+  .source-tag {
+    font-family: var(--mono);
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ============ STAT BAR ============ */
+  .stat-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: 36px;
+  }
+
+  .stat {
+    padding: 18px 16px 16px;
+    border-right: 1px solid var(--rule-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .stat:last-child { border-right: none; }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .stat-num {
+    font-family: var(--serif-display);
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 1;
+    font-variation-settings: "opsz" 96;
+    color: var(--ink);
+  }
+  .stat-num.bull { color: var(--bull); }
+  .stat-num.bear { color: var(--bear); }
+  .stat-num.risk { color: var(--bear); }
+  .stat-num.watch { color: var(--watch); }
+  .stat-num.conviction {
+    font-size: 36px;
+    line-height: 1.02;
+    overflow-wrap: anywhere;
+  }
+
+  .stat-breakdown {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    font-family: var(--mono);
+    font-size: 8.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .risk-mix-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 5px 1px;
+    border: 1px solid var(--rule-soft);
+    background: rgba(255, 250, 240, 0.28);
+  }
+
+  .risk-mix-chip.high { color: var(--bear); background: var(--bear-soft); border-color: rgba(139, 26, 14, 0.16); }
+  .risk-mix-chip.medium { color: var(--watch); background: var(--watch-soft); border-color: rgba(139, 90, 31, 0.18); }
+  .risk-mix-chip.low { color: var(--ink-3); background: var(--paper-3); }
+
+  .partial-note {
+    margin: -18px 0 28px;
+    padding: 10px 14px;
+    font-family: var(--serif-tc);
+    font-size: 13px;
+    color: var(--watch);
+    background: var(--watch-soft);
+    border-left: 4px solid var(--watch);
+  }
+
+  /* ============ EXECUTIVE SUMMARY ============ */
+  .executive-summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(250px, 0.48fr);
+    gap: 22px;
+    padding: 20px 0 22px;
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .summary-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 7px;
+  }
+
+  .summary-body {
+    font-family: var(--serif-tc);
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink-2);
+  }
+
+  .summary-facts {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    align-content: start;
+    border-left: 1px solid var(--rule);
+    padding-left: 20px;
+  }
+
+  .summary-fact {
+    display: grid;
+    grid-template-columns: 86px minmax(0, 1fr);
+    gap: 10px;
+    align-items: baseline;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .summary-fact:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .summary-fact-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .summary-fact-value {
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.45;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+  }
+
+  /* ============ SIGNAL STRIP ============ */
+  .signal-strip {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(240px, 0.85fr);
+    gap: 22px;
+    padding: 20px 0 24px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 36px;
+  }
+
+  .signal-lead {
+    min-width: 0;
+  }
+
+  .signal-label,
+  .quality-label,
+  .evidence-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 6px;
+  }
+
+  .signal-headline {
+    font-family: var(--serif-tc);
+    font-weight: 900;
+    font-size: 25px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 7px;
+    overflow-wrap: anywhere;
+  }
+
+  .signal-deck {
+    font-family: var(--serif-tc);
+    font-size: 14.5px;
+    line-height: 1.58;
+    color: var(--ink-2);
+  }
+
+  .quality-panel {
+    border-left: 1px solid var(--rule);
+    padding-left: 20px;
+  }
+
+  .quality-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 14px;
+  }
+
+  .quality-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .quality-num {
+    font-family: var(--serif-display);
+    font-size: 24px;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .quality-text {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  /* ============ SECTION HEADERS ============ */
+  .section {
+    margin-bottom: 48px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 24px;
+  }
+
+  .section-num {
+    font-family: var(--serif-display);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 36px;
+    color: var(--ink-3);
+    font-variation-settings: "opsz" 96, "SOFT" 100;
+  }
+
+  .section-title {
+    font-family: var(--serif-tc);
+    font-weight: 900;
+    font-size: 28px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .section-sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-left: auto;
+  }
+
+  /* ============ SECTOR ROWS ============ */
+  .sector {
+    display: grid;
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: 10px 18px;
+    align-items: start;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .sector:last-child { border-bottom: none; }
+
+  .sector > .signal-pill {
+    justify-self: start;
+    margin-top: 2px;
+  }
+
+  .signal-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 4px 8px 3px;
+    border-radius: 1px;
+    white-space: nowrap;
+  }
+
+  .signal-pill.bull { background: var(--bull-soft); color: var(--bull); }
+  .signal-pill.bear { background: var(--bear-soft); color: var(--bear); }
+  .signal-pill.watch { background: var(--watch-soft); color: var(--watch); }
+
+  .signal-pill .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+  .signal-pill.bull .dot { background: var(--bull); }
+  .signal-pill.bear .dot { background: var(--bear); }
+  .signal-pill.watch .dot { background: var(--watch); }
+
+  .severity-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 4px 8px 3px;
+    border-radius: 1px;
+    white-space: nowrap;
+  }
+
+  .severity-pill .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+
+  .severity-high { background: var(--bear-soft); color: var(--bear); }
+  .severity-medium { background: var(--watch-soft); color: var(--watch); }
+  .severity-low { background: var(--paper-3); color: var(--ink-3); }
+  .severity-high .dot { background: var(--bear); }
+  .severity-medium .dot { background: var(--watch); }
+  .severity-low .dot { background: var(--ink-3); }
+
+  .sector-body {
+    min-width: 0;
+  }
+
+  .sector-body .sector-name {
+    font-family: var(--serif-tc);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--ink);
+    margin-bottom: 6px;
+    letter-spacing: -0.005em;
+  }
+
+  .sector-body .sector-thesis {
+    font-family: var(--serif-tc);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+
+  .sector-ref {
+    grid-column: 2;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 0;
+    margin-top: 4px;
+  }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .tag-row.inline {
+    display: inline-flex;
+  }
+
+  .typed-tag {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 5px;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.04em;
+    color: var(--ink-2);
+    background: var(--paper-2);
+    padding: 3px 7px 2px;
+    border: 1px solid var(--rule-soft);
+    border-radius: 1px;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .tag-kind {
+    color: var(--ink-3);
+    font-size: 8px;
+    letter-spacing: 0.12em;
+  }
+
+  .tag-ticker { background: var(--paper-3); border-color: var(--rule); color: var(--ink); font-weight: 700; }
+  .tag-event { background: rgba(14, 82, 48, 0.06); border-color: var(--rule-soft); }
+  .tag-reason { background: var(--paper-2); }
+
+  .source-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+  }
+
+  .source-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-right: 2px;
+  }
+
+  .source-chip,
+  .source-more {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 9px;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    background: rgba(255, 250, 240, 0.32);
+    border: 1px solid var(--rule-soft);
+    padding: 3px 7px 2px;
+    text-decoration: none;
+    border-radius: 1px;
+  }
+
+  .source-chip:hover {
+    background: var(--paper-3);
+    color: var(--ink);
+  }
+
+  .source-more {
+    color: var(--ink-3);
+    background: transparent;
+  }
+
+  /* ============ RISK LEDGER ============ */
+  .risk-ledger {
+    border-top: 1px solid var(--ink);
+  }
+
+  .risk-row {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr) minmax(160px, auto);
+    gap: 16px;
+    align-items: start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .risk-title {
+    font-family: var(--serif-tc);
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+
+  .risk-thesis {
+    font-family: var(--serif-tc);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+
+  .risk-tags {
+    justify-content: flex-end;
+  }
+
+  .ref-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .ticker-chip {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink);
+    background: var(--paper-3);
+    padding: 3px 8px 2px;
+    border: 1px solid var(--rule);
+    letter-spacing: 0.02em;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.35;
+  }
+
+  /* ============ STOCK CARDS ============ */
+  .stocks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--ink);
+    border-left: 1px solid var(--ink);
+  }
+
+  .stocks.solo {
+    grid-template-columns: 1fr;
+  }
+
+  .stocks.compact .stock.featured {
+    grid-column: 1 / -1;
+  }
+
+  .stock {
+    border-right: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 22px 24px;
+    background: rgba(255, 250, 240, 0.35);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .stock.featured {
+    background: rgba(14, 82, 48, 0.06);
+  }
+
+  .stock-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .ticker {
+    font-family: var(--serif-display);
+    font-weight: 700;
+    font-size: 38px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-variation-settings: "opsz" 144;
+  }
+
+  .market-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    border: 1px solid var(--rule);
+    padding: 2px 6px 1px;
+  }
+
+  .stock-signal {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .strength {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 500;
+  }
+
+  .stock-thesis {
+    font-family: var(--serif-tc);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    flex: 1;
+  }
+
+  .stock-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 4px;
+  }
+
+  .stock-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding-top: 2px;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    background: var(--paper-2);
+    padding: 3px 7px 2px;
+    border-radius: 1px;
+  }
+
+  .tag.evidence {
+    background: transparent;
+    border: 1px solid var(--rule-soft);
+    color: var(--ink-3);
+  }
+
+  /* ============ WATCHLIST EXPORT ============ */
+  .watchlist-export {
+    margin: 40px 0 0;
+  }
+
+  .watchlist-copy {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    padding: 14px 16px;
+    background: var(--paper-2);
+    border-left: 4px solid var(--ink);
+    margin-bottom: 16px;
+  }
+
+  .watchlist-copy-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .watchlist-copy-text {
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+  }
+
+  .watchlist-table {
+    border-top: 1px solid var(--ink);
+  }
+
+  .watchlist-row,
+  .watchlist-empty {
+    display: grid;
+    grid-template-columns: 110px 170px minmax(0, 1fr);
+    gap: 14px;
+    align-items: baseline;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .watchlist-empty {
+    grid-template-columns: 1fr;
+    font-family: var(--serif-tc);
+    font-size: 14px;
+    color: var(--ink-3);
+  }
+
+  .watchlist-ticker {
+    font-family: var(--serif-display);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .watchlist-refs,
+  .watchlist-reason {
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 1.45;
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+  }
+
+  .watchlist-reason {
+    color: var(--ink-2);
+    text-transform: none;
+    letter-spacing: 0.02em;
+  }
+
+  /* ============ FOOTER ============ */
+  .footer {
+    margin-top: 48px;
+    padding-top: 18px;
+    border-top: 6px double var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .disclaimer {
+    font-family: var(--serif-tc);
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ink-3);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  /* ============ DROP CAP / ORNAMENT ============ */
+  .ornament {
+    text-align: center;
+    font-family: var(--serif-display);
+    font-size: 18px;
+    color: var(--ink-3);
+    letter-spacing: 1em;
+    margin: 4px 0 -8px;
+  }
+
+  /* ============ MOBILE ============ */
+  @media (max-width: 720px) {
+    .page { padding: 28px 22px 60px; }
+    .masthead-title { font-size: 46px; }
+    .stat-bar { grid-template-columns: repeat(2, 1fr); }
+    .executive-summary { grid-template-columns: 1fr; }
+    .summary-facts { border-left: none; padding-left: 0; border-top: 1px solid var(--rule-soft); padding-top: 14px; }
+    .signal-strip { grid-template-columns: 1fr; }
+    .quality-panel { border-left: none; padding-left: 0; border-top: 1px solid var(--rule-soft); padding-top: 16px; }
+    .stat { border-bottom: 1px solid var(--rule-soft); }
+    .stocks { grid-template-columns: 1fr; }
+    .stocks.compact .stock.featured { grid-column: auto; }
+    .sector { grid-template-columns: 1fr; gap: 10px; }
+    .sector-ref { grid-column: 1; flex-direction: row; align-items: center; margin-top: 0; }
+    .risk-row { grid-template-columns: 1fr; gap: 8px; }
+    .watchlist-copy,
+    .watchlist-row { grid-template-columns: 1fr; gap: 7px; }
+    .stat-num { font-size: 32px; }
+    .ticker { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ============ MASTHEAD ============ -->
+  <header class="masthead">
+    <div class="masthead-top">
+      <div class="left">
+        <span>Vol. I</span>
+        <span>No. 147</span>
+      </div>
+      <div>X / Twitter Signal Edition</div>
+    </div>
+
+    <div class="masthead-kicker">Account Signal Report</div>
+    <h1 class="masthead-title"><span class="tc">Wall St Engine</span></h1>
+
+    <div class="ornament">· · ·</div>
+
+    <div class="masthead-sub">
+      <div>Wednesday — 27 May 2026</div>
+      <div class="source-tag">Source — @wallstengine</div>
+      <div>Last 3 Days · 122 posts</div>
+    </div>
+  </header>
+
+  <!-- ============ STAT BAR ============ -->
+  <div class="stat-bar">
+    <div class="stat">
+      <span class="stat-label">Bullish</span>
+      <span class="stat-num bull">12</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Watch</span>
+      <span class="stat-num watch">03</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Risk</span>
+      <span class="stat-num risk">08</span>
+      <div class="stat-breakdown">
+        <span class="risk-mix-chip high">高 04</span>
+        <span class="risk-mix-chip medium">中 04</span>
+        <span class="risk-mix-chip low">低 00</span>
+      </div>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Top Conviction</span>
+      <span class="stat-num conviction">AI基建</span>
+    </div>
+  </div>
+  
+
+  <!-- ============ EXECUTIVE SUMMARY ============ -->
+  <section class="executive-summary">
+    <div>
+      <div class="summary-label">Today's Summary · 今日總括 · Wall St Engine</div>
+      <div class="summary-body">主線仍是 AI基建、記憶體/HBM、企業AI軟件同國防合約。SNOW、MRVL、MU、SNDK、NBIS、DELL 係較清晰正面訊號；同時要扣住通脹利率、伊朗/霍爾木茲、NVDA/SMCI 出口管制及高估值集中度風險。</div>
+    </div>
+    <div class="summary-facts">
+      <div class="summary-fact">
+        <span class="summary-fact-label">Lead</span>
+        <span class="summary-fact-value">NBIS · 看好</span>
+      </div>
+      <div class="summary-fact">
+        <span class="summary-fact-label">Risk Mix</span>
+        <span class="summary-fact-value">高 04 / 中 04 / 低 00</span>
+      </div>
+      <div class="summary-fact">
+        <span class="summary-fact-label">Watchlist</span>
+        <span class="summary-fact-value">25 names · NBIS, DELL, RKLB, BA, MRVL, IREN, WULF, MOD, SNOW, ZS, NTNX, MU, SNDK, CRWD, NVDA, SMCI, FPS, AVGO, AMD, WIX, HEI, QCOM, HOOD, META, PDD</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="signal-strip">
+    <div class="signal-lead">
+      <div class="signal-label">Lead Signal</div>
+      <div class="signal-headline">NBIS · 看好</div>
+      <div class="signal-deck">Situational Awareness LP 披露持有 12.41M 股 Class A，佔 5.6%。13G 屬持倉披露，不等同即時買入，但對 Nebius 的 AI 基建敘事有背書作用。</div>
+    </div>
+    <div class="quality-panel">
+      <div class="quality-label">Data Quality</div>
+      <div class="quality-grid">
+        <div class="quality-item">
+          <span class="quality-num">122</span>
+          <span class="quality-text">Tweets</span>
+        </div>
+        <div class="quality-item">
+          <span class="quality-num">12</span>
+          <span class="quality-text">Images Read</span>
+        </div>
+        <div class="quality-item">
+          <span class="quality-num">5</span>
+          <span class="quality-text">Themes</span>
+        </div>
+        <div class="quality-item">
+          <span class="quality-num">15</span>
+          <span class="quality-text">Names</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 1: SECTORS ============ -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">I.</span>
+      <h2 class="section-title">板塊發展趨勢</h2>
+      <span class="section-sub">Sector Trends</span>
+    </div>
+
+    <div class="sector">
+      <span class="signal-pill bull"><span class="dot"></span>看好</span>
+      <div class="sector-body">
+        <div class="sector-name">航太國防</div>
+        <div class="sector-thesis">DELL 獲五年約 97 億美元 Pentagon 軟件協議，RKLB 合約通過里程碑，BA 亦有 737 MAX 產量及認證正面訊息。板塊偏向合約及監管催化。</div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059746029625565544" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 21:18 UTC</a><a class="source-chip" href="https://x.com/wallstengine/status/2059700319337304246" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 18:16 UTC</a><a class="source-chip" href="https://x.com/wallstengine/status/2059591661085491344" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 11:04 UTC</a></div>
+      </div>
+
+      <div class="sector-ref">
+        <span class="ref-label">關聯</span>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>DELL</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>RKLB</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>BA</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>政府合約</span></div>
+      </div>
+    </div>
+
+    <div class="sector">
+      <span class="signal-pill bull"><span class="dot"></span>看好</span>
+      <div class="sector-body">
+        <div class="sector-name">AI基建</div>
+        <div class="sector-thesis">主線仍然集中在 AI 算力、數據中心、電力及散熱供應鏈。MRVL、IREN、WULF、MOD、VICR 等都有訂單、指引或產能催化，資金仍然追逐基建瓶頸。</div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059730639059112125" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 20:17 UTC</a><a class="source-chip" href="https://x.com/wallstengine/status/2059382295174558201" target="_blank" rel="noopener noreferrer">POST · 2026-05-26 21:12 UTC</a><a class="source-chip" href="https://x.com/wallstengine/status/2059244874361348199" target="_blank" rel="noopener noreferrer">POST · 2026-05-26 12:06 UTC</a><span class="source-more">+1</span></div>
+      </div>
+
+      <div class="sector-ref">
+        <span class="ref-label">關聯</span>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>MRVL</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>IREN</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>WULF</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>MOD</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>算力基建</span></div>
+      </div>
+    </div>
+
+    <div class="sector">
+      <span class="signal-pill bull"><span class="dot"></span>看好</span>
+      <div class="sector-body">
+        <div class="sector-name">企業AI軟件</div>
+        <div class="sector-thesis">SNOW、ZS、NTNX 業績及指引普遍勝預期，AI、數據、網安及企業代理工具成為收入增長敘事。SNOW 圖片顯示業績後盤後急升，屬最清晰短線反應。</div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059729486678204862" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 20:12 UTC</a><a class="source-chip" href="https://x.com/wallstengine/status/2059728075047473208" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 20:06 UTC</a><a class="source-chip" href="https://x.com/wallstengine/status/2059366503934459986" target="_blank" rel="noopener noreferrer">POST · 2026-05-26 20:10 UTC</a></div>
+      </div>
+
+      <div class="sector-ref">
+        <span class="ref-label">關聯</span>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SNOW</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>ZS</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>NTNX</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>業績勝預期</span></div>
+      </div>
+    </div>
+
+    <div class="sector">
+      <span class="signal-pill watch"><span class="dot"></span>觀察</span>
+      <div class="sector-body">
+        <div class="sector-name">油價與伊朗</div>
+        <div class="sector-thesis">伊朗談判、制裁及霍爾木茲交通正常化訊息互相拉扯。若通道恢復可壓低油價，但最新資料仍顯示月底前完全正常化機率低於 50%。</div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059698746448093373" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 18:10 UTC</a><a class="source-chip" href="https://x.com/wallstengine/status/2059683511838363795" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 17:09 UTC</a><a class="source-chip" href="https://x.com/wallstengine/status/2059668072227917922" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 16:08 UTC</a><span class="source-more">+1</span></div>
+      </div>
+
+      <div class="sector-ref">
+        <span class="ref-label">關聯</span>
+        <div class="tag-row inline"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>霍爾木茲</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>伊朗談判</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>油價風險</span></div>
+      </div>
+    </div>
+
+    <div class="sector">
+      <span class="signal-pill bull"><span class="dot"></span>看好</span>
+      <div class="sector-body">
+        <div class="sector-name">記憶體重估</div>
+        <div class="sector-thesis">MU、SNDK 及 SK Hynix 相關訊息顯示記憶體供需、長約、HBM 散熱及價格能見度繼續改善。升幅已大，但板塊仍是 AI 週期內最強分支之一。</div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059387185779159068" target="_blank" rel="noopener noreferrer">POST · 2026-05-26 21:32 UTC</a><a class="source-chip" href="https://x.com/wallstengine/status/2059283317284061374" target="_blank" rel="noopener noreferrer">POST · 2026-05-26 14:39 UTC</a><a class="source-chip" href="https://x.com/wallstengine/status/2059246419433947205" target="_blank" rel="noopener noreferrer">POST · 2026-05-26 12:12 UTC</a><span class="source-more">+1</span></div>
+      </div>
+
+      <div class="sector-ref">
+        <span class="ref-label">關聯</span>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>MU</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SNDK</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>目標價上調</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>長約能見度</span></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ SECTION 2: RISKS ============ -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">II.</span>
+      <h2 class="section-title">風險筆記</h2>
+      <span class="section-sub">Bearish / Risk Ledger</span>
+    </div>
+    <div class="risk-ledger">
+
+      <div class="risk-row">
+        <span class="severity-pill severity-high"><span class="dot"></span>高風險</span>
+        <div>
+          <div class="risk-title">通脹與利率壓力</div>
+          <div class="risk-thesis">Fed Cook 指通脹明顯走錯方向，正確做法是維持利率不變，對長久期增長股估值屬壓力。</div>
+          <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059725635862528159" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 19:57 UTC</a></div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>Fed發言</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>高利率</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>估值壓力</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-high"><span class="dot"></span>高風險</span>
+        <div>
+          <div class="risk-title">伊朗地緣風險</div>
+          <div class="risk-thesis">伊朗協議訊息反覆，特朗普稱未滿意及不談制裁寬免，霍爾木茲交通月底前恢復正常機率仍低，能源及風險資產波動可放大。</div>
+          <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059698746448093373" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 18:10 UTC</a><a class="source-chip" href="https://x.com/wallstengine/status/2059683511838363795" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 17:09 UTC</a><a class="source-chip" href="https://x.com/wallstengine/status/2059662628465922061" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 15:46 UTC</a><span class="source-more">+1</span></div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>伊朗談判</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>霍爾木茲</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>油價波動</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-medium"><span class="dot"></span>中風險</span>
+        <div>
+          <div class="risk-title">CRWD估值天花板</div>
+          <div class="risk-thesis">Guggenheim 雖認為 CRWD 業務質素高及季度 setup 有利，但 30x EV/NTM 訂閱收入令評級維持 Neutral，估值上行空間受限。</div>
+          <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059562338286805053" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 09:08 UTC</a></div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>CRWD</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>維持Neutral</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>估值高</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-high"><span class="dot"></span>高風險</span>
+        <div>
+          <div class="risk-title">AI晶片監管</div>
+          <div class="risk-thesis">台灣調查疑似 NVIDIA AI 晶片經 Super Micro 伺服器轉運至中國，未指控 NVDA 或 SMCI 不當，但出口管制標題風險會壓抑情緒。</div>
+          <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059551147191607622" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 08:23 UTC</a></div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>NVDA</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SMCI</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>走私調查</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>出口管制</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-high"><span class="dot"></span>高風險</span>
+        <div>
+          <div class="risk-title">FPS股東售股</div>
+          <div class="risk-thesis">FPS 申請由售股股東最多出售 3500 萬股，對股價屬明顯供應及稀釋感壓力。</div>
+          <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059377534765326377" target="_blank" rel="noopener noreferrer">POST · 2026-05-26 20:54 UTC</a></div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>FPS</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>售股申請</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>供應壓力</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-medium"><span class="dot"></span>中風險</span>
+        <div>
+          <div class="risk-title">AI交易過度集中</div>
+          <div class="risk-thesis">NVDA 市值已大過其後 9 間美國晶片股合計，反映資金集中度極高，一旦龍頭回吐會拖累整條 AI 半導體鏈。</div>
+          <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059310700087119932" target="_blank" rel="noopener noreferrer">POST · 2026-05-26 16:28 UTC</a></div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>NVDA</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>AVGO</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>AMD</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>集中度</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-medium"><span class="dot"></span>中風險</span>
+        <div>
+          <div class="risk-title">中國AI人才限制</div>
+          <div class="risk-thesis">中國擴大對私企 AI 人才海外旅行限制，涉及 Alibaba、DeepSeek 相關人士，可能增加中美 AI 人才及合作摩擦。</div>
+          <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059240651972337962" target="_blank" rel="noopener noreferrer">POST · 2026-05-26 11:50 UTC</a></div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>旅行限制</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>人才流動</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>中美摩擦</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-medium"><span class="dot"></span>中風險</span>
+        <div>
+          <div class="risk-title">WIX裁員訊號</div>
+          <div class="risk-thesis">WIX 據報準備歷來最大裁員，或削減約 20% 人手，反映成本壓力或增長轉弱風險。</div>
+          <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2058911443467243763" target="_blank" rel="noopener noreferrer">POST · 2026-05-25 14:01 UTC</a></div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>WIX</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>大規模裁員</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>成本壓力</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 2: STOCKS ============ -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">III.</span>
+      <h2 class="section-title">個股分析</h2>
+      <span class="section-sub">Single-Name Coverage</span>
+    </div>
+
+    <div class="stocks ">
+
+      <article class="stock featured">
+        <div class="stock-head">
+          <div class="ticker">NBIS</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">中</span>
+        </div>
+        <p class="stock-thesis">Situational Awareness LP 披露持有 12.41M 股 Class A，佔 5.6%。13G 屬持倉披露，不等同即時買入，但對 Nebius 的 AI 基建敘事有背書作用。</p>
+        <div class="stock-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>13G披露</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>知名資金</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059743526842425571" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 21:08 UTC</a><a class="source-chip" href="https://x.com/wallstengine/status/2059742971093033107" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 21:06 UTC</a></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">HEI</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">高</span>
+        </div>
+        <p class="stock-thesis">Q2 收入及 EPS 明顯高過預期，營業收入、EBITDA 及現金流均強勁增長。航空支援及電子科技兩個分部同步擴張。</p>
+        <div class="stock-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>業績勝預期</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>利潤率改善</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>現金流</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059734643449221229" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 20:33 UTC</a></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">P</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill watch"><span class="dot"></span>觀察</span>
+          <span class="strength">低</span>
+        </div>
+        <p class="stock-thesis">收入勝預期及 Q3、全年收入指引偏正面，但 EPS 明顯低過預期，之後回覆亦指出 GAAP miss。短線訊號混合，不宜只看收入追入。</p>
+        <div class="stock-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>EPS遜預期</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>收入指引</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>訊號混合</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059732980772557238" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 20:26 UTC</a><a class="source-chip" href="https://x.com/juliuscaeser420/status/2059732411932426568" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 20:24 UTC</a><a class="source-chip" href="https://x.com/wallstengine/status/2059731851502383215" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 20:21 UTC</a></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">MRVL</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">高</span>
+        </div>
+        <p class="stock-thesis">Q1 收入及 EPS 勝預期，Q2 指引亦高過市場，並提到 AI 訂單強勁。數據中心收入增長預期加速，對 AI 半導體鏈屬正面催化。</p>
+        <div class="stock-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>業績勝預期</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>AI訂單</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>數據中心</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059730639059112125" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 20:17 UTC</a></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">SNOW</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">高</span>
+        </div>
+        <p class="stock-thesis">收入、EPS、產品收入及 RPO 全部強過預期，並上調全年產品收入指引。圖片顯示盤後急升 29.25%，短線動能最突出，但翌日追高波動會大。</p>
+        <div class="stock-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>業績勝預期</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>上調指引</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>AI順風</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059729486678204862" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 20:12 UTC</a></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">QCOM</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">中</span>
+        </div>
+        <p class="stock-thesis">ByteDance AI ASIC 訂單及另一個美國雲服務商 ASIC 項目，支持 QCOM 由手機晶片轉向 AI 基建。惟項目有延誤及中國合規門檻，催化仍需確認。</p>
+        <div class="stock-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>ByteDance交易</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>AI ASIC</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>合規限制</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059722043055374573" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 19:42 UTC</a><a class="source-chip" href="https://x.com/wallstengine/status/2059285942587052251" target="_blank" rel="noopener noreferrer">POST · 2026-05-26 14:50 UTC</a><a class="source-chip" href="https://x.com/wallstengine/status/2059284614238343407" target="_blank" rel="noopener noreferrer">POST · 2026-05-26 14:44 UTC</a></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">HOOD</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">中</span>
+        </div>
+        <p class="stock-thesis">Goldman 重申 Buy 及 94 美元目標價，焦點是 agentic trading 及信用卡代理功能。新產品仍早期，但有機會推高金融服務 AI 化估值敘事。</p>
+        <div class="stock-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>Buy評級</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>代理交易</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>金融AI</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059720976410268109" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 19:38 UTC</a><a class="source-chip" href="https://x.com/wallstengine/status/2059675556036428115" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 16:38 UTC</a></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">NVDA</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">中</span>
+        </div>
+        <p class="stock-thesis">管理層長線市值言論、每年在台灣支出約 1500 億美元，以及市值大幅拋離其他晶片股，均強化 AI 領頭羊地位。惟集中度極高，不能忽略回調風險。</p>
+        <div class="stock-tags"><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>龍頭集中</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>管理層言論</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>相對強勢</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059717251859890332" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 19:23 UTC</a><a class="source-chip" href="https://x.com/wallstengine/status/2059546805709443297" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 08:06 UTC</a><a class="source-chip" href="https://x.com/wallstengine/status/2059545648568086721" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 08:02 UTC</a><span class="source-more">+1</span></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">META</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">中</span>
+        </div>
+        <p class="stock-thesis">全球推出 Instagram、Facebook、WhatsApp 付費訂閱，並測試 Meta One AI 計劃，股價公布後升 4%。市場開始重新評估訂閱及 AI 變現故事。</p>
+        <div class="stock-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>付費訂閱</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>AI變現</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>股價反應</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059713720612433964" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 19:09 UTC</a><a class="source-chip" href="https://x.com/wallstengine/status/2059697943658275072" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 18:07 UTC</a></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">PDD</div>
+          <span class="market-tag">US</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill bear"><span class="dot"></span>看淡</span>
+          <span class="strength">中</span>
+        </div>
+        <p class="stock-thesis">Q1 收入及 EPS 均低過預期，雖然交易服務收入按年增長 20%，但整體業績質素偏弱。長期供應鏈投資亦可能壓抑短期利潤預期。</p>
+        <div class="stock-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>業績遜預期</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>利潤壓力</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/wallstengine/status/2059584382713893145" target="_blank" rel="noopener noreferrer">POST · 2026-05-27 10:35 UTC</a></div>
+      </article>
+    </div>
+  </section>
+
+
+  <!-- ============ WATCHLIST EXPORT ============ -->
+  <section class="section watchlist-export">
+    <div class="section-header">
+      <span class="section-num">IV.</span>
+      <h2 class="section-title">Watchlist Export</h2>
+      <span class="section-sub">Clean Ticker List</span>
+    </div>
+    <div class="watchlist-copy">
+      <span class="watchlist-copy-label">Copy List</span>
+      <span class="watchlist-copy-text">NBIS, DELL, RKLB, BA, MRVL, IREN, WULF, MOD, SNOW, ZS, NTNX, MU, SNDK, CRWD, NVDA, SMCI, FPS, AVGO, AMD, WIX, HEI, QCOM, HOOD, META, PDD</span>
+    </div>
+    <div class="watchlist-table">
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">NBIS</span>
+        <span class="watchlist-refs">Lead + Section III</span>
+        <span class="watchlist-reason">13G披露 · 知名資金</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">DELL</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">政府合約</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">RKLB</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">政府合約</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">BA</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">政府合約</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">MRVL</span>
+        <span class="watchlist-refs">Section I + Section III</span>
+        <span class="watchlist-reason">算力基建 · 業績勝預期 · AI訂單</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">IREN</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">算力基建</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">WULF</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">算力基建</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">MOD</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">算力基建</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">SNOW</span>
+        <span class="watchlist-refs">Section I + Section III</span>
+        <span class="watchlist-reason">業績勝預期 · 上調指引</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">ZS</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">業績勝預期</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">NTNX</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">業績勝預期</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">MU</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">目標價上調 · 長約能見度</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">SNDK</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">目標價上調 · 長約能見度</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">CRWD</span>
+        <span class="watchlist-refs">Section II</span>
+        <span class="watchlist-reason">維持Neutral · 估值高</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">NVDA</span>
+        <span class="watchlist-refs">Section II + Section III</span>
+        <span class="watchlist-reason">走私調查 · 出口管制 · 集中度</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">SMCI</span>
+        <span class="watchlist-refs">Section II</span>
+        <span class="watchlist-reason">走私調查 · 出口管制</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">FPS</span>
+        <span class="watchlist-refs">Section II</span>
+        <span class="watchlist-reason">售股申請 · 供應壓力</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">AVGO</span>
+        <span class="watchlist-refs">Section II</span>
+        <span class="watchlist-reason">集中度</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">AMD</span>
+        <span class="watchlist-refs">Section II</span>
+        <span class="watchlist-reason">集中度</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">WIX</span>
+        <span class="watchlist-refs">Section II</span>
+        <span class="watchlist-reason">大規模裁員 · 成本壓力</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">HEI</span>
+        <span class="watchlist-refs">Section III</span>
+        <span class="watchlist-reason">業績勝預期 · 利潤率改善</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">QCOM</span>
+        <span class="watchlist-refs">Section III</span>
+        <span class="watchlist-reason">ByteDance交易 · AI ASIC</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">HOOD</span>
+        <span class="watchlist-refs">Section III</span>
+        <span class="watchlist-reason">Buy評級 · 代理交易</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">META</span>
+        <span class="watchlist-refs">Section III</span>
+        <span class="watchlist-reason">付費訂閱 · AI變現</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">PDD</span>
+        <span class="watchlist-refs">Section III</span>
+        <span class="watchlist-reason">業績遜預期 · 利潤壓力</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div>© 2026 Daily Signal Digest</div>
+    <div class="disclaimer">非投資建議 · Not Investment Advice</div>
+    <div>End of Issue No. 147</div>
+  </footer>
+
+</div>
+</body>
+</html>
