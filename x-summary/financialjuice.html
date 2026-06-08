@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FinancialJuice · X Signal Report · 2026.05.24</title>
+<title>FinancialJuice · X Signal Report · 2026.06.08</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900;9..144,900&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -518,6 +518,50 @@
   .tag-event { background: rgba(14, 82, 48, 0.06); border-color: var(--rule-soft); }
   .tag-reason { background: var(--paper-2); }
 
+  .source-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+  }
+
+  .source-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-right: 2px;
+  }
+
+  .source-chip,
+  .source-more {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 9px;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    background: rgba(255, 250, 240, 0.32);
+    border: 1px solid var(--rule-soft);
+    padding: 3px 7px 2px;
+    text-decoration: none;
+    border-radius: 1px;
+  }
+
+  .source-chip:hover {
+    background: var(--paper-3);
+    color: var(--ink);
+  }
+
+  .source-more {
+    color: var(--ink-3);
+    background: transparent;
+  }
+
   /* ============ RISK LEDGER ============ */
   .risk-ledger {
     border-top: 1px solid var(--ink);
@@ -828,7 +872,7 @@
     <div class="masthead-top">
       <div class="left">
         <span>Vol. I</span>
-        <span>No. 144</span>
+        <span>No. 159</span>
       </div>
       <div>X / Twitter Signal Edition</div>
     </div>
@@ -839,9 +883,9 @@
     <div class="ornament">· · ·</div>
 
     <div class="masthead-sub">
-      <div>Sunday — 24 May 2026</div>
+      <div>Monday — 08 June 2026</div>
       <div class="source-tag">Source — @financialjuice</div>
-      <div>Last 3 Days · 258 posts</div>
+      <div>Last 3 Days · 239 posts</div>
     </div>
   </header>
 
@@ -857,16 +901,16 @@
     </div>
     <div class="stat">
       <span class="stat-label">Risk</span>
-      <span class="stat-num risk">08</span>
+      <span class="stat-num risk">06</span>
       <div class="stat-breakdown">
-        <span class="risk-mix-chip high">高 03</span>
-        <span class="risk-mix-chip medium">中 05</span>
+        <span class="risk-mix-chip high">高 04</span>
+        <span class="risk-mix-chip medium">中 02</span>
         <span class="risk-mix-chip low">低 00</span>
       </div>
     </div>
     <div class="stat">
       <span class="stat-label">Top Conviction</span>
-      <span class="stat-num conviction">MU/NVDA</span>
+      <span class="stat-num conviction">AI記憶體</span>
     </div>
   </div>
   <div class="partial-note">資料可能未完整：timeline 未確認覆蓋整個時間範圍。</div>
@@ -875,20 +919,20 @@
   <section class="executive-summary">
     <div>
       <div class="summary-label">Today's Summary · 今日總括 · FinancialJuice</div>
-      <div class="summary-body">主線係美伊 MoU 與霍爾木茲消息主導宏觀風險，短線有降溫催化但未能當作已落實；同時 Fed/ECB 通脹壓力升溫，限制估值擴張。單名較清晰係 MU、NVDA，受 AI 及記憶體供需支持；BTC 情緒仍弱。</div>
+      <div class="summary-body">主線係 AI 記憶體同韓國 AI 基建最強，NVDA、SK Hynix 相關消息密集；但中東升級、台股急跌、南韓匯率同歐洲工業數據轉弱，令倉位要偏重強催化、避開高 beta 追價。</div>
     </div>
     <div class="summary-facts">
       <div class="summary-fact">
         <span class="summary-fact-label">Lead</span>
-        <span class="summary-fact-value">MU · 看好</span>
+        <span class="summary-fact-value">NVDA · 看好</span>
       </div>
       <div class="summary-fact">
         <span class="summary-fact-label">Risk Mix</span>
-        <span class="summary-fact-value">高 03 / 中 05 / 低 00</span>
+        <span class="summary-fact-value">高 04 / 中 02 / 低 00</span>
       </div>
       <div class="summary-fact">
         <span class="summary-fact-label">Watchlist</span>
-        <span class="summary-fact-value">6 names · MU, NVDA, OPENAI, ANTHROPIC, REELEMENT, BTC</span>
+        <span class="summary-fact-value">8 names · NVDA, SKHYNIX, SKTELECOM, NAVER, MACRO, SK, OPENAI, ASML</span>
       </div>
     </div>
   </section>
@@ -896,26 +940,26 @@
   <section class="signal-strip">
     <div class="signal-lead">
       <div class="signal-label">Lead Signal</div>
-      <div class="signal-headline">MU · 看好</div>
-      <div class="signal-deck">Micron 行政總裁預期記憶體晶片短缺會持續至 2026 年後，直接支持定價及盈利周期。此為今次單名中最清晰的供需利好。</div>
+      <div class="signal-headline">NVDA · 看好</div>
+      <div class="signal-deck">Nvidia CEO 指股價波動帶來買入機會，同時與 LG、SK、Doosan、SK Hynix 擴大合作。AI factories、robotics、data centers 需求線維持強勢。</div>
     </div>
     <div class="quality-panel">
       <div class="quality-label">Data Quality</div>
       <div class="quality-grid">
         <div class="quality-item">
-          <span class="quality-num">258</span>
+          <span class="quality-num">239</span>
           <span class="quality-text">Tweets</span>
         </div>
         <div class="quality-item">
-          <span class="quality-num">12</span>
+          <span class="quality-num">0</span>
           <span class="quality-text">Images Read</span>
         </div>
         <div class="quality-item">
-          <span class="quality-num">6</span>
+          <span class="quality-num">5</span>
           <span class="quality-text">Themes</span>
         </div>
         <div class="quality-item">
-          <span class="quality-num">3</span>
+          <span class="quality-num">4</span>
           <span class="quality-text">Names</span>
         </div>
       </div>
@@ -933,78 +977,70 @@
     <div class="sector">
       <span class="signal-pill bull"><span class="dot"></span>催化</span>
       <div class="sector-body">
-        <div class="sector-name">伊朗停火</div>
-        <div class="sector-thesis">多條消息指美伊接近 MoU、60 日談判框架、部分資金解凍及霍爾木茲重開，對風險資產偏正面、對油價地緣溢價偏下行。但伊朗消息同時否認已同意交出高濃縮鈾，交易上要當作高波動事件。</div>
+        <div class="sector-name">韓國股市</div>
+        <div class="sector-thesis">南韓總統 Lee 指股市仍被低估、正尋找合理估值，並提出全面 AI 整合及嚴打操縱股價。政策訊號偏向改善估值折讓，但短線仍要跟匯率波動。</div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/financialjuice/status/2063802373227598068" target="_blank" rel="noopener noreferrer">POST · 2026-06-08 01:56 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063801334537630145" target="_blank" rel="noopener noreferrer">POST · 2026-06-08 01:52 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063791395857465499" target="_blank" rel="noopener noreferrer">POST · 2026-06-08 01:13 UTC</a><span class="source-more">+1</span></div>
       </div>
 
       <div class="sector-ref">
         <span class="ref-label">關聯</span>
-        <div class="tag-row inline"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>美伊 MoU</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>霍爾木茲</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>60 日框架</span></div>
+        <div class="tag-row inline"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>估值重估</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>全面 AI 整合</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>打擊操縱</span></div>
       </div>
     </div>
 
     <div class="sector">
       <span class="signal-pill watch"><span class="dot"></span>觀察</span>
       <div class="sector-body">
-        <div class="sector-name">能源航道</div>
-        <div class="sector-thesis">WTI 及 Brent 先跌後回升，伊朗燃料/天然氣設施受損、霍爾木茲通行受控、240 艘船等候入海峽，令能源價格仍受消息面主導。若 MoU 落地，油價風險溢價有回落壓力；若談判反覆，油氣可再被擠高。</div>
+        <div class="sector-name">中國流動性</div>
+        <div class="sector-thesis">人行透過 7 日逆回購投放 2,185 億人民幣，外匯儲備亦按月上升；流動性支撐存在，但未見直接風險資產催化。</div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/financialjuice/status/2063793867183280617" target="_blank" rel="noopener noreferrer">POST · 2026-06-08 01:22 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063441005005713740" target="_blank" rel="noopener noreferrer">POST · 2026-06-07 02:00 UTC</a></div>
       </div>
 
       <div class="sector-ref">
         <span class="ref-label">關聯</span>
-        <div class="tag-row inline"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>WTI 96.60</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>Brent 103.54</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>航道受控</span></div>
+        <div class="tag-row inline"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>逆回購投放</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>外儲上升</span></div>
       </div>
     </div>
 
     <div class="sector">
       <span class="signal-pill bull"><span class="dot"></span>看好</span>
       <div class="sector-body">
-        <div class="sector-name">AI 營收</div>
-        <div class="sector-thesis">OpenAI 第一季收入 57 億美元，領先 Anthropic 10 億美元；Anthropic 年化收入接近 450 億美元、第二季收入預期翻倍至 110 億美元。AI 需求仍強，利好上游算力、記憶體及雲端供應鏈情緒。</div>
+        <div class="sector-name">AI記憶體</div>
+        <div class="sector-thesis">Nvidia 與 SK Hynix 展開多年期記憶體合作，覆蓋 Vera Rubin、Vera CPU、RTX Spark、Jetson Thor 及全球 AI factories。Huang 同時指記憶體短缺會持續數年，供需格局偏利好先進記憶體鏈。</div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/financialjuice/status/2063779031598715350" target="_blank" rel="noopener noreferrer">POST · 2026-06-08 00:23 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063761189914423301" target="_blank" rel="noopener noreferrer">POST · 2026-06-07 23:13 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063758179582783883" target="_blank" rel="noopener noreferrer">POST · 2026-06-07 23:01 UTC</a><span class="source-more">+1</span></div>
       </div>
 
       <div class="sector-ref">
         <span class="ref-label">關聯</span>
-        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>OpenAI</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>Anthropic</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>收入增長</span></div>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>NVDA</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SK Hynix</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>多年合作</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>記憶體短缺</span></div>
       </div>
     </div>
 
     <div class="sector">
       <span class="signal-pill bull"><span class="dot"></span>看好</span>
       <div class="sector-body">
-        <div class="sector-name">記憶體周期</div>
-        <div class="sector-thesis">Micron 行政總裁指記憶體短缺會延續至 2026 年後；Nvidia 亦提到記憶體成本是買家挑戰但供應商會快速增產。供需偏緊支持記憶體定價及相關半導體鏈。</div>
+        <div class="sector-name">韓國 AI 基建</div>
+        <div class="sector-thesis">SK Telecom、Naver、Doosan 均傳出擴大使用 Nvidia 技術，主線由晶片延伸至 AI cloud、AI factories、robotics、能源設備。韓國 AI 生態有機會成為資金追逐主題。</div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/financialjuice/status/2063763647977914487" target="_blank" rel="noopener noreferrer">POST · 2026-06-07 23:22 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063763111878771005" target="_blank" rel="noopener noreferrer">POST · 2026-06-07 23:20 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063760018961281369" target="_blank" rel="noopener noreferrer">POST · 2026-06-07 23:08 UTC</a><span class="source-more">+1</span></div>
       </div>
 
       <div class="sector-ref">
         <span class="ref-label">關聯</span>
-        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>MU</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>NVDA</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>供應短缺</span></div>
+        <div class="tag-row inline"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>NVDA</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>SK Telecom</span><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>Naver</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>AI factories</span></div>
       </div>
     </div>
 
     <div class="sector">
       <span class="signal-pill watch"><span class="dot"></span>觀察</span>
       <div class="sector-body">
-        <div class="sector-name">市場情緒</div>
-        <div class="sector-thesis">股票 Fear &amp; Greed Index 為 60，仍屬貪婪但較一個月前 68 回落；MOC 由前一日大買盤轉為 S&amp;P 500 -854 百萬、Nasdaq 100 -335 百萬沽盤。風險偏好仍在，但追貨動能降溫。</div>
+        <div class="sector-name">油市供應</div>
+        <div class="sector-thesis">OPEC+ 維持整體政策穩定，但七個成員國 7 月增產上限 18.8 萬桶每日；供應面偏壓油價，惟中東衝突可隨時抵消。</div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/financialjuice/status/2063632709465841935" target="_blank" rel="noopener noreferrer">POST · 2026-06-07 14:42 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063604346604884115" target="_blank" rel="noopener noreferrer">POST · 2026-06-07 12:49 UTC</a></div>
       </div>
 
       <div class="sector-ref">
         <span class="ref-label">關聯</span>
-        <div class="tag-row inline"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>貪婪 60</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>MOC 沽盤</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>情緒降溫</span></div>
-      </div>
-    </div>
-
-    <div class="sector">
-      <span class="signal-pill bear"><span class="dot"></span>風險</span>
-      <div class="sector-body">
-        <div class="sector-name">歐洲通脹</div>
-        <div class="sector-thesis">歐盟官員提到滯脹壓力及要回應通脹跳升，ECB 官員亦指 6 月可能要加息、2026 通脹展望或上調。歐洲資產面對增長弱、利率上行的雙重壓力。</div>
-      </div>
-
-      <div class="sector-ref">
-        <span class="ref-label">關聯</span>
-        <div class="tag-row inline"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>ECB 加息</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>滯脹壓力</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>通脹上調</span></div>
+        <div class="tag-row inline"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>OPEC+ 增產</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>供應壓力</span></div>
       </div>
     </div>
   </section>
@@ -1022,66 +1058,56 @@
       <div class="risk-row">
         <span class="severity-pill severity-high"><span class="dot"></span>高風險</span>
         <div>
-          <div class="risk-title">美伊協議反覆</div>
-          <div class="risk-thesis">特朗普稱協議大致完成及霍爾木茲將重開，但 Fars/Tasnim 及伊朗高層消息指海峽控制、核議題及高濃縮鈾仍未定，消息衝突會令油、金、股指開市波動放大。</div>
+          <div class="risk-title">中東升級</div>
+          <div class="risk-thesis">伊朗、以色列、也門胡塞互有導彈及空襲消息，並涉及伊朗石化設施受損，風險資產要防避險及能源波動急升。</div>
+          <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/financialjuice/status/2063872438069244181" target="_blank" rel="noopener noreferrer">POST · 2026-06-08 06:35 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063864300846915825" target="_blank" rel="noopener noreferrer">POST · 2026-06-08 06:02 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063847316700758276" target="_blank" rel="noopener noreferrer">POST · 2026-06-08 04:55 UTC</a><span class="source-more">+1</span></div>
         </div>
-        <div class="tag-row risk-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>美伊 MoU</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>高濃縮鈾</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>消息衝突</span></div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>伊朗導彈</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>以色列空襲</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>地緣升級</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-medium"><span class="dot"></span>中風險</span>
+        <div>
+          <div class="risk-title">歐洲工業轉弱</div>
+          <div class="risk-thesis">德國工業訂單按月跌 3.8%，差過預期，對歐洲周期股及出口鏈屬負面訊號。</div>
+          <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/financialjuice/status/2063863720158081134" target="_blank" rel="noopener noreferrer">POST · 2026-06-08 06:00 UTC</a></div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>MACRO</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>工業訂單</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>差過預期</span></div>
+      </div>
+      <div class="risk-row">
+        <span class="severity-pill severity-medium"><span class="dot"></span>中風險</span>
+        <div>
+          <div class="risk-title">南韓匯率波動</div>
+          <div class="risk-thesis">南韓外匯當局指匯率變動與基本面不相稱並會果斷行動，顯示 won 波動仍可能干擾韓股重估交易。</div>
+          <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/financialjuice/status/2063829762200519046" target="_blank" rel="noopener noreferrer">POST · 2026-06-08 03:45 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063815130224222451" target="_blank" rel="noopener noreferrer">POST · 2026-06-08 02:47 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063814857854525457" target="_blank" rel="noopener noreferrer">POST · 2026-06-08 02:46 UTC</a></div>
+        </div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>匯率干預</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>won 波動</span></div>
       </div>
       <div class="risk-row">
         <span class="severity-pill severity-high"><span class="dot"></span>高風險</span>
         <div>
-          <div class="risk-title">霍爾木茲通行</div>
-          <div class="risk-thesis">伊朗稱海峽仍由其控制、240 艘船等候批准，雖有 25 至 33 艘船通過，但航運瓶頸未解除，能源及運輸成本仍有上行尾風險。</div>
+          <div class="risk-title">台股急跌</div>
+          <div class="risk-thesis">台股單日跌逾 4%，在中東風險及科技鏈波動下，亞洲風險資產短線承壓。</div>
+          <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/financialjuice/status/2063788274305355965" target="_blank" rel="noopener noreferrer">POST · 2026-06-08 01:00 UTC</a></div>
         </div>
-        <div class="tag-row risk-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>240 艘船</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>霍爾木茲</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>通行受控</span></div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>跌逾 4%</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>亞洲風險資產</span></div>
       </div>
       <div class="risk-row">
         <span class="severity-pill severity-high"><span class="dot"></span>高風險</span>
         <div>
-          <div class="risk-title">通脹預期</div>
-          <div class="risk-thesis">密歇根消費者信心低過預期，同時 1 年及 5 年通脹預期高過預期；Waller 指若通脹預期脫錨或需採取行動，市場已完全定價 2026 年底前加息 25 點子。</div>
+          <div class="risk-title">中東航空風險</div>
+          <div class="risk-thesis">伊朗、伊拉克、敘利亞及海灣多地曾出現空域關閉、機場停飛或預警，反映衝突已影響區內交通與供應鏈。</div>
+          <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/financialjuice/status/2063732174407209365" target="_blank" rel="noopener noreferrer">POST · 2026-06-07 21:17 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063716416465830198" target="_blank" rel="noopener noreferrer">POST · 2026-06-07 20:15 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063714106352234706" target="_blank" rel="noopener noreferrer">POST · 2026-06-07 20:05 UTC</a><span class="source-more">+1</span></div>
         </div>
-        <div class="tag-row risk-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>密歇根數據</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>Fed 加息定價</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>預期脫錨</span></div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>空域關閉</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>機場停飛</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>供應鏈風險</span></div>
       </div>
       <div class="risk-row">
-        <span class="severity-pill severity-medium"><span class="dot"></span>中風險</span>
+        <span class="severity-pill severity-high"><span class="dot"></span>高風險</span>
         <div>
-          <div class="risk-title">Fed 政策轉向</div>
-          <div class="risk-thesis">Warsh 就任 Fed Chair 後強調改革及削弱 forward guidance，Waller 同時反對短期減息，利率路徑不確定性升高，對長久期成長股估值不利。</div>
+          <div class="risk-title">俄烏核設施風險</div>
+          <div class="risk-thesis">Chornobyl 附近核燃料儲存設施受無人機襲擊並造成重大結構損毀，雖輻射水平正常，但尾部風險仍高。</div>
+          <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/financialjuice/status/2063677934787874817" target="_blank" rel="noopener noreferrer">POST · 2026-06-07 17:42 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063677901203976238" target="_blank" rel="noopener noreferrer">POST · 2026-06-07 17:42 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063537878982922291" target="_blank" rel="noopener noreferrer">POST · 2026-06-07 08:25 UTC</a></div>
         </div>
-        <div class="tag-row risk-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>Warsh 就任</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>forward guidance</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>利率不確定</span></div>
-      </div>
-      <div class="risk-row">
-        <span class="severity-pill severity-medium"><span class="dot"></span>中風險</span>
-        <div>
-          <div class="risk-title">英國消費轉弱</div>
-          <div class="risk-thesis">英國零售銷售按年 0%、按月 -1.3%，均遜預期，反映消費需求偏弱，對英國內需及英鎊風險偏負面。</div>
-        </div>
-        <div class="tag-row risk-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>英國零售</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>消費轉弱</span></div>
-      </div>
-      <div class="risk-row">
-        <span class="severity-pill severity-medium"><span class="dot"></span>中風險</span>
-        <div>
-          <div class="risk-title">加國物價壓力</div>
-          <div class="risk-thesis">加拿大零售銷售強過預期，但 PPI 按年升至 11.4%，增長與通脹同時偏熱，可能加重央行政策壓力。</div>
-        </div>
-        <div class="tag-row risk-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>加拿大 PPI</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>零售強</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>政策壓力</span></div>
-      </div>
-      <div class="risk-row">
-        <span class="severity-pill severity-medium"><span class="dot"></span>中風險</span>
-        <div>
-          <div class="risk-title">半導體關稅</div>
-          <div class="risk-thesis">USTR 指特朗普訪華未改變半導體關稅調查方向，對晶片供應鏈及估值屬政策風險，會抵消部分 AI/記憶體利好。</div>
-        </div>
-        <div class="tag-row risk-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>關稅調查</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>政策風險</span></div>
-      </div>
-      <div class="risk-row">
-        <span class="severity-pill severity-medium"><span class="dot"></span>中風險</span>
-        <div>
-          <div class="risk-title">稀土資金不穩</div>
-          <div class="risk-thesis">Pentagon 考慮撤回對 ReElement Technologies 的 8,000 萬美元有條件貸款，顯示美國稀土去中國化政策執行有分歧，相關供應鏈不宜過度追高。</div>
-        </div>
-        <div class="tag-row risk-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>ReElement</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>8,000 萬貸款</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>政策分歧</span></div>
+        <div class="tag-row risk-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>Chornobyl</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>無人機襲擊</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>核設施風險</span></div>
       </div>
     </div>
   </section>
@@ -1094,45 +1120,62 @@
       <span class="section-sub">Single-Name Coverage</span>
     </div>
 
-    <div class="stocks compact">
+    <div class="stocks ">
 
       <article class="stock featured">
-        <div class="stock-head">
-          <div class="ticker">MU</div>
-          <span class="market-tag">US</span>
-        </div>
-        <div class="stock-signal">
-          <span class="signal-pill bull"><span class="dot"></span>看好</span>
-          <span class="strength">強</span>
-        </div>
-        <p class="stock-thesis">Micron 行政總裁預期記憶體晶片短缺會持續至 2026 年後，直接支持定價及盈利周期。此為今次單名中最清晰的供需利好。</p>
-        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>MU</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>記憶體短缺</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>CEO 評論</span></div>
-      </article>
-
-      <article class="stock">
         <div class="stock-head">
           <div class="ticker">NVDA</div>
           <span class="market-tag">US</span>
         </div>
         <div class="stock-signal">
           <span class="signal-pill bull"><span class="dot"></span>看好</span>
-          <span class="strength">中強</span>
+          <span class="strength">高</span>
         </div>
-        <p class="stock-thesis">Nvidia 行政總裁指明年增長仍會快速，延續 AI 算力需求主線。不過記憶體成本對買家構成挑戰，短線要留意毛利及供應鏈成本。</p>
-        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>NVDA</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>增長快速</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>記憶體成本</span></div>
+        <p class="stock-thesis">Nvidia CEO 指股價波動帶來買入機會，同時與 LG、SK、Doosan、SK Hynix 擴大合作。AI factories、robotics、data centers 需求線維持強勢。</p>
+        <div class="stock-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>合作擴大</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>AI factories</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>買入機會</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/financialjuice/status/2063808313435766950" target="_blank" rel="noopener noreferrer">POST · 2026-06-08 02:20 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063807702480896015" target="_blank" rel="noopener noreferrer">POST · 2026-06-08 02:17 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063774459744358549" target="_blank" rel="noopener noreferrer">POST · 2026-06-08 00:05 UTC</a><span class="source-more">+1</span></div>
       </article>
 
       <article class="stock">
         <div class="stock-head">
-          <div class="ticker">BTC</div>
-          <span class="market-tag">Crypto</span>
+          <div class="ticker">SK Hynix</div>
+          <span class="market-tag">KR</span>
         </div>
         <div class="stock-signal">
-          <span class="signal-pill bear"><span class="dot"></span>風險</span>
+          <span class="signal-pill bull"><span class="dot"></span>看好</span>
+          <span class="strength">高</span>
+        </div>
+        <p class="stock-thesis">SK Hynix 與 Nvidia 合作下一代記憶體，並會配合 Nvidia 基建計劃及全球 AI 需求供貨。短缺持續數年嘅敘事，令先進記憶體議價能力更突出。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>NVDA</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>下一代記憶體</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>供應偏緊</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/financialjuice/status/2063779031598715350" target="_blank" rel="noopener noreferrer">POST · 2026-06-08 00:23 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063759524964528154" target="_blank" rel="noopener noreferrer">POST · 2026-06-07 23:06 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063759433855811810" target="_blank" rel="noopener noreferrer">POST · 2026-06-07 23:06 UTC</a><span class="source-more">+1</span></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">ChatGPT</div>
+          <span class="market-tag">PRIVATE</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill watch"><span class="dot"></span>觀察</span>
           <span class="strength">中</span>
         </div>
-        <p class="stock-thesis">Crypto Fear &amp; Greed Index 只有 28，屬恐懼，低過上周 43，顯示加密市場風險偏好偏弱。可觀察逆向反彈，但現階段不屬強勢訊號。</p>
-        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>BTC</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>恐懼 28</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>情緒偏弱</span></div>
+        <p class="stock-thesis">OpenAI 據報計劃對 ChatGPT 作推出以來最大改版，方向包括 superapp、coding tools、AI agents。未有上市 ticker，但對 AI 應用鏈屬情緒催化。</p>
+        <div class="stock-tags"><span class="typed-tag tag-ticker"><span class="tag-kind">TICKER</span>OpenAI</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>ChatGPT 改版</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>AI agents</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/financialjuice/status/2063472134572142647" target="_blank" rel="noopener noreferrer">POST · 2026-06-07 04:04 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063471712306331942" target="_blank" rel="noopener noreferrer">POST · 2026-06-07 04:02 UTC</a></div>
+      </article>
+
+      <article class="stock">
+        <div class="stock-head">
+          <div class="ticker">ASML</div>
+          <span class="market-tag">EU</span>
+        </div>
+        <div class="stock-signal">
+          <span class="signal-pill watch"><span class="dot"></span>觀察</span>
+          <span class="strength">中</span>
+        </div>
+        <p class="stock-thesis">ASML 將有 Elon Musk 參與虛擬科技會議，議題包括 Terafab、AI vision、晶片生產。屬事件催化，未有直接訂單或財務數據支持，宜先放觀察。</p>
+        <div class="stock-tags"><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>Terafab</span><span class="typed-tag tag-event"><span class="tag-kind">EVENT</span>科技會議</span><span class="typed-tag tag-reason"><span class="tag-kind">REASON</span>事件催化</span></div>
+        <div class="source-row"><span class="source-label">來源</span><a class="source-chip" href="https://x.com/financialjuice/status/2063274611488219629" target="_blank" rel="noopener noreferrer">POST · 2026-06-06 14:59 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063274555867607245" target="_blank" rel="noopener noreferrer">POST · 2026-06-06 14:59 UTC</a><a class="source-chip" href="https://x.com/financialjuice/status/2063274085686071765" target="_blank" rel="noopener noreferrer">POST · 2026-06-06 14:57 UTC</a></div>
       </article>
     </div>
   </section>
@@ -1147,44 +1190,56 @@
     </div>
     <div class="watchlist-copy">
       <span class="watchlist-copy-label">Copy List</span>
-      <span class="watchlist-copy-text">MU, NVDA, OPENAI, ANTHROPIC, REELEMENT, BTC</span>
+      <span class="watchlist-copy-text">NVDA, SKHYNIX, SKTELECOM, NAVER, MACRO, SK, OPENAI, ASML</span>
     </div>
     <div class="watchlist-table">
 
       <div class="watchlist-row">
-        <span class="watchlist-ticker">MU</span>
+        <span class="watchlist-ticker">NVDA</span>
         <span class="watchlist-refs">Lead + Section I + Section III</span>
-        <span class="watchlist-reason">供應短缺 · 記憶體短缺 · CEO 評論</span>
+        <span class="watchlist-reason">多年合作 · 記憶體短缺 · AI factories</span>
       </div>
 
       <div class="watchlist-row">
-        <span class="watchlist-ticker">NVDA</span>
-        <span class="watchlist-refs">Lead + Section I + Section III</span>
-        <span class="watchlist-reason">供應短缺 · 增長快速 · 記憶體成本</span>
+        <span class="watchlist-ticker">SKHYNIX</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">多年合作 · 記憶體短缺</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">SKTELECOM</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">AI factories</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">NAVER</span>
+        <span class="watchlist-refs">Section I</span>
+        <span class="watchlist-reason">AI factories</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">MACRO</span>
+        <span class="watchlist-refs">Section II</span>
+        <span class="watchlist-reason">工業訂單 · 差過預期</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">SK</span>
+        <span class="watchlist-refs">Section III</span>
+        <span class="watchlist-reason">下一代記憶體 · 供應偏緊</span>
       </div>
 
       <div class="watchlist-row">
         <span class="watchlist-ticker">OPENAI</span>
-        <span class="watchlist-refs">Section I</span>
-        <span class="watchlist-reason">收入增長</span>
-      </div>
-
-      <div class="watchlist-row">
-        <span class="watchlist-ticker">ANTHROPIC</span>
-        <span class="watchlist-refs">Section I</span>
-        <span class="watchlist-reason">收入增長</span>
-      </div>
-
-      <div class="watchlist-row">
-        <span class="watchlist-ticker">REELEMENT</span>
-        <span class="watchlist-refs">Section II</span>
-        <span class="watchlist-reason">8,000 萬貸款 · 政策分歧</span>
-      </div>
-
-      <div class="watchlist-row">
-        <span class="watchlist-ticker">BTC</span>
         <span class="watchlist-refs">Section III</span>
-        <span class="watchlist-reason">恐懼 28 · 情緒偏弱</span>
+        <span class="watchlist-reason">ChatGPT 改版 · AI agents</span>
+      </div>
+
+      <div class="watchlist-row">
+        <span class="watchlist-ticker">ASML</span>
+        <span class="watchlist-refs">Section III</span>
+        <span class="watchlist-reason">Terafab · 科技會議</span>
       </div>
     </div>
   </section>
@@ -1193,7 +1248,7 @@
   <footer class="footer">
     <div>© 2026 Daily Signal Digest</div>
     <div class="disclaimer">非投資建議 · Not Investment Advice</div>
-    <div>End of Issue No. 144</div>
+    <div>End of Issue No. 159</div>
   </footer>
 
 </div>
