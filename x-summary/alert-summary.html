@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Discord Alert 板塊總結</title>
+<title>Alert 熱力總結</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
@@ -23,15 +23,12 @@
   --positive-soft:rgba(56,211,154,.14);
   --negative:#f2685c;
   --negative-soft:rgba(242,104,92,.14);
-  --mixed:#e3a548;
   --term-short:#f2685c;
   --term-short-soft:rgba(242,104,92,.16);
   --term-medium:#e3a548;
   --term-medium-soft:rgba(227,165,72,.16);
   --term-long:#38d39a;
   --term-long-soft:rgba(56,211,154,.16);
-  --silver:#b9c1cf;
-  --bronze:#c98a53;
   --focus:#7dd3fc;
   --f-display:'Space Grotesk','Segoe UI',sans-serif;
   --f-body:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC','Noto Sans CJK TC','Microsoft JhengHei',sans-serif;
@@ -47,497 +44,335 @@ body{
 }
 a{color:inherit;}
 :focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px;}
-
 .report{
-  width:1240px;
-  max-width:100%;
+  width:100%;
+  max-width:1240px;
   margin:0 auto;
-  padding:44px 48px 24px;
-  background:
-    radial-gradient(900px 360px at 18% -8%, rgba(227,165,72,.10), transparent 60%),
-    radial-gradient(700px 320px at 88% -4%, rgba(56,211,154,.06), transparent 60%),
-    var(--bg);
-  position:relative;
+  padding:32px 44px 22px;
+  background:var(--bg);
 }
-.report::before{
-  content:"";
-  position:absolute;
-  top:0;left:0;right:0;
-  height:3px;
-  background:linear-gradient(90deg, var(--accent) 0%, rgba(227,165,72,.35) 28%, transparent 55%);
-}
-.report-footer{
-  margin-top:24px;
-  padding-top:16px;
-  border-top:1px solid var(--line);
-  color:var(--muted-2);
-  font-size:12px;
-  line-height:1.6;
-}
-.hero{padding-top:6px;}
-.hero-top{
+.hero{
   display:flex;
   justify-content:space-between;
-  align-items:flex-start;
-  gap:24px;
-}
-.brand{display:flex;align-items:flex-start;gap:14px;}
-.brand-mark{
-  font-family:var(--f-mono);
-  color:var(--bg);
-  background:var(--accent);
-  font-weight:700;
-  font-size:15px;
-  width:34px;height:34px;
-  border-radius:8px;
-  display:flex;align-items:center;justify-content:center;
-  flex:none;
-  margin-top:4px;
+  align-items:baseline;
+  gap:16px;
+  flex-wrap:wrap;
 }
 h1{
   margin:0;
   font-family:var(--f-display);
-  font-size:34px;
-  line-height:1.15;
+  font-size:26px;
+  line-height:1.2;
   font-weight:700;
-  letter-spacing:-.01em;
+  letter-spacing:0;
   color:#f5f2ec;
 }
-.hero-sub{
-  margin-top:10px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:15px;
-  color:var(--muted);
-  flex-wrap:wrap;
-}
-.hero-sub .sep{color:var(--muted-2);}
 .chan{
+  color:var(--muted-2);
+  font-weight:500;
+  font-size:15px;
+}
+.hero-meta{
   font-family:var(--f-mono);
-  color:#d8d2c8;
-  background:var(--panel-2);
-  border:1px solid var(--line);
-  border-radius:6px;
-  padding:3px 8px;
-  font-size:13px;
+  font-size:12px;
+  color:var(--muted-2);
+  line-height:1.55;
+  text-align:right;
 }
 .count-hl{color:var(--accent);font-weight:700;font-family:var(--f-mono);}
-.meta{
-  text-align:right;
-  font-family:var(--f-mono);
-  font-size:12.5px;
-  color:var(--muted-2);
-  line-height:1.7;
-  padding-top:6px;
-}
-.meta strong{color:var(--muted);font-weight:500;}
-
-.stat-rail{
-  margin:26px 0 8px;
-  display:flex;
-  align-items:center;
-  border:1px solid var(--line);
-  border-radius:12px;
-  background:var(--panel);
-  padding:18px 26px;
-}
-.stat{flex:1;text-align:left;}
-.stat-div{width:1px;align-self:stretch;background:var(--line);margin:0 22px;}
-.stat-value{
-  font-family:var(--f-mono);
-  font-size:26px;
-  font-weight:700;
-  color:#f5f2ec;
-  line-height:1;
-}
-.stat-label{
-  margin-top:8px;
-  font-size:12.5px;
-  color:var(--muted);
-  text-transform:uppercase;
-  letter-spacing:.04em;
-}
-.stat-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  font-family:var(--f-mono);
-  font-size:20px;
-  font-weight:700;
-  color:var(--positive);
-  text-transform:uppercase;
-}
-.stat-badge.warn{color:var(--accent);}
-.stat-badge.bad{color:var(--negative);}
-.stat-badge .dot{
-  width:8px;height:8px;border-radius:50%;
-  background:currentColor;
-  box-shadow:0 0 0 4px var(--positive-soft);
-}
-.stat-badge.warn .dot{box-shadow:0 0 0 4px var(--accent-soft);}
-.stat-badge.bad .dot{box-shadow:0 0 0 4px var(--negative-soft);}
-
-.overview{
-  margin:22px 0 4px;
-}
-.overview-grid{
+.hot-strip{
   display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:14px;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin:18px 0 14px;
 }
-.overview-card{
+.hot-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:12px 16px 13px;
+  min-width:0;
+}
+.hot-kicker{
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted-2);
+  font-family:var(--f-mono);
+  font-weight:700;
+}
+.hot-main{
+  margin-top:4px;
+  font-family:var(--f-display);
+  font-size:19px;
+  line-height:1.25;
+  font-weight:700;
+  color:#f3efe8;
+  overflow-wrap:anywhere;
+}
+.hot-main .mono{font-family:var(--f-mono);}
+.hot-sub{
+  font-family:var(--f-mono);
+  font-size:12.5px;
+  line-height:1.45;
+  color:var(--muted);
+  margin-top:3px;
+  overflow-wrap:anywhere;
+}
+.positive,.pos{color:var(--positive);}
+.negative,.neg{color:var(--negative);}
+.neutral{color:var(--muted);}
+.heatmap-section{margin-top:10px;}
+.tm-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  margin:10px 0 8px;
+}
+.tm-head h2,.rank-section h2,.news-section h2{
+  margin:0;
+  font-family:var(--f-display);
+  font-size:16px;
+  line-height:1.3;
+  font-weight:600;
+  letter-spacing:0;
+  color:#f1eee7;
+}
+.tm-note{
+  font-size:12px;
+  color:var(--muted-2);
+  font-weight:500;
+}
+.tm-toggle{
+  display:flex;
+  border:1px solid var(--line);
+  border-radius:8px;
+  overflow:hidden;
+  flex:none;
+}
+.tm-toggle button{
+  appearance:none;
+  background:var(--panel);
+  color:var(--muted);
+  border:0;
+  border-right:1px solid var(--line);
+  padding:5px 14px;
+  font-size:12.5px;
+  line-height:1.3;
+  cursor:pointer;
+  font-family:var(--f-body);
+}
+.tm-toggle button:last-child{border-right:0;}
+.tm-toggle button.active{
+  background:var(--accent);
+  color:var(--bg);
+  font-weight:700;
+}
+.treemap{
+  position:relative;
+  width:100%;
+  height:400px;
   border:1px solid var(--line);
   border-radius:10px;
   background:var(--panel);
-  padding:18px 18px 22px;
-  min-height:386px;
+  overflow:hidden;
 }
-.overview-card.empty{
-  color:var(--muted);
+.tile{
+  position:absolute;
+  border:1.5px solid var(--bg);
+  border-radius:4px;
+  padding:7px 9px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:filter .12s ease;
 }
-.overview-title{
-  min-width:0;
-  margin-bottom:10px;
+.tile:hover{filter:brightness(1.18);}
+.tile .t-name{
+  font-family:var(--f-display);
+  font-weight:700;
+  font-size:14px;
+  line-height:1.2;
+  color:#f6f1e9;
+  overflow-wrap:anywhere;
 }
-.overview-chart-wrap{
-  position:relative;
-  width:100%;
-  height:300px;
+.tile .t-stat{
+  font-family:var(--f-mono);
+  font-size:11.5px;
+  color:rgba(236,234,228,.86);
+  margin-top:2px;
+}
+.tile .t-tickers{
+  font-family:var(--f-mono);
+  font-size:10.5px;
+  color:rgba(236,234,228,.66);
+  margin-top:5px;
+  line-height:1.55;
+  overflow-wrap:anywhere;
+}
+.tile.small .t-name{font-size:11.5px;}
+.tile.small .t-stat{font-size:10px;}
+.tile.small .t-tickers{display:none;}
+.tile.tiny{padding:4px 6px;}
+.tile.tiny .t-name{font-size:10px;}
+.tile.tiny .t-stat,.tile.tiny .t-tickers{display:none;}
+.tm-empty{
+  position:absolute;
+  inset:0;
   display:flex;
   align-items:center;
   justify-content:center;
-}
-.pie-svg{
-  width:100%;
-  max-width:520px;
-  height:300px;
-  overflow:visible;
-}
-.pie-slice{
-  stroke:var(--panel);
-  stroke-width:2.2;
-  filter:drop-shadow(0 8px 13px rgba(0,0,0,.18));
-}
-.pie-callout polyline{
-  fill:none;
-  stroke-width:2;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
-.pie-callout-pct{
-  fill:#f5f2ec;
-  font-family:var(--f-mono);
-  font-size:27px;
-  font-weight:800;
-  paint-order:stroke;
-  stroke:rgba(10,12,16,.72);
-  stroke-width:3px;
-  stroke-linejoin:round;
-}
-.pie-callout-label{
-  fill:#f5f2ec;
-  font-size:14px;
-  font-weight:800;
-  paint-order:stroke;
-  stroke:rgba(10,12,16,.72);
-  stroke-width:3px;
-  stroke-linejoin:round;
-}
-.overview-kicker{
-  font-family:var(--f-mono);
-  color:var(--muted-2);
-  font-size:10.5px;
-  font-weight:700;
-  letter-spacing:.055em;
-  text-transform:uppercase;
-  margin-bottom:5px;
-}
-.overview-title h2{
-  font-size:18px;
-  margin-bottom:10px;
-}
-.overview-empty{
   color:var(--muted-2);
   font-size:13px;
-  font-style:italic;
 }
-
-.section{margin-top:34px;}
-.section-head{
+.tm-scale{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:8px;
+  font-family:var(--f-mono);
+  font-size:11px;
+  color:var(--muted-2);
+}
+.tm-scale .bar{
+  height:8px;
+  width:180px;
+  border-radius:4px;
+  background:linear-gradient(90deg,#f2685c,#1b2029 50%,#38d39a);
+}
+.rank-section{margin-top:22px;}
+.rank-section h2{margin-bottom:8px;}
+.rk-row{
+  display:grid;
+  grid-template-columns:26px 140px 150px 76px minmax(0,1fr) 70px;
+  gap:10px;
+  align-items:center;
+  padding:7px 12px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:var(--panel);
+  margin-bottom:5px;
+}
+.rk-n{
+  font-family:var(--f-mono);
+  font-size:12px;
+  color:var(--muted-2);
+}
+.rk-name{
+  font-weight:600;
+  font-size:13.5px;
+  color:#f0ede7;
+  overflow-wrap:anywhere;
+}
+.rk-bar{
+  height:10px;
+  background:var(--panel-2);
+  border-radius:5px;
+  overflow:hidden;
+}
+.rk-bar i{
+  display:block;
+  height:100%;
+  border-radius:5px;
+}
+.rk-pct{
+  font-family:var(--f-mono);
+  font-size:12.5px;
+  text-align:right;
+}
+.rk-tk{
+  font-family:var(--f-mono);
+  font-size:11.5px;
+  line-height:1.4;
+  color:var(--muted);
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+.copy-btn{
+  appearance:none;
+  background:var(--panel-2);
+  border:1px solid var(--line);
+  color:var(--muted);
+  border-radius:6px;
+  font-size:11px;
+  padding:4px 8px;
+  cursor:pointer;
+  font-family:var(--f-body);
+  line-height:1.25;
+}
+.copy-btn:hover{color:var(--text);}
+.copy-btn.copied{color:var(--positive);border-color:var(--positive);}
+.news-section{
+  margin-top:22px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--panel);
+  padding:14px 18px 16px;
+}
+.news-head{
   display:flex;
   align-items:baseline;
   justify-content:space-between;
-  gap:18px;
-  margin-bottom:14px;
+  gap:16px;
   padding-bottom:10px;
-  border-bottom:1px solid var(--line);
-}
-h2{
-  margin:0;
-  font-family:var(--f-display);
-  font-size:20px;
-  font-weight:700;
-  color:#f0ede6;
-  letter-spacing:.01em;
-}
-.section-note{
-  font-size:12.5px;
-  color:var(--muted-2);
-  text-align:right;
-}
-.card-grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:14px;
-  align-items:start;
-}
-.g-card{
-  border:1px solid var(--line);
-  border-radius:10px;
-  background:var(--panel);
-  padding:18px 20px 20px;
-}
-.g-card.empty{min-height:120px;color:var(--muted);}
-.g-head{
-  display:grid;
-  grid-template-columns:auto 1fr auto;
-  align-items:center;
-  gap:14px;
-}
-.g-rank{
-  font-family:var(--f-mono);
-  font-size:13px;
-  font-weight:700;
-  width:32px;height:32px;
-  border-radius:7px;
-  display:flex;align-items:center;justify-content:center;
-  border:1px solid var(--line);
-  color:var(--muted);
-  background:var(--panel-2);
-  flex:none;
-}
-.g-rank.gold{color:#1a1408;background:var(--accent);border-color:var(--accent);}
-.g-rank.silver{color:#12151b;background:var(--silver);border-color:var(--silver);}
-.g-rank.bronze{color:#1a1108;background:var(--bronze);border-color:var(--bronze);}
-.g-id{min-width:0;}
-h3{
-  margin:0;
-  font-size:18px;
-  font-weight:700;
-  color:#f2efe9;
-  line-height:1.25;
-  overflow-wrap:anywhere;
-}
-.g-actions{display:flex;align-items:center;gap:8px;}
-.copy-btn{
-  appearance:none;
-  border:1px solid rgba(227,165,72,.34);
-  background:var(--accent-soft);
-  color:var(--accent);
-  border-radius:6px;
-  padding:6px 9px;
-  font-family:var(--f-mono);
-  font-size:10.5px;
-  font-weight:700;
-  line-height:1;
-  letter-spacing:.035em;
-  cursor:pointer;
-  white-space:normal;
-}
-.copy-btn:hover,.copy-btn.copied{border-color:var(--accent);background:rgba(227,165,72,.22);}
-.copy-btn:disabled{
-  cursor:not-allowed;
-  opacity:.45;
-}
-.g-metrics{display:flex;gap:8px;}
-.g-metric{
-  text-align:right;
-  border:1px solid var(--line-soft);
-  background:var(--panel-2);
-  border-radius:7px;
-  padding:6px 10px;
-  min-width:64px;
-}
-.g-metric span{
-  display:block;
-  font-size:10.5px;
-  color:var(--muted-2);
-  text-transform:uppercase;
-  letter-spacing:.04em;
-  margin-bottom:3px;
-}
-.g-metric strong{
-  font-family:var(--f-mono);
-  font-size:15px;
-  font-weight:700;
-}
-.positive{color:var(--positive);}
-.negative{color:var(--negative);}
-.neutral{color:var(--muted);}
-.g-bar-track{
-  margin-top:14px;
-  height:5px;
-  border-radius:4px;
-  background:var(--panel-3);
-  overflow:hidden;
-}
-.g-bar-fill{height:100%;border-radius:4px;}
-.g-bar-fill.positive{background:linear-gradient(90deg,#1f8f6c,var(--positive));}
-.g-bar-fill.negative{background:linear-gradient(90deg,#8f2f27,var(--negative));}
-.g-bar-fill.neutral{background:linear-gradient(90deg,#3b4250,var(--muted));}
-.g-block{margin-top:15px;}
-.g-label{
-  font-size:11px;
-  font-weight:700;
-  color:var(--muted-2);
-  text-transform:uppercase;
-  letter-spacing:.06em;
-  margin-bottom:8px;
-}
-.g-label-n{color:var(--muted-2);font-weight:500;}
-.ticker-wrap{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
-.chip{
-  display:inline-flex;
-  align-items:baseline;
-  gap:4px;
-  font-family:var(--f-mono);
-  font-size:12.5px;
-  font-weight:600;
-  color:#e4dfd6;
-  background:var(--panel-2);
-  border:1px solid var(--line);
-  border-radius:6px;
-  padding:4px 8px;
-  line-height:1;
-}
-.chip b{color:var(--accent);font-weight:700;font-size:11px;}
-.no-cat{color:var(--muted-2);font-size:13px;font-style:italic;}
-.catalyst-list{display:flex;flex-direction:column;gap:9px;}
-.cat-row{display:flex;gap:9px;align-items:flex-start;}
-.cat-dot{
-  width:8px;height:8px;border-radius:50%;
-  margin-top:6px;flex:none;
-}
-.cat-dot.term-short{background:var(--term-short);box-shadow:0 0 0 3px var(--term-short-soft);}
-.cat-dot.term-medium{background:var(--term-medium);box-shadow:0 0 0 3px var(--term-medium-soft);}
-.cat-dot.term-long{background:var(--term-long);box-shadow:0 0 0 3px var(--term-long-soft);}
-.cat-body{min-width:0;}
-.cat-top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
-.cat-h{
-  font-family:var(--f-mono);
-  font-size:10px;
-  font-weight:700;
-  color:var(--muted);
-  border:1px solid var(--line);
-  border-radius:4px;
-  padding:1px 5px;
-  letter-spacing:.04em;
-}
-.cat-h.term-short{color:var(--term-short);background:var(--term-short-soft);border-color:rgba(242,104,92,.38);}
-.cat-h.term-medium{color:var(--term-medium);background:var(--term-medium-soft);border-color:rgba(227,165,72,.38);}
-.cat-h.term-long{color:var(--term-long);background:var(--term-long-soft);border-color:rgba(56,211,154,.38);}
-.cat-impact{font-size:13.5px;color:#e9e5dd;font-weight:600;overflow-wrap:anywhere;}
-.cat-reason{
-  margin-top:5px;
-  padding:6px 8px;
-  border-radius:6px;
-  background:#0f1116;
-  color:#d5d1ca;
-  font-size:12px;
-  line-height:1.42;
-}
-.cat-reason span{
-  color:var(--accent);
-  font-family:var(--f-mono);
-  font-size:10px;
-  font-weight:700;
-  margin-right:6px;
-  text-transform:uppercase;
-}
-.cat-src{margin-top:5px;font-size:12px;color:var(--muted-2);line-height:1.4;overflow-wrap:anywhere;}
-
-.insight-list{display:flex;flex-direction:column;}
-.insight-row{
-  display:grid;
-  grid-template-columns:112px 1fr;
-  gap:20px;
-  padding:16px 4px;
   border-bottom:1px solid var(--line-soft);
 }
-.insight-row:first-child{padding-top:6px;}
-.insight-row:last-child{border-bottom:none;}
-.insight-tag{
+.section-kicker{
+  margin-bottom:3px;
   font-family:var(--f-mono);
   font-size:10.5px;
   font-weight:700;
-  letter-spacing:.05em;
-  height:22px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted-2);
+}
+.news-count{
+  color:var(--muted-2);
+  font-family:var(--f-mono);
+  font-size:12px;
+}
+.news-list{display:flex;flex-direction:column;}
+.news-row{
+  display:grid;
+  grid-template-columns:96px minmax(0,1fr);
+  gap:16px;
+  padding:14px 0;
+  border-bottom:1px solid var(--line-soft);
+}
+.news-row:last-child{border-bottom:0;padding-bottom:0;}
+.news-tag{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  border-radius:5px;
+  height:22px;
+  padding:0 8px;
   align-self:start;
-}
-.insight-tag.data{color:var(--muted);background:var(--panel-2);border:1px solid var(--line);}
-.insight-tag.news{color:var(--accent);background:var(--accent-soft);border:1px solid rgba(227,165,72,.3);}
-.insight-tag.term-short{color:var(--term-short);background:var(--term-short-soft);border:1px solid rgba(242,104,92,.38);}
-.insight-tag.term-medium{color:var(--term-medium);background:var(--term-medium-soft);border:1px solid rgba(227,165,72,.38);}
-.insight-tag.term-long{color:var(--term-long);background:var(--term-long-soft);border:1px solid rgba(56,211,154,.38);}
-.insight-body p{
-  margin:0;
-  font-size:15px;
-  line-height:1.55;
-  color:#e9e5dd;
-}
-.impact-title{
-  margin:0 0 5px;
-  font-size:15.5px;
-  line-height:1.35;
-  font-weight:700;
-  color:#f2efe9;
-  overflow-wrap:anywhere;
-}
-.impact-sides{
-  margin-top:10px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-}
-.impact-side{
-  min-width:0;
-  border:1px solid var(--line-soft);
-  background:var(--panel-2);
-  border-radius:7px;
-  padding:8px 9px;
-}
-.impact-side span{
-  display:block;
-  margin-bottom:6px;
+  border-radius:5px;
   font-family:var(--f-mono);
-  font-size:10px;
+  font-size:10.5px;
   font-weight:700;
   letter-spacing:.05em;
-  text-transform:uppercase;
 }
-.impact-side.bullish span{color:var(--positive);}
-.impact-side.bearish span{color:var(--negative);}
-.impact-side em{font-style:normal;color:var(--muted-2);font-size:12px;}
-.impact-chip-wrap{display:flex;flex-wrap:wrap;gap:5px;}
-.impact-chip-wrap b{
-  display:inline-flex;
-  max-width:100%;
-  font-family:var(--f-mono);
-  font-size:11px;
-  font-weight:600;
-  color:#e4dfd6;
-  background:#0f1116;
-  border:1px solid var(--line);
-  border-radius:5px;
-  padding:3px 6px;
+.news-tag.news{color:var(--accent);background:var(--accent-soft);border:1px solid rgba(227,165,72,.34);}
+.news-tag.term-short{color:var(--term-short);background:var(--term-short-soft);border:1px solid rgba(242,104,92,.38);}
+.news-tag.term-medium{color:var(--term-medium);background:var(--term-medium-soft);border:1px solid rgba(227,165,72,.38);}
+.news-tag.term-long{color:var(--term-long);background:var(--term-long-soft);border:1px solid rgba(56,211,154,.38);}
+.news-body{min-width:0;}
+.news-title{
+  margin:0;
+  font-size:14.5px;
+  line-height:1.5;
+  color:#ebe6dd;
   overflow-wrap:anywhere;
 }
-.impact-reason{margin-top:9px;}
+.news-title b{color:#f5f2ec;}
+.news-meta{
+  margin-top:7px;
+  font-size:12px;
+  line-height:1.45;
+  color:var(--muted);
+  overflow-wrap:anywhere;
+}
 .insight-refs{
   margin-top:9px;
   display:flex;
@@ -552,98 +387,169 @@ h3{
   background:var(--panel-2);
   border-radius:6px;
   padding:5px 9px;
-  max-width:340px;
+  max-width:360px;
 }
-.ref-label{font-size:11.5px;color:#b9c6ea;white-space:normal;overflow-wrap:anywhere;}
-.ref-ts{font-family:var(--f-mono);font-size:10px;color:var(--muted-2);margin-top:2px;}
+.ref-label{
+  font-size:11.5px;
+  color:#b9c6ea;
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+.ref-ts{
+  font-family:var(--f-mono);
+  font-size:10px;
+  color:var(--muted-2);
+  margin-top:2px;
+}
+.empty-note{
+  color:var(--muted-2);
+  font-size:13px;
+  line-height:1.6;
+  padding-top:13px;
+}
+.report-footer{
+  margin-top:20px;
+  padding-top:12px;
+  border-top:1px solid var(--line);
+  color:var(--muted-2);
+  font-size:11.5px;
+  line-height:1.6;
+}
 @media (max-width:900px){
-  .report{padding:26px 18px;}
-  .hero-top{flex-direction:column;}
-  .brand,.brand > div{min-width:0;}
-  h1{font-size:30px;overflow-wrap:anywhere;}
-  .meta{text-align:left;}
-  .overview-grid{grid-template-columns:1fr;}
-  .overview-chart-wrap{height:280px;}
-  .pie-svg{height:280px;}
-  .pie-callout-pct{font-size:22px;}
-  .pie-callout-label{font-size:12px;}
-  .section-head{flex-direction:column;align-items:flex-start;gap:6px;}
-  .section-note{text-align:left;}
-  .g-head{grid-template-columns:auto 1fr;}
-  .g-actions{grid-column:1 / -1;justify-content:flex-start;flex-wrap:wrap;}
-  .insight-row{grid-template-columns:1fr;}
-  .impact-sides{grid-template-columns:1fr;}
-  .stat-rail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;}
-  .stat{min-width:0;}
-  .stat-badge{font-size:18px;}
-  .stat-div{display:none;}
+  .report{padding:24px 16px 18px;}
+  .hero{align-items:flex-start;}
+  .hero-meta{text-align:left;overflow-wrap:anywhere;}
+  h1{font-size:24px;}
+  .hot-strip{grid-template-columns:1fr;}
+  .tm-head{align-items:flex-start;flex-direction:column;}
+  .treemap{height:420px;}
+  .rk-row{
+    grid-template-columns:28px minmax(0,1fr) 64px;
+    grid-template-areas:
+      "n name pct"
+      ". bar bar"
+      ". tk copy";
+    align-items:center;
+  }
+  .rk-n{grid-area:n;}
+  .rk-name{grid-area:name;}
+  .rk-pct{grid-area:pct;}
+  .rk-bar{grid-area:bar;width:100%;}
+  .rk-tk{grid-area:tk;}
+  .copy-btn{grid-area:copy;}
+  .news-head{align-items:flex-start;flex-direction:column;gap:4px;}
+  .news-row{grid-template-columns:1fr;gap:9px;}
 }
 </style>
 </head>
 <body>
 <main class="report">
   <header class="hero">
-    <div class="hero-top">
-      <div class="brand">
-        <div class="brand-mark">▌</div>
-        <div>
-          <h1>Discord Alert 板塊總結</h1>
-          <div class="hero-sub">
-            <span class="chan">#⏰﹒共享-tv-alert</span>
-            <span class="sep">·</span>
-            <span>今日 ET</span>
-            <span class="sep">·</span>
-            <span class="count-hl">53 alerts</span>
-          </div>
-        </div>
-      </div>
-      <div class="meta">
-        <div>生成時間 <strong>2026-07-06 21:10 UTC</strong></div>
-        <div>統計範圍 <strong>2026-07-06 04:00 UTC -&gt; 2026-07-06 21:08 UTC</strong></div>
-      </div>
-    </div>
+    <h1>Alert 熱力總結 <span class="chan">#⏰﹒共享-tv-alert</span></h1>
+    <div class="hero-meta">今日 ET · 53 alerts · 掃描 53 / 跳過 0 · 新聞 ok · AI ok</div>
   </header>
 
-  <section class="stat-rail">
-    <div class="stat"><div class="stat-value">53</div><div class="stat-label">已解析 Alerts</div></div>
-    <div class="stat-div"></div>
-    <div class="stat"><div class="stat-value">53</div><div class="stat-label">已掃描訊息</div></div>
-    <div class="stat-div"></div>
-    <div class="stat"><div class="stat-value">0</div><div class="stat-label">已跳過訊息</div></div>
-    <div class="stat-div"></div>
-    <div class="stat"><div class="stat-badge ok"><span class="dot"></span>ok</div><div class="stat-label">新聞狀態</div></div>
-    <div class="stat-div"></div>
-    <div class="stat"><div class="stat-badge ok"><span class="dot"></span>ok</div><div class="stat-label">AI 狀態</div></div>
-  </section>
+  <section class="hot-strip" aria-label="Alert overview"><article class="hot-card"><div class="hot-kicker">量最集中（廣度熱）</div><div class="hot-main">醫療保健 <span class="mono">18</span></div><div class="hot-sub">34.0% of alerts · Avg <span class="positive">+1.95%</span> · 行業核心：製藥 10</div></article><article class="hot-card"><div class="hot-kicker">動能最強（強度熱）</div><div class="hot-main">網絡設備 <span class="positive">+7.85%</span></div><div class="hot-sub">1 alerts · Tickers: ANET</div></article><article class="hot-card"><div class="hot-kicker">重複訊號</div><div class="hot-main">BNS <span class="mono">×2</span></div><div class="hot-sub">同一 ticker 多次觸發 · 金融</div></article></section>
 
-  <section class="overview" aria-label="Alert 分佈 overview"><div class="overview-grid"><article class="overview-card"><div class="overview-title"><div class="overview-kicker">按 alert count 計算</div><h2>板塊佔比</h2></div><div class="overview-chart-wrap"><svg class="pie-svg" viewBox="0 0 520 340" role="img" aria-label="Alert distribution pie chart"><g class="pie-slices"><path class="pie-slice" d="M 260.00 170.00 L 260.00 62.00 A 108.00 108.00 0 0 1 351.32 227.65 Z" fill="#38d39a"/><path class="pie-slice" d="M 260.00 170.00 L 351.32 227.65 A 108.00 108.00 0 0 1 279.10 276.30 Z" fill="#e3a548"/><path class="pie-slice" d="M 260.00 170.00 L 279.10 276.30 A 108.00 108.00 0 0 1 216.46 268.84 Z" fill="#7dd3fc"/><path class="pie-slice" d="M 260.00 170.00 L 216.46 268.84 A 108.00 108.00 0 0 1 184.77 247.49 Z" fill="#f2685c"/><path class="pie-slice" d="M 260.00 170.00 L 184.77 247.49 A 108.00 108.00 0 0 1 260.00 62.00 Z" fill="#a78bfa"/></g><g class="pie-callouts"><g class="pie-callout"><polyline points="350.8,119.9 396.0,98.5 408.0,98.5" stroke="#38d39a"/><circle cx="408.0" cy="98.5" r="4.4" fill="#38d39a"/><circle cx="408.0" cy="98.5" r="7.2" fill="none" stroke="#38d39a" opacity=".55"/><text class="pie-callout-pct" x="393.0" y="91.5" text-anchor="end">34.0%</text><text class="pie-callout-label" x="393.0" y="114.5" text-anchor="end">醫療保健</text></g><g class="pie-callout"><polyline points="317.9,256.0 396.0,292.8 408.0,292.8" stroke="#e3a548"/><circle cx="408.0" cy="292.8" r="4.4" fill="#e3a548"/><circle cx="408.0" cy="292.8" r="7.2" fill="none" stroke="#e3a548" opacity=".55"/><text class="pie-callout-pct" x="393.0" y="285.8" text-anchor="end">13.2%</text><text class="pie-callout-label" x="393.0" y="308.8" text-anchor="end">金融</text></g><g class="pie-callout"><polyline points="247.7,273.0 124.0,304.0 112.0,304.0" stroke="#7dd3fc"/><circle cx="112.0" cy="304.0" r="4.4" fill="#7dd3fc"/><circle cx="112.0" cy="304.0" r="7.2" fill="none" stroke="#7dd3fc" opacity=".55"/><text class="pie-callout-pct" x="127.0" y="297.0" text-anchor="start">9.4%</text><text class="pie-callout-label" x="127.0" y="320.0" text-anchor="start">科技服務</text></g><g class="pie-callout"><polyline points="202.1,256.0 124.0,257.0 112.0,257.0" stroke="#f2685c"/><circle cx="112.0" cy="257.0" r="4.4" fill="#f2685c"/><circle cx="112.0" cy="257.0" r="7.2" fill="none" stroke="#f2685c" opacity=".55"/><text class="pie-callout-pct" x="127.0" y="250.0" text-anchor="start">5.7%</text><text class="pie-callout-label" x="127.0" y="273.0" text-anchor="start">非能源礦業</text></g><g class="pie-callout"><polyline points="163.9,131.0 124.0,78.6 112.0,78.6" stroke="#a78bfa"/><circle cx="112.0" cy="78.6" r="4.4" fill="#a78bfa"/><circle cx="112.0" cy="78.6" r="7.2" fill="none" stroke="#a78bfa" opacity=".55"/><text class="pie-callout-pct" x="127.0" y="71.6" text-anchor="start">37.7%</text><text class="pie-callout-label" x="127.0" y="94.6" text-anchor="start">其他</text></g></g></svg></div></article><article class="overview-card"><div class="overview-title"><div class="overview-kicker">按 alert count 計算</div><h2>行業佔比</h2></div><div class="overview-chart-wrap"><svg class="pie-svg" viewBox="0 0 520 340" role="img" aria-label="Alert distribution pie chart"><g class="pie-slices"><path class="pie-slice" d="M 260.00 170.00 L 260.00 62.00 A 108.00 108.00 0 0 1 339.69 97.10 Z" fill="#38d39a"/><path class="pie-slice" d="M 260.00 170.00 L 339.69 97.10 A 108.00 108.00 0 0 1 366.82 154.05 Z" fill="#e3a548"/><path class="pie-slice" d="M 260.00 170.00 L 366.82 154.05 A 108.00 108.00 0 0 1 357.50 216.45 Z" fill="#7dd3fc"/><path class="pie-slice" d="M 260.00 170.00 L 357.50 216.45 A 108.00 108.00 0 0 1 343.86 238.05 Z" fill="#f2685c"/><path class="pie-slice" d="M 260.00 170.00 L 343.86 238.05 A 108.00 108.00 0 1 1 260.00 62.00 Z" fill="#a78bfa"/></g><g class="pie-callouts"><g class="pie-callout"><polyline points="301.8,75.1 396.0,38.0 408.0,38.0" stroke="#38d39a"/><circle cx="408.0" cy="38.0" r="4.4" fill="#38d39a"/><circle cx="408.0" cy="38.0" r="7.2" fill="none" stroke="#38d39a" opacity=".55"/><text class="pie-callout-pct" x="393.0" y="31.0" text-anchor="end">13.2%</text><text class="pie-callout-label" x="393.0" y="54.0" text-anchor="end">製藥</text></g><g class="pie-callout"><polyline points="353.6,125.4 396.0,106.4 408.0,106.4" stroke="#e3a548"/><circle cx="408.0" cy="106.4" r="4.4" fill="#e3a548"/><circle cx="408.0" cy="106.4" r="7.2" fill="none" stroke="#e3a548" opacity=".55"/><text class="pie-callout-pct" x="393.0" y="99.4" text-anchor="end">9.4%</text><text class="pie-callout-label" x="393.0" y="122.4" text-anchor="end">生物科技</text></g><g class="pie-callout"><polyline points="362.5,185.3 396.0,191.9 408.0,191.9" stroke="#7dd3fc"/><circle cx="408.0" cy="191.9" r="4.4" fill="#7dd3fc"/><circle cx="408.0" cy="191.9" r="7.2" fill="none" stroke="#7dd3fc" opacity=".55"/><text class="pie-callout-pct" x="393.0" y="184.9" text-anchor="end">9.4%</text><text class="pie-callout-label" x="393.0" y="207.9" text-anchor="end">大型銀行</text></g><g class="pie-callout"><polyline points="347.7,225.3 396.0,249.0 408.0,249.0" stroke="#f2685c"/><circle cx="408.0" cy="249.0" r="4.4" fill="#f2685c"/><circle cx="408.0" cy="249.0" r="7.2" fill="none" stroke="#f2685c" opacity=".55"/><text class="pie-callout-pct" x="393.0" y="242.0" text-anchor="end">3.8%</text><text class="pie-callout-label" x="393.0" y="265.0" text-anchor="end">投資基金</text></g><g class="pie-callout"><polyline points="166.4,214.6 124.0,233.6 112.0,233.6" stroke="#a78bfa"/><circle cx="112.0" cy="233.6" r="4.4" fill="#a78bfa"/><circle cx="112.0" cy="233.6" r="7.2" fill="none" stroke="#a78bfa" opacity=".55"/><text class="pie-callout-pct" x="127.0" y="226.6" text-anchor="start">64.2%</text><text class="pie-callout-label" x="127.0" y="249.6" text-anchor="start">其他</text></g></g></svg></div></article></div></section>
+  <section class="heatmap-section" aria-label="Alert heatmap"><div class="tm-head"><h2>熱力圖 <span class="tm-note">面積 = alert 數 · 顏色 = Avg D% · 點擊複製 tickers</span></h2><div class="tm-toggle"><button id="btn-sector" class="active" type="button">板塊</button><button id="btn-industry" type="button">行業</button></div></div><div id="treemap" class="treemap"></div><div class="tm-scale"><span>-5%</span><span class="bar"></span><span>+5%</span></div><section class="rank-section"><h2 id="rank-title">板塊排名</h2><div id="rank-list"></div></section></section>
 
-  <section class="section"><div class="section-head"><h2>主要板塊</h2><span class="section-note">按 alert 數排序 · 長條 = Avg D% 對比最大波幅</span></div><div class="card-grid"><article class="g-card"><div class="g-head"><div class="g-rank gold">01</div><div class="g-id"><h3>醫療保健</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="ALKS, ARWR, AVTR, AVTX, BEAM, CAH, ELAN, ESTA, GPCR, IDYA, IONS, KNSA, LGND, LQDA, MLAB, PTCT, RVMD, STOK">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>18</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+1.95%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:28%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">18</span></div><div class="ticker-wrap"><span class="chip">ALKS</span><span class="chip">ARWR</span><span class="chip">AVTR</span><span class="chip">AVTX</span><span class="chip">BEAM</span><span class="chip">CAH</span><span class="chip">ELAN</span><span class="chip">ESTA</span><span class="chip">GPCR</span><span class="chip">IDYA</span><span class="chip">IONS</span><span class="chip">KNSA</span><span class="chip">LGND</span><span class="chip">LQDA</span><span class="chip">MLAB</span><span class="chip">PTCT</span><span class="chip">RVMD</span><span class="chip">STOK</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="no-cat">— 無相關催化因素</div></div></article><article class="g-card"><div class="g-head"><div class="g-rank silver">02</div><div class="g-id"><h3>金融</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="BNS, BAC, PFG, RY, TD, WLFC">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>7</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+1.47%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:21%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">6</span></div><div class="ticker-wrap"><span class="chip">BNS<b>×2</b></span><span class="chip">BAC</span><span class="chip">PFG</span><span class="chip">RY</span><span class="chip">TD</span><span class="chip">WLFC</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="catalyst-list"><div class="cat-row"><span class="cat-dot term-short" title="短線"></span><div class="cat-body"><div class="cat-top"><span class="cat-h term-short">短線</span><span class="cat-impact">Waller 強調 Fed 不會為政府融資而壓低利率，對銀行淨息差偏支持但亦維持利率不確定性。</span></div><div class="cat-reason"><span>判斷原因</span>BAC、BNS、RY、TD 都是大型銀行，政策利率路徑會直接影響淨息差、貸款需求及資產估值。</div><div class="cat-src">FinancialJuice: Fed&#x27;s Waller: The Fed will not keep rates down for the purpose of helping the US government f...</div></div></div><div class="cat-row"><span class="cat-dot term-short" title="短線"></span><div class="cat-body"><div class="cat-top"><span class="cat-h term-short">短線</span><span class="cat-impact">Waller 指風險已轉向、勞工市場穩定而通脹升溫，令金融股要重新定價減息節奏。</span></div><div class="cat-reason"><span>判斷原因</span>金融股對利率、收益率曲線及信用周期敏感，這段 Fed 訊息會影響銀行、REIT、保險及資產管理。</div><div class="cat-src">FinancialJuice: Fed&#x27;s Waller: The risks have flipped around, the labor market seems stabilized, and inflation...</div></div></div></div></div></article><article class="g-card"><div class="g-head"><div class="g-rank bronze">03</div><div class="g-id"><h3>科技服務</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="GRAB, ODD, PATH, PINS, STUB">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>5</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+1.29%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:19%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">5</span></div><div class="ticker-wrap"><span class="chip">GRAB</span><span class="chip">ODD</span><span class="chip">PATH</span><span class="chip">PINS</span><span class="chip">STUB</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="no-cat">— 無相關催化因素</div></div></article><article class="g-card"><div class="g-head"><div class="g-rank plain">04</div><div class="g-id"><h3>非能源礦業</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="AWE, CRS, SSRM">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>3</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+5.07%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:74%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">3</span></div><div class="ticker-wrap"><span class="chip">AWE</span><span class="chip">CRS</span><span class="chip">SSRM</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="no-cat">— 無相關催化因素</div></div></article><article class="g-card"><div class="g-head"><div class="g-rank plain">04</div><div class="g-id"><h3>工業製造</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="GEV, MIDD, PHIN">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>3</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+3.91%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:57%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">3</span></div><div class="ticker-wrap"><span class="chip">GEV</span><span class="chip">MIDD</span><span class="chip">PHIN</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="no-cat">— 無相關催化因素</div></div></article><article class="g-card"><div class="g-head"><div class="g-rank plain">04</div><div class="g-id"><h3>零售</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="BBY, CASY, PSMT">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>3</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+0.77%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:11%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">3</span></div><div class="ticker-wrap"><span class="chip">BBY</span><span class="chip">CASY</span><span class="chip">PSMT</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="catalyst-list"><div class="cat-row"><span class="cat-dot term-short" title="短線"></span><div class="cat-body"><div class="cat-top"><span class="cat-h term-short">短線</span><span class="cat-impact">特朗普點名 Walmart 減價及呼籲其他零售商跟隨，短線或支持客流但壓低零售毛利率預期。</span></div><div class="cat-reason"><span>判斷原因</span>PSMT、BBY、CASY 同屬零售範圍，新聞直接講 retailer pricing 行為，對價格競爭和消費需求有讀穿。</div><div class="cat-src">FinancialJuice: Trump: Other retailers should follow Walmart&#x27;s lead. $WMT</div></div></div><div class="cat-row"><span class="cat-dot term-short" title="短線"></span><div class="cat-body"><div class="cat-top"><span class="cat-h term-short">短線</span><span class="cat-impact">Walmart 大幅降低牛肉及其他貨品價格，或加劇零售價格競爭但改善低價零售流量。</span></div><div class="cat-reason"><span>判斷原因</span>減價訊號對零售同業的定價能力及客流預期有直接參考價值。</div><div class="cat-src">FinancialJuice: Trump: Walmart will be dropping price for a pound of ground beef by almost 15%, among many ot...</div></div></div></div></div></article><article class="g-card"><div class="g-head"><div class="g-rank plain">07</div><div class="g-id"><h3>科技硬件</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="ANET, NTAP">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>2</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+6.88%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:100%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">2</span></div><div class="ticker-wrap"><span class="chip">ANET</span><span class="chip">NTAP</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="catalyst-list"><div class="cat-row"><span class="cat-dot term-short" title="短線"></span><div class="cat-body"><div class="cat-top"><span class="cat-h term-short">短線</span><span class="cat-impact">NVIDIA 表示 roadmap intact，有助穩定 AI 數據中心硬件鏈的情緒。</span></div><div class="cat-reason"><span>判斷原因</span>ANET、NTAP 雖非 NVDA，但都受數據中心及 AI infrastructure capex 敘事影響，NVDA 延遲疑慮降溫對同鏈條有支持。</div><div class="cat-src">FinancialJuice: NVIDIA, in response to the delay report: Our roadmap is intact. $NVDA</div></div></div></div></div></article><article class="g-card"><div class="g-head"><div class="g-rank plain">07</div><div class="g-id"><h3>運輸</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="INSW, JBLU">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>2</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+3.10%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:45%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">2</span></div><div class="ticker-wrap"><span class="chip">INSW</span><span class="chip">JBLU</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="catalyst-list"><div class="cat-row"><span class="cat-dot term-short" title="短線"></span><div class="cat-body"><div class="cat-top"><span class="cat-h term-short">短線</span><span class="cat-impact">美國 SPR 跌至 1983 年以來低位，若推高油價預期會壓縮航空公司燃油成本假設。</span></div><div class="cat-reason"><span>判斷原因</span>JBLU 對 jet fuel 成本敏感，SPR 庫存下跌屬能源供應緩衝變弱的宏觀訊號。</div><div class="cat-src">FinancialJuice: Stocks of Crude oil in the US Strategic Petroleum Reserve fell by about 6.2 mln to 319.5 mln ...</div></div></div><div class="cat-row"><span class="cat-dot term-short" title="短線"></span><div class="cat-body"><div class="cat-top"><span class="cat-h term-short">短線</span><span class="cat-impact">SPR 庫存大跌可能支持原油運輸需求和油價波動，但亦增加能源運輸成本不確定性。</span></div><div class="cat-reason"><span>判斷原因</span>INSW 是油輪 / 海運公司，原油供應與庫存變化會影響運費、航線需求及市場波動。</div><div class="cat-src">FinancialJuice: Stocks of Crude oil in the US Strategic Petroleum Reserve fell by about 6.2 mln to 319.5 mln ...</div></div></div></div></div></article><article class="g-card"><div class="g-head"><div class="g-rank plain">07</div><div class="g-id"><h3>航太及國防</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="CW, HXL">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>2</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+2.49%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:36%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">2</span></div><div class="ticker-wrap"><span class="chip">CW</span><span class="chip">HXL</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="no-cat">— 無相關催化因素</div></div></article><article class="g-card"><div class="g-head"><div class="g-rank plain">07</div><div class="g-id"><h3>消費服務</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="KRUS, RSI">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>2</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+0.98%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:14%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">2</span></div><div class="ticker-wrap"><span class="chip">KRUS</span><span class="chip">RSI</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="no-cat">— 無相關催化因素</div></div></article><article class="g-card"><div class="g-head"><div class="g-rank plain">07</div><div class="g-id"><h3>基金及 ETF</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="PSC, THE">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>2</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+0.58%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:8%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">2</span></div><div class="ticker-wrap"><span class="chip">PSC</span><span class="chip">THE</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="no-cat">— 無相關催化因素</div></div></article><article class="g-card"><div class="g-head"><div class="g-rank plain">12</div><div class="g-id"><h3>通訊</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="VEON">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>1</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+1.83%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:27%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">1</span></div><div class="ticker-wrap"><span class="chip">VEON</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="no-cat">— 無相關催化因素</div></div></article></div></section>
-<section class="section"><div class="section-head"><h2>主要行業</h2><span class="section-note">按 alert 數排序 · 長條 = Avg D% 對比最大波幅</span></div><div class="card-grid"><article class="g-card"><div class="g-head"><div class="g-rank gold">01</div><div class="g-id"><h3>製藥</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="ALKS, AVTX, IDYA, IONS, KNSA, LQDA, PTCT">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>7</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+2.64%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:34%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">7</span></div><div class="ticker-wrap"><span class="chip">ALKS</span><span class="chip">AVTX</span><span class="chip">IDYA</span><span class="chip">IONS</span><span class="chip">KNSA</span><span class="chip">LQDA</span><span class="chip">PTCT</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="no-cat">— 無相關催化因素</div></div></article><article class="g-card"><div class="g-head"><div class="g-rank silver">02</div><div class="g-id"><h3>生物科技</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="ARWR, BEAM, GPCR, RVMD, STOK">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>5</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+2.36%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:30%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">5</span></div><div class="ticker-wrap"><span class="chip">ARWR</span><span class="chip">BEAM</span><span class="chip">GPCR</span><span class="chip">RVMD</span><span class="chip">STOK</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="no-cat">— 無相關催化因素</div></div></article><article class="g-card"><div class="g-head"><div class="g-rank silver">02</div><div class="g-id"><h3>大型銀行</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="BNS, BAC, RY, TD">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>5</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+1.38%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:18%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">4</span></div><div class="ticker-wrap"><span class="chip">BNS<b>×2</b></span><span class="chip">BAC</span><span class="chip">RY</span><span class="chip">TD</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="catalyst-list"><div class="cat-row"><span class="cat-dot term-short" title="短線"></span><div class="cat-body"><div class="cat-top"><span class="cat-h term-short">短線</span><span class="cat-impact">Waller 強調 Fed 不會為政府融資而壓低利率，對銀行淨息差偏支持但亦維持利率不確定性。</span></div><div class="cat-reason"><span>判斷原因</span>BAC、BNS、RY、TD 都是大型銀行，政策利率路徑會直接影響淨息差、貸款需求及資產估值。</div><div class="cat-src">FinancialJuice: Fed&#x27;s Waller: The Fed will not keep rates down for the purpose of helping the US government f...</div></div></div><div class="cat-row"><span class="cat-dot term-short" title="短線"></span><div class="cat-body"><div class="cat-top"><span class="cat-h term-short">短線</span><span class="cat-impact">Waller 指風險已轉向、勞工市場穩定而通脹升溫，令金融股要重新定價減息節奏。</span></div><div class="cat-reason"><span>判斷原因</span>金融股對利率、收益率曲線及信用周期敏感，這段 Fed 訊息會影響銀行、REIT、保險及資產管理。</div><div class="cat-src">FinancialJuice: Fed&#x27;s Waller: The risks have flipped around, the labor market seems stabilized, and inflation...</div></div></div></div></div></article><article class="g-card"><div class="g-head"><div class="g-rank plain">04</div><div class="g-id"><h3>投資基金</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="PSC, THE">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>2</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+0.58%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:7%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">2</span></div><div class="ticker-wrap"><span class="chip">PSC</span><span class="chip">THE</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="no-cat">— 無相關催化因素</div></div></article><article class="g-card"><div class="g-head"><div class="g-rank plain">05</div><div class="g-id"><h3>雲端網絡設備</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="ANET">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>1</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+7.85%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:100%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">1</span></div><div class="ticker-wrap"><span class="chip">ANET</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="catalyst-list"><div class="cat-row"><span class="cat-dot term-short" title="短線"></span><div class="cat-body"><div class="cat-top"><span class="cat-h term-short">短線</span><span class="cat-impact">NVIDIA 表示 roadmap intact，有助穩定 AI 數據中心硬件鏈的情緒。</span></div><div class="cat-reason"><span>判斷原因</span>ANET、NTAP 雖非 NVDA，但都受數據中心及 AI infrastructure capex 敘事影響，NVDA 延遲疑慮降溫對同鏈條有支持。</div><div class="cat-src">FinancialJuice: NVIDIA, in response to the delay report: Our roadmap is intact. $NVDA</div></div></div></div></div></article><article class="g-card"><div class="g-head"><div class="g-rank plain">05</div><div class="g-id"><h3>其他金屬礦業</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="AWE">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>1</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+7.14%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:91%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">1</span></div><div class="ticker-wrap"><span class="chip">AWE</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="no-cat">— 無相關催化因素</div></div></article><article class="g-card"><div class="g-head"><div class="g-rank plain">05</div><div class="g-id"><h3>企業儲存設備</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="NTAP">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>1</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+5.91%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:75%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">1</span></div><div class="ticker-wrap"><span class="chip">NTAP</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="catalyst-list"><div class="cat-row"><span class="cat-dot term-short" title="短線"></span><div class="cat-body"><div class="cat-top"><span class="cat-h term-short">短線</span><span class="cat-impact">NVIDIA 表示 roadmap intact，有助穩定 AI 數據中心硬件鏈的情緒。</span></div><div class="cat-reason"><span>判斷原因</span>ANET、NTAP 雖非 NVDA，但都受數據中心及 AI infrastructure capex 敘事影響，NVDA 延遲疑慮降溫對同鏈條有支持。</div><div class="cat-src">FinancialJuice: NVIDIA, in response to the delay report: Our roadmap is intact. $NVDA</div></div></div></div></div></article><article class="g-card"><div class="g-head"><div class="g-rank plain">05</div><div class="g-id"><h3>電力設備</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="GEV">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>1</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+5.87%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:75%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">1</span></div><div class="ticker-wrap"><span class="chip">GEV</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="no-cat">— 無相關催化因素</div></div></article><article class="g-card"><div class="g-head"><div class="g-rank plain">05</div><div class="g-id"><h3>汽車零件</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="PHIN">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>1</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+5.02%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:64%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">1</span></div><div class="ticker-wrap"><span class="chip">PHIN</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="no-cat">— 無相關催化因素</div></div></article><article class="g-card"><div class="g-head"><div class="g-rank plain">05</div><div class="g-id"><h3>特種金屬</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="CRS">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>1</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+4.57%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:58%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">1</span></div><div class="ticker-wrap"><span class="chip">CRS</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="no-cat">— 無相關催化因素</div></div></article><article class="g-card"><div class="g-head"><div class="g-rank plain">05</div><div class="g-id"><h3>貴金屬礦業</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="SSRM">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>1</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+3.49%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:44%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">1</span></div><div class="ticker-wrap"><span class="chip">SSRM</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="no-cat">— 無相關催化因素</div></div></article><article class="g-card"><div class="g-head"><div class="g-rank plain">05</div><div class="g-id"><h3>航空公司</h3></div><div class="g-actions"><button class="copy-btn" type="button" data-copy-tickers="JBLU">複製全部 tickers</button><div class="g-metrics"><div class="g-metric"><span>Alerts</span><strong>1</strong></div><div class="g-metric"><span>Avg D%</span><strong class="positive">+3.41%</strong></div></div></div></div><div class="g-bar-track"><div class="g-bar-fill positive" style="width:43%"></div></div><div class="g-block"><div class="g-label">Tickers <span class="g-label-n">1</span></div><div class="ticker-wrap"><span class="chip">JBLU</span></div></div><div class="g-block"><div class="g-label">相關催化因素</div><div class="catalyst-list"><div class="cat-row"><span class="cat-dot term-short" title="短線"></span><div class="cat-body"><div class="cat-top"><span class="cat-h term-short">短線</span><span class="cat-impact">美國 SPR 跌至 1983 年以來低位，若推高油價預期會壓縮航空公司燃油成本假設。</span></div><div class="cat-reason"><span>判斷原因</span>JBLU 對 jet fuel 成本敏感，SPR 庫存下跌屬能源供應緩衝變弱的宏觀訊號。</div><div class="cat-src">FinancialJuice: Stocks of Crude oil in the US Strategic Petroleum Reserve fell by about 6.2 mln to 319.5 mln ...</div></div></div></div></div></article></div></section>
-<section class="section"><div class="section-head"><h2>重點結論</h2><span class="section-note">只顯示有來源支持的判斷</span></div><div class="insight-list"><div class="insight-row"><div class="insight-tag data">Alert 數據</div><div class="insight-body"><p>今日 alert 明顯集中於醫療保健，尤其生物科技及製藥股，屬高 beta 研發管線風格主導。</p><div class="insight-refs"><a class="ref" href="https://discord.com/channels/1429868886878322771/1486769627156713623/1523682563653243082" target="_blank" rel="noopener"><span class="ref-label">Discord Alert: 🟢 PB LONG — ARWR @ $84.59</span><span class="ref-ts">2026-07-06 13:30 UTC</span></a><a class="ref" href="https://discord.com/channels/1429868886878322771/1486769627156713623/1523682571958095934" target="_blank" rel="noopener"><span class="ref-label">Discord Alert: 🟢 PB LONG — STOK @ $32.79</span><span class="ref-ts">2026-07-06 13:30 UTC</span></a><a class="ref" href="https://discord.com/channels/1429868886878322771/1486769627156713623/1523683274336239688" target="_blank" rel="noopener"><span class="ref-label">Discord Alert: 🟢 PB LONG — LQDA @ $80.70</span><span class="ref-ts">2026-07-06 13:33 UTC</span></a></div></div></div><div class="insight-row"><div class="insight-tag news">新聞關聯</div><div class="insight-body"><p>金融及大型銀行 alert 同時出現，而 Fed Waller 訊息令利率路徑成為即日最重要宏觀變數。</p><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074164747214184643" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Fed&#x27;s Waller: The Fed will not keep rates down for the purpose of helping the US government f...</span><span class="ref-ts">2026-07-06 16:13 UTC</span></a><a class="ref" href="https://twitter.com/financialjuice/status/2074158147757895715" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Fed&#x27;s Waller: The risks have flipped around, the labor market seems stabilized, and inflation...</span><span class="ref-ts">2026-07-06 15:46 UTC</span></a><a class="ref" href="https://discord.com/channels/1429868886878322771/1486769627156713623/1523682524121796672" target="_blank" rel="noopener"><span class="ref-label">Discord Alert: 🟢 PB LONG — BAC @ $59.20</span><span class="ref-ts">2026-07-06 13:30 UTC</span></a></div></div></div><div class="insight-row"><div class="insight-tag news">新聞關聯</div><div class="insight-body"><p>零售 alert 受 Walmart 減價新聞牽動，短線要分辨客流改善與毛利受壓兩個方向。</p><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074234238803599449" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Trump: Other retailers should follow Walmart&#x27;s lead. $WMT</span><span class="ref-ts">2026-07-06 20:49 UTC</span></a><a class="ref" href="https://twitter.com/financialjuice/status/2074233733268259179" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Trump: Walmart will be dropping price for a pound of ground beef by almost 15%, among many ot...</span><span class="ref-ts">2026-07-06 20:47 UTC</span></a><a class="ref" href="https://discord.com/channels/1429868886878322771/1486769627156713623/1523682592975618219" target="_blank" rel="noopener"><span class="ref-label">Discord Alert: 🟢 PB LONG — PSMT @ $199.50</span><span class="ref-ts">2026-07-06 13:30 UTC</span></a></div></div></div><div class="insight-row"><div class="insight-tag news">新聞關聯</div><div class="insight-body"><p>科技硬件 alert 中 ANET、NTAP 與 AI / data center 情緒相關，NVDA roadmap intact 對板塊風險偏正面。</p><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074164222624137622" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: NVIDIA, in response to the delay report: Our roadmap is intact. $NVDA</span><span class="ref-ts">2026-07-06 16:11 UTC</span></a><a class="ref" href="https://discord.com/channels/1429868886878322771/1486769627156713623/1523692823864676523" target="_blank" rel="noopener"><span class="ref-label">Discord Alert: 🟢 PB LONG — ANET @ $172.55</span><span class="ref-ts">2026-07-06 14:11 UTC</span></a><a class="ref" href="https://discord.com/channels/1429868886878322771/1486769627156713623/1523778161278451752" target="_blank" rel="noopener"><span class="ref-label">Discord Alert: 🔴 FTM T2 — NTAP @ $163.28</span><span class="ref-ts">2026-07-06 19:50 UTC</span></a></div></div></div><div class="insight-row"><div class="insight-tag news">新聞關聯</div><div class="insight-body"><p>能源相關宏觀新聞主要是 SPR 庫存跌至多年低位，對航空成本偏負面、對油輪海運則偏波動機會。</p><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074167209702597059" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Stocks of Crude oil in the US Strategic Petroleum Reserve fell by about 6.2 mln to 319.5 mln ...</span><span class="ref-ts">2026-07-06 16:22 UTC</span></a><a class="ref" href="https://discord.com/channels/1429868886878322771/1486769627156713623/1523685181083615242" target="_blank" rel="noopener"><span class="ref-label">Discord Alert: 🟢 PB LONG — JBLU @ $6.23</span><span class="ref-ts">2026-07-06 13:40 UTC</span></a><a class="ref" href="https://discord.com/channels/1429868886878322771/1486769627156713623/1523686727556923442" target="_blank" rel="noopener"><span class="ref-label">Discord Alert: 🟢 PB LONG — INSW @ $84.70</span><span class="ref-ts">2026-07-06 13:47 UTC</span></a></div></div></div></div></section>
-<section class="section"><div class="section-head"><h2>市場影響雷達</h2><span class="section-note">整理 alert tickers 以外的短線 / 中線 / 長線影響</span></div><div class="insight-list"><div class="insight-row impact-row"><div class="insight-tag term-short">短線</div><div class="insight-body impact-body"><div class="impact-title">Fed Waller 言論令減息預期更難單邊交易</div><p>市場需要重新平衡通脹升溫、勞工市場穩定與 Fed 獨立性訊號，利率敏感股短線波動或升。</p><div class="impact-sides"><div class="impact-side bullish"><span>利好</span><div class="impact-chip-wrap"><b>大型銀行</b><b>美元</b><b>短端利率波動</b></div></div><div class="impact-side bearish"><span>利淡</span><div class="impact-chip-wrap"><b>REIT</b><b>長久期成長股</b></div></div></div><div class="cat-reason impact-reason"><span>判斷原因</span>新聞同時提到不會為政府融資壓低利率，以及通脹已升溫，對寬鬆預期構成掣肘。</div><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074164747214184643" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Fed&#x27;s Waller: The Fed will not keep rates down for the purpose of helping the US government f...</span><span class="ref-ts">2026-07-06 16:13 UTC</span></a><a class="ref" href="https://twitter.com/financialjuice/status/2074158147757895715" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Fed&#x27;s Waller: The risks have flipped around, the labor market seems stabilized, and inflation...</span><span class="ref-ts">2026-07-06 15:46 UTC</span></a></div></div></div><div class="insight-row impact-row"><div class="insight-tag term-short">短線</div><div class="insight-body impact-body"><div class="impact-title">Walmart 減價訊號可能引發零售價格競爭</div><p>低價策略有助防守消費客流，但若同業跟隨，零售毛利率可能受壓。</p><div class="impact-sides"><div class="impact-side bullish"><span>利好</span><div class="impact-chip-wrap"><b>低價零售</b><b>消費者購買力</b></div></div><div class="impact-side bearish"><span>利淡</span><div class="impact-chip-wrap"><b>零售毛利率</b><b>高定價權零售商</b></div></div></div><div class="cat-reason impact-reason"><span>判斷原因</span>特朗普稱其他零售商應跟隨 Walmart，而 Walmart 將牛肉等產品降價。</div><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074234238803599449" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Trump: Other retailers should follow Walmart&#x27;s lead. $WMT</span><span class="ref-ts">2026-07-06 20:49 UTC</span></a><a class="ref" href="https://twitter.com/financialjuice/status/2074233733268259179" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Trump: Walmart will be dropping price for a pound of ground beef by almost 15%, among many ot...</span><span class="ref-ts">2026-07-06 20:47 UTC</span></a></div></div></div><div class="insight-row impact-row"><div class="insight-tag term-short">短線</div><div class="insight-body impact-body"><div class="impact-title">NVIDIA 稱 roadmap intact 穩定 AI 硬件鏈情緒</div><p>延遲疑慮降溫有利 AI infrastructure 相關風險偏好回穩。</p><div class="impact-sides"><div class="impact-side bullish"><span>利好</span><div class="impact-chip-wrap"><b>AI 硬件鏈</b><b>數據中心網絡設備</b><b>NVDA</b></div></div><div class="impact-side bearish"><span>利淡</span><em>—</em></div></div><div class="cat-reason impact-reason"><span>判斷原因</span>NVIDIA 對延遲報道回應稱 roadmap intact，直接支撐 AI 供應鏈敘事。</div><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074164222624137622" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: NVIDIA, in response to the delay report: Our roadmap is intact. $NVDA</span><span class="ref-ts">2026-07-06 16:11 UTC</span></a></div></div></div><div class="insight-row impact-row"><div class="insight-tag term-short">短線</div><div class="insight-body impact-body"><div class="impact-title">美國 SPR 庫存跌至 1983 年以來低位</div><p>能源供應緩衝下降或推高原油風險溢價，增加燃油敏感行業成本壓力。</p><div class="impact-sides"><div class="impact-side bullish"><span>利好</span><div class="impact-chip-wrap"><b>原油</b><b>能源運輸</b><b>油輪海運</b></div></div><div class="impact-side bearish"><span>利淡</span><div class="impact-chip-wrap"><b>航空公司</b><b>燃油敏感消費</b></div></div></div><div class="cat-reason impact-reason"><span>判斷原因</span>新聞指 SPR 一周跌約 620 萬桶至 3.195 億桶，是 1983 年以來最低。</div><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074167209702597059" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Stocks of Crude oil in the US Strategic Petroleum Reserve fell by about 6.2 mln to 319.5 mln ...</span><span class="ref-ts">2026-07-06 16:22 UTC</span></a></div></div></div><div class="insight-row impact-row"><div class="insight-tag term-short">短線</div><div class="insight-body impact-body"><div class="impact-title">ECB 官員暗示不排除再行動</div><p>歐洲利率路徑仍有政策變數，可能影響歐元、歐洲債息及全球金融條件。</p><div class="impact-sides"><div class="impact-side bullish"><span>利好</span><div class="impact-chip-wrap"><b>歐元波動</b><b>利率波動交易</b></div></div><div class="impact-side bearish"><span>利淡</span><div class="impact-chip-wrap"><b>歐洲長久期資產</b></div></div></div><div class="cat-reason impact-reason"><span>判斷原因</span>ECB Wunsch 表示不排除 another move，並稱不要等太久。</div><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074159547468464349" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: ECB&#x27;s Wunsch: I am not excluding another move, but let&#x27;s not wait too long.</span><span class="ref-ts">2026-07-06 15:52 UTC</span></a></div></div></div></div></section>
+  <section class="news-section"><div class="news-head"><div><div class="section-kicker">新聞來源支持</div><h2>重點結論 &amp; 催化因素</h2></div><div class="news-count">12 items</div></div><div class="news-list"><article class="news-row"><div class="news-tag news">新聞關聯</div><div class="news-body"><p class="news-title">大型銀行及金融相關 ticker 多次出現，同時 Fed Waller 關於通脹目標及利率獨立性的言論，令金融板塊短線要看利率定價。</p><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074165468726706628" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Fed&#x27;s Waller: The exact inflation target is too extreme a standard.</span><span class="ref-ts">2026-07-06 16:15 UTC</span></a><a class="ref" href="https://twitter.com/financialjuice/status/2074165350745186396" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Fed&#x27;s Waller: I would prefer the inflation target be set as a range, but changing the target ...</span><span class="ref-ts">2026-07-06 16:15 UTC</span></a><a class="ref" href="https://twitter.com/financialjuice/status/2074164747214184643" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Fed&#x27;s Waller: The Fed will not keep rates down for the purpose of helping the US government f...</span><span class="ref-ts">2026-07-06 16:13 UTC</span></a></div></div></article><article class="news-row"><div class="news-tag news">新聞關聯</div><div class="news-body"><p class="news-title">ANET 與 NTAP 的科技硬件 alert 可受 NVDA roadmap 澄清帶動，AI 基建鏈情緒短線偏正面。</p><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074164222624137622" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: NVIDIA, in response to the delay report: Our roadmap is intact. $NVDA</span><span class="ref-ts">2026-07-06 16:11 UTC</span></a><a class="ref" href="https://discord.com/channels/1429868886878322771/1486769627156713623/1523692823864676523" target="_blank" rel="noopener"><span class="ref-label">Discord Alert: 🟢 PB LONG — ANET @ $172.55</span><span class="ref-ts">2026-07-06 14:11 UTC</span></a><a class="ref" href="https://discord.com/channels/1429868886878322771/1486769627156713623/1523778161278451752" target="_blank" rel="noopener"><span class="ref-label">Discord Alert: 🔴 FTM T2 — NTAP @ $163.28</span><span class="ref-ts">2026-07-06 19:50 UTC</span></a></div></div></article><article class="news-row"><div class="news-tag news">新聞關聯</div><div class="news-body"><p class="news-title">零售 alerts 遇上 Walmart 減價及 Trump 要求同業跟隨的消息，消費需求與毛利壓力並存。</p><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074234238803599449" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Trump: Other retailers should follow Walmart&#x27;s lead. $WMT</span><span class="ref-ts">2026-07-06 20:49 UTC</span></a><a class="ref" href="https://twitter.com/financialjuice/status/2074233733268259179" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Trump: Walmart will be dropping price for a pound of ground beef by almost 15%, among many ot...</span><span class="ref-ts">2026-07-06 20:47 UTC</span></a><a class="ref" href="https://discord.com/channels/1429868886878322771/1486769627156713623/1523682592975618219" target="_blank" rel="noopener"><span class="ref-label">Discord Alert: 🟢 PB LONG — PSMT @ $199.50</span><span class="ref-ts">2026-07-06 13:30 UTC</span></a></div></div></article><article class="news-row"><div class="news-tag news">新聞關聯</div><div class="news-body"><p class="news-title">原油 SPR 庫存跌至 1983 年以來低位，對航空燃油成本與油品海運相關 ticker 的方向影響分化。</p><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074167209702597059" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Stocks of Crude oil in the US Strategic Petroleum Reserve fell by about 6.2 mln to 319.5 mln ...</span><span class="ref-ts">2026-07-06 16:22 UTC</span></a><a class="ref" href="https://discord.com/channels/1429868886878322771/1486769627156713623/1523685181083615242" target="_blank" rel="noopener"><span class="ref-label">Discord Alert: 🟢 PB LONG — JBLU @ $6.23</span><span class="ref-ts">2026-07-06 13:40 UTC</span></a><a class="ref" href="https://discord.com/channels/1429868886878322771/1486769627156713623/1523686727556923442" target="_blank" rel="noopener"><span class="ref-label">Discord Alert: 🟢 PB LONG — INSW @ $84.70</span><span class="ref-ts">2026-07-06 13:47 UTC</span></a></div></div></article><article class="news-row"><div class="news-tag term-short">短線</div><div class="news-body"><p class="news-title"><b>板塊：金融</b> Fed 官員討論通脹目標彈性，但未等同即時放鬆，銀行及 REIT 對利率預期反應會分化。</p><div class="news-meta">BAC、BNS、RY、TD、PFG、LXP 等金融 alert 對利率路徑敏感，Waller 言論令短線利率定價有變數。</div><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074165468726706628" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Fed&#x27;s Waller: The exact inflation target is too extreme a standard.</span><span class="ref-ts">2026-07-06 16:15 UTC</span></a></div></div></article><article class="news-row"><div class="news-tag term-short">短線</div><div class="news-body"><p class="news-title"><b>板塊：金融</b> Waller 強調 Fed 不會為政府赤字壓低利率，對長久期金融資產及 REIT 估值偏壓。</p><div class="news-meta">金融股及 REIT 的估值受資金成本影響，若市場解讀為利率不會因財政壓力而下調，LXP 及銀行股短線承壓。</div><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074164747214184643" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Fed&#x27;s Waller: The Fed will not keep rates down for the purpose of helping the US government f...</span><span class="ref-ts">2026-07-06 16:13 UTC</span></a></div></div></article><article class="news-row"><div class="news-tag term-short">短線</div><div class="news-body"><p class="news-title"><b>板塊：電子科技</b> NVIDIA 表示 roadmap intact，紓緩 AI 硬件延遲憂慮，利好數據中心網絡及儲存供應鏈情緒。</p><div class="news-meta">ANET、NTAP 同屬 AI/雲端基建硬件鏈，NVDA 對 roadmap 的澄清可支持相關科技硬件風險胃納。</div><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074164222624137622" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: NVIDIA, in response to the delay report: Our roadmap is intact. $NVDA</span><span class="ref-ts">2026-07-06 16:11 UTC</span></a></div></div></article><article class="news-row"><div class="news-tag term-short">短線</div><div class="news-body"><p class="news-title"><b>板塊：零售</b> Walmart 降低牛肉等商品價格或利好消費量，但亦可能加劇零售價格競爭與毛利壓力。</p><div class="news-meta">PSMT、BBY、CASY 同屬零售，Trump 點名 Walmart 減價及要求其他零售商跟隨，對零售同業定價策略有直接參考。</div><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074233733268259179" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Trump: Walmart will be dropping price for a pound of ground beef by almost 15%, among many ot...</span><span class="ref-ts">2026-07-06 20:47 UTC</span></a></div></div></article><article class="news-row"><div class="news-tag term-short">短線</div><div class="news-body"><p class="news-title"><b>板塊：交通運輸</b> SPR 庫存跌至多年低位可支撐原油風險溢價，對航空成本不利但對能源海運需求可能中性至偏利好。</p><div class="news-meta">JBLU 對燃油成本敏感，INSW 則與油品運輸需求相關，同一原油庫存消息對交通運輸內部影響分化。</div><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074167209702597059" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Stocks of Crude oil in the US Strategic Petroleum Reserve fell by about 6.2 mln to 319.5 mln ...</span><span class="ref-ts">2026-07-06 16:22 UTC</span></a></div></div></article><article class="news-row"><div class="news-tag term-medium">中線</div><div class="news-body"><p class="news-title"><b>板塊：公用事業</b> 若市場維持較高利率假設，資本開支密集的電力公用事業估值及融資成本受壓。</p><div class="news-meta">EIX 屬電力公用事業，Waller 指 Fed 不會為財政融資而壓低利率，對高負債防守板塊不利。</div><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074164747214184643" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Fed&#x27;s Waller: The Fed will not keep rates down for the purpose of helping the US government f...</span><span class="ref-ts">2026-07-06 16:13 UTC</span></a></div></div></article><article class="news-row"><div class="news-tag term-short">短線</div><div class="news-body"><p class="news-title"><b>NVIDIA 指 roadmap intact，AI 硬件延遲憂慮降溫。</b> 市場可重新追捧 AI/GPU 及數據中心基建鏈，但只屬公司澄清層面，仍要留意後續供應鏈確認。</p><div class="news-meta">利好：NVDA, AI 基建, 網絡設備, 資料儲存設備 · 新聞明確指 NVIDIA 回應延遲報告並稱 roadmap intact，直接改善 AI 硬件供應預期。</div><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074164222624137622" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: NVIDIA, in response to the delay report: Our roadmap is intact. $NVDA</span><span class="ref-ts">2026-07-06 16:11 UTC</span></a></div></div></article><article class="news-row"><div class="news-tag term-short">短線</div><div class="news-body"><p class="news-title"><b>Fed Waller 討論通脹目標 range，但同時維持政策可信度表述。</b> 利率預期可能波動，金融、REIT、公用事業及長久期資產短線要跟隨債息反應。</p><div class="news-meta">利好：大型銀行淨息差；利淡：REIT, 公用事業, 長久期成長股 · Waller 同時提及 inflation target range 與不會為政府融資壓低利率，令減息想像受限制。</div><div class="insight-refs"><a class="ref" href="https://twitter.com/financialjuice/status/2074165468726706628" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Fed&#x27;s Waller: The exact inflation target is too extreme a standard.</span><span class="ref-ts">2026-07-06 16:15 UTC</span></a><a class="ref" href="https://twitter.com/financialjuice/status/2074165350745186396" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Fed&#x27;s Waller: I would prefer the inflation target be set as a range, but changing the target ...</span><span class="ref-ts">2026-07-06 16:15 UTC</span></a><a class="ref" href="https://twitter.com/financialjuice/status/2074165124206678360" target="_blank" rel="noopener"><span class="ref-label">FinancialJuice: Fed&#x27;s Waller: It is reasonable to think about a range for the inflation target.</span><span class="ref-ts">2026-07-06 16:14 UTC</span></a></div></div></article></div></section>
 
   <footer class="report-footer">AI model: codex_cli:gpt-5.5 · 非投資建議</footer>
-
 </main>
+
 <script>
+const ALERT_DATA = {"initialMode":"sector","sectors":[{"name":"醫療保健","count":18,"avg":1.95,"tickerText":"ALKS ARWR AVTR AVTX BEAM CAH ELAN ESTA GPCR IDYA IONS KNSA LGND LQDA MLAB PTCT RVMD STOK","copyText":"ALKS, ARWR, AVTR, AVTX, BEAM, CAH, ELAN, ESTA, GPCR, IDYA, IONS, KNSA, LGND, LQDA, MLAB, PTCT, RVMD, STOK"},{"name":"金融","count":8,"avg":1.31,"tickerText":"BNS×2 BAC LXP PFG RY TD WLFC","copyText":"BNS, BAC, LXP, PFG, RY, TD, WLFC"},{"name":"電子科技","count":4,"avg":4.68,"tickerText":"ANET CW HXL NTAP","copyText":"ANET, CW, HXL, NTAP"},{"name":"科技服務","count":4,"avg":1.33,"tickerText":"ODD PATH PINS STUB","copyText":"ODD, PATH, PINS, STUB"},{"name":"非能源礦產","count":3,"avg":5.07,"tickerText":"AWE CRS SSRM","copyText":"AWE, CRS, SSRM"},{"name":"工業製造","count":3,"avg":3.91,"tickerText":"GEV MIDD PHIN","copyText":"GEV, MIDD, PHIN"},{"name":"零售","count":3,"avg":0.77,"tickerText":"BBY CASY PSMT","copyText":"BBY, CASY, PSMT"},{"name":"交通運輸","count":2,"avg":3.1,"tickerText":"INSW JBLU","copyText":"INSW, JBLU"},{"name":"消費服務","count":2,"avg":0.98,"tickerText":"KRUS RSI","copyText":"KRUS, RSI"},{"name":"基金","count":2,"avg":0.58,"tickerText":"PSC THE","copyText":"PSC, THE"},{"name":"通訊服務","count":1,"avg":1.83,"tickerText":"VEON","copyText":"VEON"},{"name":"交通及平台服務","count":1,"avg":1.15,"tickerText":"GRAB","copyText":"GRAB"},{"name":"公用事業","count":1,"avg":0.44,"tickerText":"EIX","copyText":"EIX"},{"name":"商業服務","count":1,"avg":0.18,"tickerText":"GPGI","copyText":"GPGI"}],"industries":[{"name":"製藥","count":10,"avg":2.41,"tickerText":"ALKS AVTX GPCR IDYA IONS KNSA LGND LQDA PTCT RVMD","copyText":"ALKS, AVTX, GPCR, IDYA, IONS, KNSA, LGND, LQDA, PTCT, RVMD"},{"name":"大型銀行","count":5,"avg":1.38,"tickerText":"BNS×2 BAC RY TD","copyText":"BNS, BAC, RY, TD"},{"name":"生物科技","count":3,"avg":2.22,"tickerText":"ARWR BEAM STOK","copyText":"ARWR, BEAM, STOK"},{"name":"航空航天與國防","count":2,"avg":2.49,"tickerText":"CW HXL","copyText":"CW, HXL"},{"name":"互聯網平台","count":2,"avg":1.85,"tickerText":"PINS STUB","copyText":"PINS, STUB"},{"name":"企業軟件","count":2,"avg":0.81,"tickerText":"ODD PATH","copyText":"ODD, PATH"},{"name":"醫療設備與專科用品","count":2,"avg":0.65,"tickerText":"ESTA MLAB","copyText":"ESTA, MLAB"},{"name":"投資信託/互惠基金","count":2,"avg":0.58,"tickerText":"PSC THE","copyText":"PSC, THE"},{"name":"網絡設備","count":1,"avg":7.85,"tickerText":"ANET","copyText":"ANET"},{"name":"其他金屬礦產","count":1,"avg":7.14,"tickerText":"AWE","copyText":"AWE"},{"name":"資料儲存設備","count":1,"avg":5.91,"tickerText":"NTAP","copyText":"NTAP"},{"name":"電力設備","count":1,"avg":5.87,"tickerText":"GEV","copyText":"GEV"},{"name":"汽車零部件","count":1,"avg":5.02,"tickerText":"PHIN","copyText":"PHIN"},{"name":"特種金屬","count":1,"avg":4.57,"tickerText":"CRS","copyText":"CRS"},{"name":"貴金屬","count":1,"avg":3.49,"tickerText":"SSRM","copyText":"SSRM"},{"name":"航空公司","count":1,"avg":3.41,"tickerText":"JBLU","copyText":"JBLU"},{"name":"海運","count":1,"avg":2.79,"tickerText":"INSW","copyText":"INSW"},{"name":"博彩娛樂","count":1,"avg":1.96,"tickerText":"RSI","copyText":"RSI"},{"name":"租賃金融","count":1,"avg":1.96,"tickerText":"WLFC","copyText":"WLFC"},{"name":"無線電訊","count":1,"avg":1.83,"tickerText":"VEON","copyText":"VEON"},{"name":"資產管理與保險","count":1,"avg":1.46,"tickerText":"PFG","copyText":"PFG"},{"name":"醫療分銷","count":1,"avg":1.22,"tickerText":"CAH","copyText":"CAH"},{"name":"叫車與本地配送平台","count":1,"avg":1.15,"tickerText":"GRAB","copyText":"GRAB"},{"name":"動物保健生物科技","count":1,"avg":0.96,"tickerText":"ELAN","copyText":"ELAN"}]};
+
 (() => {
+  const dataRoot = ALERT_DATA || {};
+  const treemapEl = document.getElementById("treemap");
+  const rankListEl = document.getElementById("rank-list");
+  const rankTitleEl = document.getElementById("rank-title");
+  const sectorButton = document.getElementById("btn-sector");
+  const industryButton = document.getElementById("btn-industry");
+  let mode = dataRoot.initialMode || "sector";
+
+  function rowsForMode() {
+    const rows = mode === "industry" ? dataRoot.industries : dataRoot.sectors;
+    return Array.isArray(rows) ? rows.filter((item) => item && item.count > 0) : [];
+  }
+
+  function heatColor(avg, isOther) {
+    if (isOther) return "#1b2029";
+    const number = Number(avg) || 0;
+    const t = Math.min(1, Math.abs(number) / 5);
+    const a = 0.18 + 0.72 * t;
+    return number >= 0 ? `rgba(56,211,154,${a.toFixed(2)})` : `rgba(242,104,92,${a.toFixed(2)})`;
+  }
+
+  function squarify(items, width, height) {
+    const total = items.reduce((sum, item) => sum + Math.max(0, Number(item.count) || 0), 0);
+    if (!total || width <= 0 || height <= 0) return [];
+    const queue = items
+      .map((item) => ({item, area: (Math.max(0, Number(item.count) || 0) / total) * width * height}))
+      .filter((item) => item.area > 0)
+      .sort((a, b) => b.area - a.area);
+    const out = [];
+    let x = 0, y = 0, w = width, h = height;
+    const worst = (row, side) => {
+      const sum = row.reduce((acc, item) => acc + item.area, 0);
+      if (!sum || !side) return Infinity;
+      return Math.max(...row.map((item) => Math.max((side * side * item.area) / (sum * sum), (sum * sum) / (side * side * item.area))));
+    };
+    while (queue.length) {
+      const row = [queue.shift()];
+      const side = Math.min(w, h);
+      while (queue.length && worst(row.concat(queue[0]), side) <= worst(row, side)) {
+        row.push(queue.shift());
+      }
+      const sum = row.reduce((acc, item) => acc + item.area, 0);
+      const thick = sum / side;
+      let offset = 0;
+      for (const entry of row) {
+        const length = entry.area / thick;
+        if (w >= h) {
+          out.push({item: entry.item, x, y: y + offset, w: thick, h: length});
+        } else {
+          out.push({item: entry.item, x: x + offset, y, w: length, h: thick});
+        }
+        offset += length;
+      }
+      if (w >= h) {
+        x += thick;
+        w -= thick;
+      } else {
+        y += thick;
+        h -= thick;
+      }
+    }
+    return out;
+  }
+
+  function formatPct(value) {
+    const number = Number(value) || 0;
+    return `${number >= 0 ? "+" : ""}${number.toFixed(2)}%`;
+  }
+
+  function copyableTickers(item) {
+    return String(item.copyText || item.tickerText || "").trim();
+  }
+
   function fallbackCopy(text) {
-    const textarea = document.createElement('textarea');
+    const textarea = document.createElement("textarea");
     textarea.value = text;
-    textarea.setAttribute('readonly', '');
-    textarea.style.position = 'fixed';
-    textarea.style.left = '-9999px';
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
     document.body.appendChild(textarea);
     textarea.select();
-    const ok = document.execCommand('copy');
+    const ok = document.execCommand("copy");
     textarea.remove();
-    if (!ok) {
-      throw new Error('copy failed');
-    }
+    if (!ok) throw new Error("copy failed");
   }
 
   async function copyText(text) {
+    if (!text) return;
     if (navigator.clipboard && window.isSecureContext) {
       await navigator.clipboard.writeText(text);
       return;
@@ -651,28 +557,97 @@ h3{
     fallbackCopy(text);
   }
 
-  document.addEventListener('click', async (event) => {
-    const button = event.target.closest('[data-copy-tickers]');
-    if (!button || button.disabled) {
+  function renderTreemap(rows) {
+    if (!treemapEl) return;
+    treemapEl.innerHTML = "";
+    if (!rows.length) {
+      treemapEl.innerHTML = '<div class="tm-empty">無已解析 alerts</div>';
       return;
     }
-    const text = button.getAttribute('data-copy-tickers') || '';
-    if (!text) {
+    const rect = treemapEl.getBoundingClientRect();
+    const boxes = squarify(rows, rect.width, rect.height);
+    for (const box of boxes) {
+      const item = box.item;
+      const tile = document.createElement("div");
+      const small = box.w < 110 || box.h < 64;
+      const tiny = box.w < 70 || box.h < 38;
+      tile.className = `tile${tiny ? " tiny" : small ? " small" : ""}`;
+      tile.style.left = `${box.x}px`;
+      tile.style.top = `${box.y}px`;
+      tile.style.width = `${box.w}px`;
+      tile.style.height = `${box.h}px`;
+      tile.style.background = heatColor(item.avg, item.name === "其他");
+      tile.innerHTML = `<div class="t-name"></div><div class="t-stat"></div><div class="t-tickers"></div>`;
+      tile.querySelector(".t-name").textContent = item.name || "Unclassified";
+      tile.querySelector(".t-stat").textContent = `${item.count} alerts · ${formatPct(item.avg)}`;
+      tile.querySelector(".t-tickers").textContent = item.tickerText || "";
+      tile.title = `${item.name || "Unclassified"}: ${item.count} alerts · avg ${formatPct(item.avg)}（點擊複製 tickers）`;
+      tile.addEventListener("click", () => copyText(copyableTickers(item)));
+      treemapEl.appendChild(tile);
+    }
+  }
+
+  function renderRank(rows) {
+    if (!rankListEl || !rankTitleEl) return;
+    rankTitleEl.textContent = mode === "industry" ? "行業排名" : "板塊排名";
+    rankListEl.innerHTML = "";
+    if (!rows.length) {
+      rankListEl.innerHTML = '<div class="empty-note">無已解析 alerts</div>';
       return;
     }
-    const original = button.textContent;
-    try {
-      await copyText(text);
-      button.textContent = '已複製';
-      button.classList.add('copied');
-    } catch (error) {
-      button.textContent = '複製失敗';
-    }
-    window.setTimeout(() => {
-      button.textContent = original;
-      button.classList.remove('copied');
-    }, 1200);
-  });
+    const maxCount = Math.max(...rows.map((item) => Number(item.count) || 0), 1);
+    rows.forEach((item, index) => {
+      const row = document.createElement("div");
+      row.className = "rk-row";
+      const pctClass = Number(item.avg) > 0 ? "positive" : Number(item.avg) < 0 ? "negative" : "neutral";
+      const width = Math.max(4, Math.min(100, ((Number(item.count) || 0) / maxCount) * 100));
+      row.innerHTML = `
+        <span class="rk-n"></span>
+        <span class="rk-name"></span>
+        <span class="rk-bar"><i></i></span>
+        <span class="rk-pct ${pctClass}"></span>
+        <span class="rk-tk"></span>
+        <button class="copy-btn" type="button">複製</button>`;
+      row.querySelector(".rk-n").textContent = String(index + 1).padStart(2, "0");
+      row.querySelector(".rk-name").textContent = item.name || "Unclassified";
+      row.querySelector(".rk-bar i").style.width = `${width.toFixed(0)}%`;
+      row.querySelector(".rk-bar i").style.background = heatColor(item.avg, item.name === "其他");
+      row.querySelector(".rk-pct").textContent = formatPct(item.avg);
+      row.querySelector(".rk-tk").textContent = item.tickerText || "";
+      const button = row.querySelector(".copy-btn");
+      button.disabled = !copyableTickers(item);
+      button.addEventListener("click", async () => {
+        const original = button.textContent;
+        try {
+          await copyText(copyableTickers(item));
+          button.textContent = "已複製";
+          button.classList.add("copied");
+        } catch (error) {
+          button.textContent = "失敗";
+        }
+        window.setTimeout(() => {
+          button.textContent = original;
+          button.classList.remove("copied");
+        }, 1200);
+      });
+      rankListEl.appendChild(row);
+    });
+  }
+
+  function render() {
+    const rows = rowsForMode();
+    renderTreemap(rows);
+    renderRank(rows);
+    if (sectorButton) sectorButton.classList.toggle("active", mode === "sector");
+    if (industryButton) industryButton.classList.toggle("active", mode === "industry");
+  }
+
+  if (sectorButton) sectorButton.addEventListener("click", () => { mode = "sector"; render(); });
+  if (industryButton) industryButton.addEventListener("click", () => { mode = "industry"; render(); });
+  if (treemapEl || rankListEl) {
+    window.addEventListener("resize", render);
+    render();
+  }
 })();
 </script>
 </body>
