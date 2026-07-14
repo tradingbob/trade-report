@@ -210,12 +210,13 @@ h1{
   line-height:1.55;
   overflow-wrap:anywhere;
 }
+.tile.small{display:flex;flex-direction:column;}
 .tile.small .t-name{font-size:11.5px;}
-.tile.small .t-stat{font-size:10px;}
-.tile.small .t-tickers{display:none;}
-.tile.tiny{padding:4px 6px;}
-.tile.tiny .t-name{font-size:10px;}
-.tile.tiny .t-stat,.tile.tiny .t-tickers{display:none;}
+.tile.small .t-stat{order:2;font-size:10px;}
+.tile.small .t-tickers{display:block;order:1;width:100%;min-width:0;font-size:9.5px;line-height:1.3;margin-top:3px;}
+.tile.tiny{display:flex;align-items:center;padding:4px 6px;}
+.tile.tiny .t-name,.tile.tiny .t-stat{display:none;}
+.tile.tiny .t-tickers{display:block;width:100%;min-width:0;font-size:8.5px;line-height:1.15;margin-top:0;}
 .tm-empty{
   position:absolute;
   inset:0;
@@ -569,8 +570,8 @@ const ALERT_DATA = {"initialMode":"sector","sectors":[{"name":"醫療服務","co
     for (const box of boxes) {
       const item = box.item;
       const tile = document.createElement("div");
-      const small = box.w < 110 || box.h < 64;
-      const tiny = box.w < 70 || box.h < 38;
+      const small = box.h < 64;
+      const tiny = box.h < 38;
       tile.className = `tile${tiny ? " tiny" : small ? " small" : ""}`;
       tile.style.left = `${box.x}px`;
       tile.style.top = `${box.y}px`;
